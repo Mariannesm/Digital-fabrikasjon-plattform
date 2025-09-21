@@ -1,17 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Route, Routes } from "react-router-dom";
+import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/landingpage';
+import Layout from './layout';
 
 function App() {
   return (
-    <>
-         <button className='flex-1 Home-Button'>SmartMaking</button>
-        <LandingPage></LandingPage>
-    </>
-  )
+    <Router>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          {/* <Route path="/about" element={<AboutPage />} /> */}
+          {/* Legg til flere ruter her */}
+        </Routes>
+      </Layout>
+    </Router>
+  );
 }
 
-export default App
+export default App;
