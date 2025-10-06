@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './landingpage.css'
-import { Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useNavigate} from "react-router-dom";
+
 
 function LandingPage() {
   return (
@@ -14,8 +15,8 @@ function LandingPage() {
         <option>OsloMet</option>
       </select>
     </div>
-    <button className="w-64 px-5 py-3 rounded-lg bg-[#E69138] text-[#663500] text-xl font-bold shadow-ml focus:outline-none focus:ring-2 focus:ring-orange-400 mt-10 hover:bg-orange-400">
-      Gå videre
+    <button onClick={useNavigate('/meny')} className="w-64 px-5 py-3 rounded-lg bg-[#E69138] text-[#663500] text-xl font-bold shadow-ml focus:outline-none focus:ring-2 focus:ring-orange-400 mt-10 hover:bg-orange-400">
+        Gå videre
     </button>
   </div>
     </>
