@@ -7,7 +7,7 @@ function LandingPage() {
   return (
     <>
     <div className="min-h-screen flex flex-col items-center justify-center">
-    <h1 className="text-9xl font-bold text-[#E69138] mb-20">SmartMaking</h1>
+    <h1 className="text-9xl font-extrabold  text-[#E69138] mb-20">SmartMaking</h1>
     <div className="relative">
       <select className="text-lg w-64 px-5 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-400">
         <option>Velg område</option>
