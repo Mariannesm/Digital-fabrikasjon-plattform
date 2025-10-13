@@ -8,7 +8,7 @@ function LandingPage() {
     <div className="min-h-screen bg-[#f5e1c3] text-black flex flex-col p-6 sm:p-10">
       {/* Header */}
       <header className="mb-6 sm:mb-10">
-        <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#E69138]">
+        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#E69138]">
           SmartMaking
         </h1>
         <select className="group mt-1 inline-flex items-center gap-2 text-l sm text-black-700/90 rounded-md px-1 -ml-1 hover:bg-black/5 transition
