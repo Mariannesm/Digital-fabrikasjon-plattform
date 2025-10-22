@@ -2,18 +2,13 @@ import { useState } from 'react'
 import './startside.css'
 import CardButton from '../../components/Cardbutton'
 
-function LandingPage() {
+function StartSide() {
   return (
     <>
     <div className="min-h-screen bg-[#f5e1c3] text-black flex flex-col pt-0">
       {/* Header */}
-<<<<<<< HEAD
       <header className="mb-6 sm:mb-10 w-screen ml-[calc(50%-50vw)] pl-6 sm:pl-10 text-left">
         <h1 className="text-4xl sm:text-1xl font-extrabold tracking-tight text-[#E69138]">
-=======
-      <header className="mb-6 sm:mb-10">
-        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#E69138]">
->>>>>>> 8e66e6880463748f946da117d62c8d86c2cc50ea
           SmartMaking
         </h1>
         <select className="mt-2 inline-flex items-center gap-2 text-lg text-black/90 rounded-md px-1 hover:bg-black/5 transition focus:outline-none 
@@ -58,4 +53,4 @@ function LandingPage() {
   )
 }
 
-export default LandingPage
+export default StartSide;
