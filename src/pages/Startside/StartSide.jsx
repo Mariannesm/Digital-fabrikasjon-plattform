@@ -11,8 +11,8 @@ function StartSide() {
         <h1 className="text-4xl sm:text-1xl font-extrabold tracking-tight text-[#E69138]">
           SmartMaking
         </h1>
-        <select className="mt-2 inline-flex items-center gap-2 text-lg text-black/90 rounded-md px-1 hover:bg-black/5 transition focus:outline-none 
-        focus:ring-2 focus:ring-orange-400">
+        <select className="mt-3 inline-flex items-center gap-2 text-lg rounded-md px-1  
+        hover:bg-black/5 transition focus:outline-none focus:ring-2 focus:ring-orange-400 font-semibold text-[#663500]">
         <option>Høgskolen i Østfold</option>
         <option>OsloMet</option>
       </select>
