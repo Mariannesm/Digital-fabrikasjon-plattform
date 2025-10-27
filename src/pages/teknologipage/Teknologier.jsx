@@ -12,13 +12,12 @@ import PodcastIkon from '../../assets/ikoner/Podcast.png'
 function Teknolgier() {
   return (
     <div className="min-h-screen bg-[#f5e1c3] text-black flex flex-col bg-white">
-      {/* Header og tittel-seksjon */}
     <div className="bg-[#F3DDB9] pb-4"> 
   
-    {/* Header raden */} 
+    {/* Headerærn */} 
     <div className="px-6 sm:px-10 pt-3 pb-1 flex flex-col sm:flex-row sm:items-start sm:justify-between"> 
       
-    {/* Logo, tekst og tilbakeknapp */} 
+    {/*tekst og tilbakeknapp */} 
     <div> 
       <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#E69138]"> SmartMaking </h1> 
       <div className="text-sm sm:text-base text-black/80"> Høgskolen i Østfold: Halden </div> 
