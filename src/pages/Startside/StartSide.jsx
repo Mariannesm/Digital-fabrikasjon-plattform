@@ -45,8 +45,7 @@ function StartSide() {
         className="fixed bottom-6 right-6 rounded-2xl bg-[#c9ddf4] px-5 py-3 text-sm font-medium
                    shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:shadow-[0_10px_26px_rgba(0,0,0,0.18)]
                    transition"
-      >
-        Chatbot
+      >Chat
       </button>
     </div>
     </>
