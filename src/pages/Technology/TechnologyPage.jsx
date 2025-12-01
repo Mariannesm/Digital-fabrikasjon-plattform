@@ -1,0 +1,98 @@
+import "./TechnologyPage.css";
+import CardButton from "../../components/Cardbutton";
+import Header from "../../components/Header";
+import MainWrapper from "../../components/MainWrapper";
+import PrinterIkon from "../../assets/ikoner/3Dprinter.png";
+import CNCfreserIkon from "../../assets/ikoner/CNCfreser.png";
+import ElektronikkIkon from "../../assets/ikoner/Elektronikk.png";
+import LaserkutterIkon from "../../assets/ikoner/Laserkutter.png";
+import LoddeIkon from "../../assets/ikoner/Lodding.png";
+import PodcastIkon from "../../assets/ikoner/Podcast.png";
+
+function TechnologyPage() {
+  return (
+    <MainWrapper classNames="bg-[#FFFCF8]">
+      {/* HEADER */}
+      <Header title="TEKNOLOGIER" showSelectInstitution={false} />
+
+      {/* Innholdsknappene */}
+      <section className="mx-auto w-full max-w-6xl px-4 sm:px-10 py-8 sm:py-10">
+
+      {/* Erstattes med API-kall 
+      title
+      icon {
+        src
+        alt
+      }
+      path
+      */}
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 justify-items-center">
+          <CardButton>
+            <img
+              src={PrinterIkon}
+              alt="3D printer ikon"
+              className="w-24 h-24 mx-auto mb-5 mt-5"
+            />
+            <span className="block mb-6 text-center">3D-PRINTING</span>
+          </CardButton>
+
+          <CardButton>
+            <img
+              src={LaserkutterIkon}
+              alt="Laserkutter ikon"
+              className="w-24 h-24 mx-auto mb-5 mt-5"
+            />
+            <span className="block mb-6 text-center">LASERKUTTING</span>
+          </CardButton>
+
+          <CardButton>
+            <img
+              src={CNCfreserIkon}
+              alt="CNC freser ikon"
+              className="w-24 h-24 mx-auto mb-5 mt-5"
+            />
+            <span className="block mb-6 text-center">CNC-FRESING</span>
+          </CardButton>
+
+          <CardButton>
+            <img
+              src={ElektronikkIkon}
+              alt="Elektronikk ikon"
+              className="w-24 h-24 mx-auto mb-5 mt-5"
+            />
+            <span className="block mb-6 text-center">ELEKTRONIKK</span>
+          </CardButton>
+
+          <CardButton>
+            <img
+              src={LoddeIkon}
+              alt="Lodding ikon"
+              className="w-24 h-24 mx-auto mb-5 mt-5"
+            />
+            <span className="block mb-6 text-center">LODDING</span>
+          </CardButton>
+
+          <CardButton>
+            <img
+              src={PodcastIkon}
+              alt="Podcast ikon"
+              className="w-24 h-24 mx-auto mb-5 mt-5"
+            />
+            <span className="block mb-6 text-center">PODCAST</span>
+          </CardButton>
+        </div>
+      </section>
+
+      {/* Chatbotknappen */}
+      <button
+        className=" fixed bottom-4 right-4 rounded-2xl bg-[#9DDAEA] px-4 py-2 sm:px-5 sm:py-3 text-sm sm:text-lg font-bold shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:bg-[#AAE8F9]
+          transition hover:shadow-[0_10px_26px_rgba(0,0,0,0.20)]"
+      >
+        Chatbot
+      </button>
+    </MainWrapper>
+  );
+}
+
+export default TechnologyPage;

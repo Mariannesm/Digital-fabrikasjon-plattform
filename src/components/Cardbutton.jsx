@@ -3,7 +3,7 @@ import React from "react";
 function CardButton({ children, onClick }) {
   return (
     <button
-    onClick={onClick}
+      onClick={onClick}
       className="w-[300px] h-[180px] sm:w-[360px] sm:h-[210px]
                  rounded-[28px] bg-[#e3a15e]
                  shadow-[0_12px_30px_rgba(0,0,0,0.18)]
@@ -18,4 +18,4 @@ function CardButton({ children, onClick }) {
   );
 }
 
-export default CardButton
+export default CardButton;

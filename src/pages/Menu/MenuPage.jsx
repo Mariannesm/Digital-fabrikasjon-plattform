@@ -1,27 +1,19 @@
-import { useState } from 'react'
-import './startside.css'
+import './MenuPage.css'
 import CardButton from '../../components/Cardbutton'
+import MainWrapper from '../../components/MainWrapper';
+import Header from '../../components/Header'
 import { useNavigate } from "react-router-dom";
 
-function StartSide() {
+function MenuPage() {
   let navigate = useNavigate()
   return (
-    <>
-    <div className="min-h-screen bg-[#FFE8C2] text-black flex flex-col pt-0">
+    
+    <MainWrapper classNames={"pt-0 bg-[#FFFCF8]"}>
       {/* Header */}
-      <header className="mb-6 sm:mb-10 w-screen ml-[calc(50%-50vw)] pl-6 sm:pl-10 text-left">
-        <h1 className="text-4xl sm:text-1xl font-extrabold tracking-tight text-[#E69138] mt-8">
-          SmartMaking
-        </h1>
-        <select className="mt-3 inline-flex items-center gap-2 text-lg rounded-md px-1  
-        hover:bg-black/5 transition focus:outline-none focus:ring-2 focus:ring-orange-400 font-semibold text-black bg-gray-100 p-1">
-        <option>Høgskolen i Østfold</option>
-        <option>OsloMet</option>
-      </select>
-      </header>
+      <Header showSelectInstitution={true}></Header>
       <section
         className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-16 place-content-center place-items-center mx-auto w-fit  mt-10 sm:mt-16">
-        <CardButton onClick={() => navigate('/teknologimeny')}>
+        <CardButton onClick={() => navigate('/technology')}>
           <span className="block">BRUK</span>
           <span className="block">TEKNOLOGIENE</span>
         </CardButton>
@@ -49,9 +41,8 @@ function StartSide() {
                    transition"
       > Chatbot
       </button>
-    </div>
-    </>
+    </MainWrapper>
   )
 }
 
-export default StartSide;
+export default MenuPage;
