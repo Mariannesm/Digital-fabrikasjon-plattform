@@ -8,6 +8,7 @@ import ElektronikkIkon from "../../assets/ikoner/Elektronikk.png";
 import LaserkutterIkon from "../../assets/ikoner/Laserkutter.png";
 import LoddeIkon from "../../assets/ikoner/Lodding.png";
 import PodcastIkon from "../../assets/ikoner/Podcast.png";
+import Chatbot from "../../components/ChatBot";
 
 function TechnologyPage() {
   return (
@@ -79,18 +80,15 @@ function TechnologyPage() {
               alt="Podcast ikon"
               className="w-24 h-24 mx-auto mb-5 mt-5"
             />
-            <span className="block mb-6 text-center">PODCAST</span>
+            <span className="block mb-6 text-center">VINYLKUTTING</span>
           </CardButton>
         </div>
       </section>
 
-      {/* Chatbotknappen */}
-      <button
-        className=" fixed bottom-4 right-4 rounded-2xl bg-[#9DDAEA] px-4 py-2 sm:px-5 sm:py-3 text-sm sm:text-lg font-bold shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:bg-[#AAE8F9]
-          transition hover:shadow-[0_10px_26px_rgba(0,0,0,0.20)]"
-      >
+      <Chatbot>
         Chatbot
-      </button>
+      </Chatbot>
+      
     </MainWrapper>
   );
 }
