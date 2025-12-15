@@ -7,8 +7,8 @@ import CNCfreserIkon from "../../assets/ikoner/CNCfreser.png";
 import ElektronikkIkon from "../../assets/ikoner/Elektronikk.png";
 import LaserkutterIkon from "../../assets/ikoner/Laserkutter.png";
 import LoddeIkon from "../../assets/ikoner/Lodding.png";
-import PodcastIkon from "../../assets/ikoner/Podcast.png";
 import Chatbot from "../../components/ChatBot";
+import Vinylkutter from "../../assets/ikoner/VinylKutter.png";
 
 function TechnologyPage() {
   return (
@@ -28,7 +28,7 @@ function TechnologyPage() {
       path
       */}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 justify-items-center">
+        <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-50 gap-y-15 justify-items-center">
           <CardButton>
             <img
               src={PrinterIkon}
@@ -76,11 +76,20 @@ function TechnologyPage() {
 
           <CardButton>
             <img
-              src={PodcastIkon}
+              src={Vinylkutter}
               alt="Podcast ikon"
               className="w-24 h-24 mx-auto mb-5 mt-5"
             />
             <span className="block mb-6 text-center">VINYLKUTTING</span>
+          </CardButton>
+
+           <CardButton>
+            <img
+              src={Vinylkutter}
+              alt="Podcast ikon"
+              className="w-24 h-24 mx-auto mb-5 mt-5"
+            />
+            <span className="block mb-6 text-center">T-SKJORTE PRINT</span>
           </CardButton>
         </div>
       </section>
