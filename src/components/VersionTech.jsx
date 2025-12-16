@@ -4,7 +4,7 @@ import Printer from "../assets/ikoner/Printer.png"
 
 function VersionTech({data}) {
   return (
-    <div className="flex flex-col w-90 h- rounded-xl border border-[#488B90] bg-white shadow-sm overflow-hidden">
+    <div className="flex flex-col w-90 h- rounded-xl border border-[#488B90] bg-white shadow-sm overflow-hidden mt-20">
 
       <div className="h-50 bg-[#488B90] flex items-center justify-center">
         <img className="pb-2 pt-2 w-25 h-45" src={Printer} alt="Bilde av Prusa MK4S"></img>

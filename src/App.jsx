@@ -5,6 +5,8 @@ import LandingPage from './pages/landingpage/LandingPage';
 import MenuPage from './pages/Menu/MenuPage';
 import TechnologyPage from './pages/Technology/TechnologyPage';
 import SelectedTechnology from './pages/SelectedTechnology/SelectedTechnology';
+import GuidePage from './pages/Guidepage/GuidePage';
+import DigitalCourses from './pages/DigitalCourses/DigitalCourses';
 
 function App() {
   return (
@@ -14,7 +16,9 @@ function App() {
           <Route path="/" element={<LandingPage/>} />
           <Route path='/menu' element={<MenuPage/>} />
           <Route path= '/technology' element={<TechnologyPage/>} />
-          <Route path= '/selected' element={<SelectedTechnology/>}/>
+          <Route path= '/select' element={<SelectedTechnology/>}/>
+          <Route path='/guide' element={<GuidePage/>}/>
+          <Route path='/courses' element={<DigitalCourses/>}/>
           {/* <Route path="/about" element={<AboutPage />} /> */}
           {/* Legg til flere ruter her */}
         </Routes>

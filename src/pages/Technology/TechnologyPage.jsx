@@ -1,4 +1,5 @@
 import "./TechnologyPage.css";
+import { useNavigate } from "react-router-dom";
 import CardButton from "../../components/Cardbutton";
 import Header from "../../components/Header";
 import MainWrapper from "../../components/MainWrapper";
@@ -29,7 +30,7 @@ function TechnologyPage() {
       */}
 
         <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-50 gap-y-15 justify-items-center">
-          <CardButton>
+          <CardButton onClick={() => navigate('/select')} >
             <img
               src={PrinterIkon}
               alt="3D printer ikon"

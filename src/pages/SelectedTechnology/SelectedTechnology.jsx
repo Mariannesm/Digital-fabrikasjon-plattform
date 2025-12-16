@@ -7,14 +7,14 @@ function SelectedTechnology() {
 
   const printers = [
     { title: "Original Prusa MK4S", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
-    { title: "Original Prusa MK2", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
+    { title: "Original Prusa MINI", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
 
   ]
 
   return (
     <MainWrapper classNames="bg-[#FFFCF8]">
       {/* HEADER */}
-      <Header title="3D-PRINTING" showSelectInstitution={false} />
+      <Header title="3D-PRINTIG" showSelectInstitution={false} />
 
 
       {/* Erstattes med API-kall 
@@ -26,9 +26,9 @@ function SelectedTechnology() {
       path
       */}
 
-      <h2 className="font-bold text-xl">Velg printeren du skal bruke</h2>
+      <h2 className="font-bold text-xl mt-20">Velg printeren du skal bruke</h2>
 
-      <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 place-items-center items-stretch">
+      <div className="flex justify-center gap-40">
         {printers.map((card) => {
           return <VersionTech data={card} />
         })}
