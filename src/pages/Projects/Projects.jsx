@@ -18,7 +18,7 @@ function Projects() {
           <span className="block">PROSJEKT</span>
         </CardButton>
 
-        <CardButton>
+        <CardButton onClick={() => navigate('/login')}>
           <span className="block">LOGG INN PÅ DITT</span>
           <span className="block">PROSJEKT</span>
         </CardButton>

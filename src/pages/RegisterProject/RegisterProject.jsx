@@ -15,7 +15,7 @@ function RegisterProject() {
   return (
     <MainWrapper classNames={"pt-0 bg-[#FFFCF8]"}>
       <Header 
-        title="PROSJEKTER ET PROSJEKT"
+        title="REGISTRER ET PROSJEKT"
         showSelectInstitution={true}/>
 
       <div className="flex justify-center mt-16 px-4">

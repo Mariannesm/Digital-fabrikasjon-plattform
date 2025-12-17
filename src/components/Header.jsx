@@ -7,7 +7,7 @@ function Header({ title = "", showSelectInstitution = false }) {
   const isOnFrontPage = ["/", "/meny"].includes(location.pathname);
 
   return (
-    <header className="mb-6 sm:mb-10 w-screen ml-[calc(50%-50vw)] pl-6 sm:pl-10 text-left bg-[#FFE8C2] grid grid-cols-3 grid-rows-5 gap-0">
+    <header className="mb-6 sm:mb-10 w-screen ml-[calc(50%-50vw)] pl-6 sm:pl-10 text-left bg-[#FFE8C2] grid grid-cols-3 grid-rows-4 gap-0 pb-5">
       <div className="col-span-0 row-span-4">
         {/* Venstre innhold – SmartMaking + select + tilbake */}
         <h1
@@ -36,8 +36,8 @@ function Header({ title = "", showSelectInstitution = false }) {
           </div>
         )}
       </div>
-      <div className="col-span-1 row-span-4 flex items-end justify-center">
-        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-medium text-center">
+      <div className="col-span-1 row-span-3 flex items-end justify-center">
+        <h2 className="text-5xl font-semibold text-center">
           {title}
         </h2>
       </div>
