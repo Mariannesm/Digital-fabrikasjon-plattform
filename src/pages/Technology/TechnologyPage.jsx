@@ -12,6 +12,7 @@ import Chatbot from "../../components/ChatBot";
 import Vinylkutter from "../../assets/ikoner/VinylKutter.png";
 
 function TechnologyPage() {
+    let navigate = useNavigate()
   return (
     <MainWrapper classNames="bg-[#FFFCF8]">
       {/* HEADER */}

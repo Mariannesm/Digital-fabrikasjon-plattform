@@ -26,7 +26,7 @@ function SelectedTechnology() {
       path
       */}
 
-      <h2 className="font-bold text-xl mt-20">Velg printeren du skal bruke</h2>
+      <h2 className="font-bold text-xl mt-5">Velg printeren du skal bruke</h2>
 
       <div className="flex justify-center gap-40">
         {printers.map((card) => {

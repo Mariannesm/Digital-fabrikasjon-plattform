@@ -7,6 +7,8 @@ import TechnologyPage from './pages/Technology/TechnologyPage';
 import SelectedTechnology from './pages/SelectedTechnology/SelectedTechnology';
 import GuidePage from './pages/Guidepage/GuidePage';
 import DigitalCourses from './pages/DigitalCourses/DigitalCourses';
+import Projects from './pages/Projects/Projects';
+import RegisterProject from './pages/RegisterProject/RegisterProject';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path= '/select' element={<SelectedTechnology/>}/>
           <Route path='/guide' element={<GuidePage/>}/>
           <Route path='/courses' element={<DigitalCourses/>}/>
+          <Route path='/projects' element={<Projects/>}/>
+          <Route path='/register' element={<RegisterProject/>}/>
           {/* <Route path="/about" element={<AboutPage />} /> */}
           {/* Legg til flere ruter her */}
         </Routes>
