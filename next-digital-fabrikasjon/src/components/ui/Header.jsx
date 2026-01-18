@@ -1,17 +1,17 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useRouter, useLocation } from 'next/navigation';
 import BackButton from "./BackButton";
 
-function Header({ title = "", showSelectInstitution = false }) {
-  const location = useLocation();
+export default function Header({ title = "", showSelectInstitution = false }) {
+  const location = useRouter();
   const navigate = useNavigate();
-  const isOnFrontPage = ["/", "/meny"].includes(location.pathname);
+  const isOnFrontPage = ["/", "/meny", "/login"].includes(location.pathname);
 
   return (
     <header className="mb-6 sm:mb-10 w-screen ml-[calc(50%-50vw)] pl-6 sm:pl-10 text-left bg-[#FFE8C2] grid grid-cols-3 grid-rows-4 gap-0 pb-5">
       <div className="col-span-0 row-span-4">
         {/* Venstre innhold – SmartMaking + select + tilbake */}
         <h1
-          onClick={() => navigate("/menu")}
+          onClick={() => navigate.push('/menu')}
           className="text-4xl sm:text-1xl font-extrabold tracking-tight text-[#E69138] mt-8 cursor-pointer"
         >
           SmartMaking
@@ -44,5 +44,3 @@ function Header({ title = "", showSelectInstitution = false }) {
     </header>
   );
 }
-
-export default Header;

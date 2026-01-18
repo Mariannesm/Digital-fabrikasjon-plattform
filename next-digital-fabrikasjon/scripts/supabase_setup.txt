@@ -1,0 +1,62 @@
+GUIDE: Sette opp roller for brukere i Supabase (fra scratch – januar 2026)
+
+1. OPPRETT TABELLEN 'profiles' (via Table Editor – enklest)
+
+   - Gå til venstremeny → Table Editor
+   - Klikk "New Table" øverst til høyre
+   - Table name: profiles (små bokstaver)
+   - Legg til kolonner:
+
+     Column name    Type         Default value       Constraints / Extra
+     --------------------------------------------------------------------
+     id             uuid         (tom)               Primary key
+                                                        References → auth.users (id)
+                                                        On delete → CASCADE
+     role           text         'user'              Not null (valgfritt)
+     created_at     timestamptz  now()               (valgfritt – bra å ha)
+
+   - Klikk "Save"
+   - create table public.profiles (
+    id          uuid primary key references auth.users on delete cascade,
+    role        text not null default 'user',
+    created_at  timestamptz default now()
+    );
+
+2. SLÅ PÅ ROW LEVEL SECURITY (RLS)
+
+   - Etter opprettelse → finn 'profiles' i listen
+   - Klikk på tabellen → "Edit table" eller lignende
+   - Aktiver "Enable Row Level Security" (viktig!)
+
+5. AUTOMATISER NYE BRUKERE (trigger – default 'user' for alle nye)
+
+   Kjør denne SQL-koden i SQL Editor:
+
+   create or replace function public.handle_new_user()
+   returns trigger as $$
+   begin
+     insert into public.profiles (id, role)
+     values (new.id, 'ADMIN');
+     return new;
+   end;
+   $$ language plpgsql security definer;
+
+   create or replace trigger on_auth_user_created
+     after insert on auth.users
+     for each row execute procedure public.handle_new_user();
+
+6. LEGG TIL ROLLER FOR EKSISTERENDE BRUKERE (manuelt først om du har opprettet før scriptene er kjørt)
+
+   - Gå til Table Editor → profiles
+   - Klikk "Insert row" / "New row" for hver bruker du allerede har:
+     - id: kopier UUID fra Authentication → Users (kolonne "ID")
+     - role: skriv 'admin', 'editor', 'user' osv.
+   - Lagre
+
+   (Gjenta for alle dine nåværende brukere)
+
+7. SENERE: Endre roller enkelt
+
+   - I Table Editor: Finn rad → Edit → endre role → Save
+   - Eller fra egen app (når du har admin-panel):
+     await supabase.from('profiles').update({ role: 'admin' }).eq('id', userId)

@@ -1,6 +1,10 @@
-import React from "react";
+import { PropsWithChildren } from 'react';
 
-function Chatbot({ children, onClick }) {
+interface ChatBotProps extends PropsWithChildren {
+  onClick?: () => void;
+}
+
+export default function Chatbot({ children, onClick }: ChatBotProps) {
   return (
     <button
       onClick={onClick}
@@ -11,5 +15,3 @@ function Chatbot({ children, onClick }) {
     </button>
   );
 }
-
-export default Chatbot;

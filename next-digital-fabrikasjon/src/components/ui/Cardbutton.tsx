@@ -1,6 +1,10 @@
-import React from "react";
+import { PropsWithChildren } from 'react';
 
-function CardButton({ children, onClick }) {
+interface CardButtonProps extends PropsWithChildren {
+  onClick?: () => void;
+}
+
+export default function CardButton({ children, onClick }: CardButtonProps) {
   return (
     <button
       onClick={onClick}
@@ -17,5 +21,3 @@ function CardButton({ children, onClick }) {
     </button>
   );
 }
-
-export default CardButton;
