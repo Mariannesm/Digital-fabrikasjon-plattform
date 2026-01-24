@@ -1,0 +1,132 @@
+Digital fabrikasjon platform
+
+
+Prioriteringsliste
+* Innlogging for admin/super admin
+    * ContextProvider
+    * Util funksjoner for å sjekke rolle
+* Prosjekt
+    * Innlogging
+        * Set cookie for prosjekt validering
+    * Lagre prosjekt i Sanity
+    * Redigeringsside
+
+Tilgangsstyring
+* Super admin (Supabase)
+    * Pages
+    * Organization
+    * Projects
+* Admin (Supabase)
+    * Begrenset til en organisasjon (?)
+    * Projects
+        * Approve
+        * Decline
+* Bruker
+    * Bruker kan bare logge inn på inviduellt prosjekt for å redigere tittel, innhold eller vedlegg. Dette trenger ingen session, men blir overført direkte til redigeringsside
+    * Bruk httpOnly cookie per prosjekt – det er nesten alle som gjør det slik i små prosjekter uten full brukerkonto. Slik fungerer flyten:
+        * Bruker skriver tittel (brukernavn) + passord ved opprettelse
+        * Du lagrer passord i klartekst (eller hashet) i Sanity-dokumentet
+        * Når brukeren logger inn på prosjektet (/edit eller lignende):
+        * Sjekker du mot Sanity om passordet stemmer
+        * Hvis riktig → sett en httpOnly cookie som bevis på at denne nettleseren har tilgang til akkurat dette prosjektet
+        * På alle fremtidige requests (både server components, server actions, API routes):
+        * Les cookie → se hvilket prosjekt-ID den gir tilgang til
+        * Tillat redigering hvis cookie matcher prosjektet
+
+// 1. Ved vellykket innlogging (server action eller API route)
+'use server'
+import { cookies } from 'next/headers'
+import { sign } from 'jsonwebtoken' // eller enkel egen string, f.eks. crypto.randomUUID()
+
+export async function loginToProject(slug: string, password: string) {
+  const project = await getProjectFromSanity(slug) // din fetch-funksjon
+
+  if (!project || project.editPassword !== password) {
+    throw new Error('Feil passord')
+  }
+
+  // Enkel, sikker nok token for dette use-case
+  const accessToken = sign(
+    { projectId: project._id, slug: project.slug.current },
+    process.env.COOKIE_SECRET!, // legg til en sterk secret i .env
+    { expiresIn: '30d' }
+  )
+
+  cookies().set({
+    name: `project_access_${slug}`,        // unik per prosjekt!
+    value: accessToken,
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+    path: `/prosjekt/${slug}`,             // begrens til akkurat denne ruten
+    maxAge: 60 * 60 * 24 * 30,             // 30 dager
+  })
+
+  return { success: true }
+}
+
+// 2. Middleware eller protect-funksjon (brukes overalt)
+import { cookies } from 'next/headers'
+import { verify } from 'jsonwebtoken'
+
+export async function getProjectAccess(slug: string) {
+  const cookieStore = cookies()
+  const token = cookieStore.get(`project_access_${slug}`)?.value
+
+  if (!token) return null
+
+  try {
+    const payload = verify(token, process.env.COOKIE_SECRET!) as {
+      projectId: string
+      slug: string
+    }
+
+    if (payload.slug !== slug) return null
+
+    return payload.projectId // → nå kan du bruke dette til å autorisere Sanity writes osv.
+  } catch {
+    return null
+  }
+}
+
+
+Database
+
+Brukere
+* Epost
+* Type
+    * Admin
+    * Super admin
+* Organization id
+    * Bare om man er admin
+
+Legg til funksjonalitet så Super admin og admin kan overskrive ett passord på ett prosjekt
+
+
+Organisasjon
+* Id: Long
+* Navn: String
+* Slug: String
+
+Template
+* Id: Long
+* Navn: String
+* Template: String (HTML?)
+    * Setup for side
+* Scheme: String (JSON?)
+    * Felter som må fylles ut av administrator
+
+Category
+* Id: Long
+* Name: String
+* Aktiv: boolean
+
+Page
+* Id: Long
+* Aktiv: Boolean
+* Navn: String
+* Template: String <- Template Object (HTML)
+* Scheme: String (Scheme for JSON for all values present in Template HTML)
+* Content: String (Filled JSON with values)
+
+
