@@ -1,22 +1,20 @@
 import blockContent from './customTypes/blockContent'
-import crewMember from './customTypes/crewMember'
-import castMember from './customTypes/castMember'
-import person from './documentTypes/person'
-import screening from './documentTypes/screening'
-import plotSummary from './customTypes/plotSummary'
-import plotSummaries from './customTypes/plotSummaries'
+import { pageBlocks } from './customTypes/pageBlocks'
 import { organization } from './documentTypes/organization'
+import { project } from './documentTypes/project'
+import { category } from './documentTypes/category'
+import { page } from './documentTypes/page'
 
 export const schemaTypes = [
   // Document types
-  person,
-  screening,
   organization,
+  project,
+  category,
+  page,
+
+  // Block types for page builder
+  ...pageBlocks,
 
   // Other types
   blockContent,
-  plotSummary,
-  plotSummaries,
-  castMember,
-  crewMember,
 ]

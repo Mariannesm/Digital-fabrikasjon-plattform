@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import NextTopLoader from 'nextjs-toploader';
-import { UserProvider } from '@/app/context/UserProvider'; // eller '@/app/_contexts/UserContext'
-import { createClient } from '@/libs/supabase/client'
+import { UserProvider } from '@/providers/UserProvider';
+import { createClient } from '@/lib/supabase/client'
 import "@/globals.css";
 
 export const metadata: Metadata = {
@@ -30,7 +30,7 @@ export default async function RootLayout({
   if (user) {
     const { data: profile } = await supabase
       .from('profiles')
-      .select('role, full_name') // Legg gjerne til flere felter senere
+      .select('role, full_name, assigned_to')
       .eq('id', user.id)
       .single();
 
@@ -38,11 +38,12 @@ export default async function RootLayout({
       id: user.id,
       email: user.email ?? null,
       role: profile?.role ?? 'user',
+      assigned_to: profile?.assigned_to ?? null,
     };
   }
 
   return (
-    <html lang="no">  {/* Endret til norsk */}
+    <html lang="no">
       <body className="antialiased">
         <NextTopLoader color="#3b82f6" />
 
