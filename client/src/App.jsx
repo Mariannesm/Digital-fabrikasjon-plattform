@@ -10,6 +10,7 @@ import DigitalCourses from './pages/DigitalCourses/DigitalCourses';
 import Projects from './pages/Projects/Projects';
 import RegisterProject from './pages/RegisterProject/RegisterProject';
 import LogIn from './pages/LogIn/LogIn';
+import GuideStep1 from './pages/GuideStep1/GuideStep1';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path= '/technology' element={<TechnologyPage/>} />
           <Route path= '/select' element={<SelectedTechnology/>}/>
           <Route path='/guide' element={<GuidePage/>}/>
+          <Route path='/step1' element={<GuideStep1/>}/>
           <Route path='/courses' element={<DigitalCourses/>}/>
           <Route path='/projects' element={<Projects/>}/>
           <Route path='/register' element={<RegisterProject/>}/>

@@ -7,9 +7,10 @@ import PrinterIkon from "../../assets/ikoner/3Dprinter.png";
 import CNCfreserIkon from "../../assets/ikoner/CNCfreser.png";
 import ElektronikkIkon from "../../assets/ikoner/Elektronikk.png";
 import LaserkutterIkon from "../../assets/ikoner/Laserkutter.png";
-import LoddeIkon from "../../assets/ikoner/Lodding.png";
 import Chatbot from "../../components/ChatBot";
 import Vinylkutter from "../../assets/ikoner/VinylKutter.png";
+import TskjortePrinting from "../../assets/ikoner/TskjortePrinting.png";
+import AirBrushing from "../../assets/ikoner/AirBrushing.png";
 
 function TechnologyPage() {
     let navigate = useNavigate()
@@ -69,15 +70,6 @@ function TechnologyPage() {
 
           <CardButton>
             <img
-              src={LoddeIkon}
-              alt="Lodding ikon"
-              className="w-24 h-24 mx-auto mb-5 mt-5"
-            />
-            <span className="block mb-6 text-center">LODDING</span>
-          </CardButton>
-
-          <CardButton>
-            <img
               src={Vinylkutter}
               alt="Podcast ikon"
               className="w-24 h-24 mx-auto mb-5 mt-5"
@@ -87,12 +79,24 @@ function TechnologyPage() {
 
            <CardButton>
             <img
-              src={Vinylkutter}
+              src={TskjortePrinting}
               alt="Podcast ikon"
               className="w-24 h-24 mx-auto mb-5 mt-5"
             />
             <span className="block mb-6 text-center">T-SKJORTE PRINT</span>
           </CardButton>
+
+          
+           <CardButton>
+            <img
+              src={AirBrushing}
+              alt="Podcast ikon"
+              className="w-24 h-24 mx-auto mb-5 mt-5"
+            />
+            <span className="block mb-6 text-center">AIRBRUSHING</span>
+          </CardButton>
+
+
         </div>
       </section>
 
