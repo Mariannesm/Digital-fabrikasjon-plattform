@@ -1,9 +1,9 @@
-import "./GuideStep1.css";
+import "./GuideStep2.css";
 import Header from "../../components/Header";
 import MainWrapper from "../../components/MainWrapper";
 import Printer from "../../assets/ikoner/Printer.png";
 
-function GuideStep1() {
+function GuideStep2() {
   return (
     <MainWrapper classNames="bg-[#FFFCF8]">
       {/* HEADER */}
@@ -27,35 +27,20 @@ function GuideStep1() {
               </div>
 
              {/* Navigasjon */}
-                <nav className="w-full">
-            
-                <div className="space-y-1">
-                    <button className="w-full bg-[#214C50] px-5 py-4 text-left text-white shadow">
-                    1. Lag modellen
-                    </button>
-
-                    <div className="mt-2 space-y-0">
-                    <button className="w-full bg-[#214C50] hover:bg-[#122B2D] px-5 py-4 text-left text-white shadow pl-10">
-                        1.1 Eksisterende modell
-                    </button>
-                    <button className="w-full bg-[#214C50] hover:bg-[#122B2D] px-5 py-4 text-left text-white shadow pl-10">
-                        1.2 3D-modellering
-                    </button>
-                    </div>
-                </div>
-
-                <div className="mt-4 space-y-4">
-                    <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-5 py-4 text-left text-white shadow">
-                    2. Forbered printen
-                    </button>
-                    <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-5 py-4 text-left text-white shadow">
-                    3. Print
-                    </button>
-                    <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-5 py-4 text-left text-white shadow">
-                    4. Etterbehandling
-                    </button>
-                </div>
-                </nav>
+              <nav className="w-full space-y-4">
+                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-5 py-4 text-left text-white shadow-sm">
+                  1. Lag modellen
+                </button>
+                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-5 py-4 text-left text-white shadow-sm">
+                  2. Forbered printen
+                </button>
+                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-5 py-4 text-left text-white shadow-sm">
+                  3. Print
+                </button>
+                <button className="w-full bg-[#488B90] hover:bg-[#214C50]  px-5 py-4 text-left text-white shadow-sm">
+                  4. Etterbehandling
+                </button>
+              </nav>
             </aside>
 
             {/* Høyre seksjon */}
@@ -113,4 +98,4 @@ function GuideStep1() {
   );
 }
 
-export default GuideStep1;
+export default GuideStep2;

@@ -98,7 +98,7 @@ function GuidePage() {
                 </div>
 
                 <div className="mt-12 flex justify-center">
-                  <button className="rounded-md bg-[#488B90] hover:bg-[#214C50] px-8 py-3 text-white shadow">
+                  <button className="rounded-md bg-[#214C50] hover:bg-[#122B2D] px-8 py-3 text-white shadow">
                     Start 3D-printingen
                   </button>
                 </div>
