@@ -1,0 +1,32 @@
+SANITY SEED SCRIPT
+==================
+
+For å opprette standard-kategorier i Sanity, kjør følgende fra server-mappen:
+
+    cd server
+    npx sanity exec scripts/seedCategories.ts --with-user-token
+
+Scriptet ligger i: server/scripts/seedCategories.ts
+
+Kategorier som opprettes:
+- Teknologi (slug: technology, order: 1)
+- Prosjekter (slug: projects, order: 2)
+- Kurs (slug: courses, order: 3)
+- Galleri (slug: gallery, order: 4)
+
+Scriptet hopper over kategorier som allerede eksisterer.
+
+
+SANITY EKSPORT/IMPORT
+=====================
+
+Eksportere data:
+    npx sanity dataset export production ./backup.tar.gz
+
+Importere til ny instans:
+    npx sanity dataset import ./backup.tar.gz production
+
+Nyttige flagg:
+- --no-assets    Eksporterer bare dokumenter, ikke bilder/filer
+- --overwrite    Overskriver eksisterende data ved import
+- --missing      Importerer bare dokumenter som ikke finnes

@@ -1,9 +1,9 @@
 'use client';
-import './Projects.css'
+
 import CardButton from '@/components/ui/Cardbutton';
 import MainWrapper from '@/components/templates/MainWrapper';
 import Header from '@/components/ui/Header';
-import { useRouter, useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function ProjectPage() {
     let navigate = useRouter()

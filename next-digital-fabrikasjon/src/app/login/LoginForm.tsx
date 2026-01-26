@@ -3,9 +3,9 @@
 import { useActionState, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { loginUserSchema } from '@/libs/validation/login'
-import { signIn } from '@/libs/supabase/user' // din server action
-import { SubmitButton } from "@/components/ui/SubmitButton"
+import { loginUserSchema } from '@/lib/validation/login'
+import { signIn } from '@/lib/supabase/user'
+import { Button } from "@/components/ui/Button"
 import { z } from 'zod'
 
 type FormState = { error?: string }
@@ -77,13 +77,13 @@ export default function LoginForm() {
         </p>
       )}
 
-      <SubmitButton
+      <Button
         type="submit"
         pendingText="Logger inn..."
         disabled={isPending}
       >
         Logg inn
-      </SubmitButton>
+      </Button>
     </form>
   )
 }

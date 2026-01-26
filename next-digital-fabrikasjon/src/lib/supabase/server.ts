@@ -1,6 +1,14 @@
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { NextResponse, type NextRequest } from 'next/server'
+import type { UUID } from 'crypto'
+
+type ServerUser = {
+  id: string
+  email: string | null
+  role: string | null
+  assigned_to: UUID | null
+}
 
 export async function createClient() {
   const cookieStore = await cookies()
@@ -50,4 +58,28 @@ export async function updateSession(request: NextRequest) {
   await supabase.auth.getUser()
 
   return response
+}
+
+/**
+ * Hent innlogget bruker med rolle fra profiles-tabellen
+ * Brukes i Server Components for rolle-sjekking
+ */
+export async function getCurrentUserWithRole(): Promise<ServerUser | null> {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) return null
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('role, assigned_to')
+    .eq('id', user.id)
+    .single()
+
+  return {
+    id: user.id,
+    email: user.email ?? null,
+    role: profile?.role ?? 'user',
+    assigned_to: profile?.assigned_to ?? null,
+  }
 }

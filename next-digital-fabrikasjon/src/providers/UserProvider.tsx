@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
-import { createClient } from '@/libs/supabase/client'
+import { createClient } from '@/lib/supabase/client'
 import type { User as SupabaseUser } from '@supabase/supabase-js'
 import { UUID } from 'crypto'
 
@@ -29,8 +29,7 @@ export function UserProvider({
 }) {
   const [user, setUser] = useState<AppUser | null>(initialUser ?? null)
   const [isLoading, setIsLoading] = useState(!initialUser)
-
-  const supabase = createClient()   // ← nå er dette en vanlig SupabaseClient, ikke Promise
+  const supabase = createClient()
 
   const loadUser = async () => {
     setIsLoading(true)
@@ -44,14 +43,14 @@ export function UserProvider({
 
       const { data: profile } = await supabase
         .from('profiles')
-        .select('role, email, assigned_to')  // ← la oss ta med full_name også
+        .select('role, email, assigned_to')
         .eq('id', authUser.id)
         .single()
 
       setUser({
         id: authUser.id,
         email: authUser.email ?? null,
-        role: profile?.role ?? 'user',
+        role: profile?.role ?? null,
         assigned_to: profile?.assigned_to ?? null,
       })
     } catch (error) {
@@ -76,7 +75,7 @@ export function UserProvider({
     })
 
     return () => subscription.unsubscribe()
-  }, [initialUser]) // ← legg gjerne til initialUser i deps
+  }, [initialUser])
 
   const refreshUser = async () => loadUser()
 

@@ -21,9 +21,9 @@ Tilgangsstyring
     * Projects
         * Approve
         * Decline
-* Bruker
+* Prosjekt (Ikke bruk av Supabase, bare passord felt på prosjekt)
     * Bruker kan bare logge inn på inviduellt prosjekt for å redigere tittel, innhold eller vedlegg. Dette trenger ingen session, men blir overført direkte til redigeringsside
-    * Bruk httpOnly cookie per prosjekt – det er nesten alle som gjør det slik i små prosjekter uten full brukerkonto. Slik fungerer flyten:
+    * Bruk httpOnly cookie per prosjekt – det er nesten alle som gjør det slik i små prosjekter uten full brukerkonto.Slik fungerer flyten:
         * Bruker skriver tittel (brukernavn) + passord ved opprettelse
         * Du lagrer passord i klartekst (eller hashet) i Sanity-dokumentet
         * Når brukeren logger inn på prosjektet (/edit eller lignende):
@@ -102,6 +102,7 @@ Brukere
 
 Legg til funksjonalitet så Super admin og admin kan overskrive ett passord på ett prosjekt
 
+Sanity database:
 
 Organisasjon
 * Id: Long
@@ -119,14 +120,118 @@ Template
 Category
 * Id: Long
 * Name: String
-* Aktiv: boolean
+* Active: boolean
 
 Page
 * Id: Long
-* Aktiv: Boolean
-* Navn: String
+* Active: Boolean
+* Name: String
 * Template: String <- Template Object (HTML)
 * Scheme: String (Scheme for JSON for all values present in Template HTML)
 * Content: String (Filled JSON with values)
 
+
+================================================================================
+Claude Innlogging System Plan
+================================================================================
+
+Oversikt
+--------
+Enkelt passord-basert innloggingssystem for prosjekter uten lagring av e-poster
+eller andre GDPR-sensitive data. Session-basert cookie som forsvinner når
+nettleseren lukkes + logout-knapp.
+
+Arkitektur
+----------
+Bruker -> Login-side -> Server Action -> Sanity (verifiser passord)
+                                      -> Sett httpOnly session cookie
+                                      -> Redirect til edit-side
+
+Edit-side -> getProjectAccess() -> Cookie gyldig? -> Vis redigeringsside
+                                -> Ugyldig? -> Redirect til login
+
+Filer som skal opprettes/endres
+-------------------------------
+
+1. SANITY SCHEMA (server/)
+   Ny fil: server/schemaTypes/documentTypes/project.ts
+   - title (string, required) - Prosjektnavn
+   - slug (slug, auto fra title)
+   - editPassword (string, required) - Passord for redigering
+   - organization (reference til organization)
+   - content (blockContent) - Innhold
+   - status (string: draft/published)
+
+   Endre: server/schemaTypes/index.ts
+   - Importere og eksportere project
+
+2. SERVER ACTIONS (next-digital-fabrikasjon/)
+   Ny fil: src/libs/project/auth.ts
+   - loginToProject(slug, password) - Setter session cookie
+   - logoutFromProject(slug) - Sletter cookie
+   - getProjectAccess(slug) - Sjekker cookie, returnerer projectId eller null
+
+3. SANITY QUERIES
+   Ny fil: src/libs/sanity/queries/project.ts
+   - getProjectBySlug(slug) - Henter prosjekt med passord for verifisering
+   - getProjectById(id) - Henter prosjekt for visning/redigering
+
+4. LOGIN-SIDE
+   Ny fil: src/app/[organization_slug]/projects/login/page.tsx
+   Ny fil: src/app/[organization_slug]/projects/login/ProjectLoginForm.tsx
+   - Client component med react-hook-form
+   - Felt: prosjektnavn (slug), passord
+   - Kaller loginToProject server action
+
+5. EDIT-SIDE
+   Endre: src/app/[organization_slug]/projects/[id]/page.tsx
+   - Sjekker getProjectAccess() ved lasting
+
+   Ny fil: src/app/[organization_slug]/projects/[id]/EditProjectForm.tsx
+   - Client component for redigering
+   - Logout-knapp
+
+6. VALIDERING
+   Ny fil: src/libs/validation/projectLogin.ts
+   - Zod schema for prosjekt-login
+
+7. ENVIRONMENT VARIABLES
+   Endre: .env.local
+   - Legge til COOKIE_SECRET
+
+Cookie-strategi
+---------------
+cookies().set({
+  name: `project_access_${slug}`,
+  value: signedToken,           // JWT med projectId og slug
+  httpOnly: true,               // Ikke tilgjengelig via JS
+  secure: process.env.NODE_ENV === 'production',
+  sameSite: 'strict',
+  path: `/`,
+  // INGEN maxAge = Session cookie (forsvinner ved nettleser-lukking)
+})
+
+Avhengigheter
+-------------
+npm install jsonwebtoken @types/jsonwebtoken
+
+Implementeringsrekkefølge
+-------------------------
+1. Installer jsonwebtoken
+2. Opprett Sanity project-schema
+3. Opprett COOKIE_SECRET i .env.local
+4. Implementer auth-funksjoner
+5. Implementer Sanity queries
+6. Opprett login-side med skjema
+7. Implementer edit-side med beskyttelse
+
+Verifisering
+------------
+1. Opprett test-prosjekt i Sanity Studio med passord
+2. Gå til /{org}/projects/login
+3. Logg inn med prosjektnavn og passord
+4. Verifiser redirect til edit-siden
+5. Verifiser cookie i DevTools -> Application -> Cookies
+6. Klikk "Logg ut" - verifiser at cookie slettes
+7. Lukk nettleseren, åpne på nytt - verifiser at cookie er borte
 

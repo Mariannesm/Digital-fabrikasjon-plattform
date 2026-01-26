@@ -46,6 +46,13 @@ export const organization = defineType({
           allowRelative: false,
         }).required(),
     }),
+    defineField({
+      name: 'active',
+      title: 'Active',
+      type: 'boolean',
+      description: 'Only active organizations are shown on the front page',
+      initialValue: true,
+    }),
   ],
   preview: {
     select: {

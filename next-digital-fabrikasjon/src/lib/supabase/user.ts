@@ -1,8 +1,8 @@
 'use server'
 import { z } from 'zod'
 import { redirect } from 'next/navigation'
-import { createClient } from '@/libs/supabase/server'
-import { loginUserSchema } from '@/libs/validation/login'
+import { createClient } from '@/lib/supabase/server'
+import { loginUserSchema } from '@/lib/validation/login'
 
 type LoginUserData = z.infer<typeof loginUserSchema>
 
