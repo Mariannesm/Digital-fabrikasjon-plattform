@@ -30,7 +30,7 @@ function GuidePage() {
 
               {/* Ikon med linje - skal vise bilde av den valgte printeren/kutteren/ osv*/}
               <div className="mb-6 flex items-center gap-4">
-                <span className="h-24 w-1 bg-teal-700" />
+                <span className="h-24 w-1 bg-[#488B90]" />
                 <img
                   src={Printer}
                   alt="3D-printer"
@@ -69,28 +69,28 @@ function GuidePage() {
                   <ol className="mt-5 space-y-3">
                     <li className="flex items-start gap-2">
                       <span className="w-6">1.</span>
-                      <p className="m-0">
+                      <p className="m-0 font-normal">
                         Først må man enten finne en modell eller designe en egen.
                       </p>
                     </li>
 
                     <li className="flex items-start gap-2">
                       <span className="w-6">2.</span>
-                      <p className="m-0">
+                      <p className="m-0 font-normal">
                         Deretter skal modellen forberedes ved å tilpasse innstillinger for å lage en utskriftsfil.
                       </p>
                     </li>
 
                     <li className="flex items-start gap-2">
                       <span className="w-6">3.</span>
-                      <p className="m-0">
+                      <p className="m-0 font-normal">
                         Videre kan modellen 3D-printes lag for lag.
                       </p>
                     </li>
 
                     <li className="flex items-start gap-2">
                       <span className="w-6">4.</span>
-                      <p className="m-0">
+                      <p className="m-0 font-normal">
                         3D-printen kan tilslutt etterbehandles om behov.
                       </p>
                     </li>

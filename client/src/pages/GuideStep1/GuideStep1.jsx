@@ -34,7 +34,7 @@ function GuideStep1() {
                     1. Lag modellen
                     </button>
 
-                    <div className="mt-2 space-y-0">
+                    <div className="space-y-0">
                     <button className="w-full bg-[#214C50] hover:bg-[#122B2D] px-5 py-4 text-left text-white shadow pl-10">
                         1.1 Eksisterende modell
                     </button>
@@ -64,7 +64,7 @@ function GuideStep1() {
                 
                 {/* Tittel */}
                 <div className="flex flex-col gap-2">
-                  <h2 className="text-lg font-semibold">
+                  <h2 className="text-lg font-bold">
                     Steg 1. Lag modellen
                   </h2>
                   <span className="h-1 w-full bg-[#488B90]" />

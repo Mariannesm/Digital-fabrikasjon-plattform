@@ -2,6 +2,11 @@ import "./GuideStep2.css";
 import Header from "../../components/Header";
 import MainWrapper from "../../components/MainWrapper";
 import Printer from "../../assets/ikoner/Printer.png";
+import Trinn2Prusa from "../../assets/bilder/Trinn2Prusa.png";
+import Trinn3Prusa from "../../assets/bilder/Trinn3Prusa.png";
+import Trinn4Prusa from "../../assets/bilder/Trinn4Prusa.png";
+import Trinn5Prusa from "../../assets/bilder/Trinn5Prusa.png";
+import Filament from "../../assets/bilder/Filament.png";
 
 function GuideStep2() {
   return (
@@ -13,10 +18,8 @@ function GuideStep2() {
         <div className="mx-auto w-full max-w-7xl px-8 py-12">
           <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-[240px_1fr]">
             
-            {/* Venstre seksjon */}
+            {/* Venstre kolonne */}
             <aside className="flex flex-col items-start">
-              
-              {/* Ikon med vertikal linje */}
               <div className="mb-6 flex items-center gap-4">
                 <span className="h-24 w-1 bg-[#488B90]" />
                 <img
@@ -26,18 +29,17 @@ function GuideStep2() {
                 />
               </div>
 
-             {/* Navigasjon */}
               <nav className="w-full space-y-4">
                 <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-5 py-4 text-left text-white shadow-sm">
                   1. Lag modellen
                 </button>
-                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-5 py-4 text-left text-white shadow-sm">
+                <button className="w-full bg-[#214C50] hover:bg-[#214C50] px-5 py-4 text-left text-white shadow-sm">
                   2. Forbered printen
                 </button>
                 <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-5 py-4 text-left text-white shadow-sm">
                   3. Print
                 </button>
-                <button className="w-full bg-[#488B90] hover:bg-[#214C50]  px-5 py-4 text-left text-white shadow-sm">
+                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-5 py-4 text-left text-white shadow-sm">
                   4. Etterbehandling
                 </button>
               </nav>
@@ -45,52 +47,144 @@ function GuideStep2() {
 
             {/* Høyre seksjon */}
             <div className="w-full">
-              <section className="relative w-full max-w-3xl min-h-[420px] rounded-2xl bg-white p-12 shadow-lg text-left flex flex-col">
+              <section className="w-full max-w-3xl rounded-2xl bg-white p-12 shadow-lg text-left">
                 
-                {/* Tittel */}
                 <div className="flex flex-col gap-2">
-                  <h2 className="text-lg font-semibold">
-                    Steg 1. Lag modellen
-                  </h2>
+                  <h2 className="text-lg font-bold">2. Forbered printeren</h2>
                   <span className="h-1 w-full bg-[#488B90]" />
                 </div>
 
-                {/* Innhold */}
-                <div className="mt-6 text-base font-semibold text-black">
-                  <p>
-                    I det første steget skal du enten finne en eksisterende modell
-                    eller 3D-modellere din egen.
-                  </p>
+                {/* Intro */}
+                <div className="mt-6 text-base font-semibold text-black text-left">
+                  <p>For å klargjøre modellen for printing følg disse stegene:</p>
                 </div>
 
-                {/* Knappene nederst*/}
-                <div className="mt-auto flex items-end justify-between">
-                  <button
-                    className="
-                     mt-20 rounded-xl bg-[#EBA65F] px-10 py-3 font-semibold text-black
-                      shadow-[0_6px_14px_rgba(0,0,0,0.18)]
-                      hover:bg-[#C28B53]
-                      active:translate-y-[1px]
-                      active:shadow-[0_4px_10px_rgba(0,0,0,0.18)]
-                      transition"> 
-                      Forrige
-                  </button>
+                {/* STEG */}
+                <div className="mt-8 space-y-10 text-sm font-medium text-slate-800">
 
-                  <button
-                    className="
-                     mt-20 rounded-xl bg-[#EBA65F] px-10 py-3 font-semibold text-black
-                      shadow-[0_6px_14px_rgba(0,0,0,0.18)]
-                      hover:bg-[#C28B53]
-                      active:translate-y-[1px]
-                      active:shadow-[0_4px_10px_rgba(0,0,0,0.18)]
-                      transition">
-                      Neste
+                  {/* 1 */}
+                  <div className="flex items-start gap-5">
+                    <div className="flex h-9 w-9 flex-none items-center justify-center rounded-full border-2 border-[#E69138] bg-[#E69138] font-bold leading-none text-white">
+                      1
+                    </div>
+                    <div className="text-base font-normal">
+                      <p>Last STL-filen inn i PrusaSlicer</p>
+                      <p>Sørg for at modellen er midtstilt og ligger flatt på platen</p>
+                    </div>
+                  </div>
+
+                  {/* 2 */}
+                  <div className="flex items-start gap-5">
+                    <div className="flex h-9 w-9 flex-none items-center justify-center rounded-full border-2 border-[#E69138] font-bold leading-none text-[#E69138]">
+                      2
+                    </div>
+                    <div className="text-base font-normal">
+                      <p>Velg print setting</p>
+                      <p className="mb-3 text-red-600">
+                        Tommelfinger: 0.2 mm fungerer for det meste!
+                      </p>
+                      <img src={Trinn2Prusa} className="w-full rounded-lg border-2 border-[#E69138]" />
+                    </div>
+                  </div>
+
+                  {/* 3 */}
+                  <div className="flex items-start gap-5">
+                    <div className="flex h-9 w-9 flex-none items-center justify-center rounded-full border-2 border-[#E69138] bg-[#E69138] font-bold leading-none text-white">
+                      3
+                    </div>
+                    <div className="w-full space-y-3">
+                      <p className="text-base font-normal">Velg filament</p>
+                      <div className="grid gap-4 lg:grid-cols-[1fr_220px]">
+                        <img src={Trinn3Prusa} className="rounded-lg border border-2 border-[#E69138]" />
+                        <div className="rounded-lg border-2 border-[#E69138] bg-[#EBECEB] p-3 text-xs">
+                          <p className="text-base font-semibold">Tilgjengelig:</p>
+                          <ul className="mt-2 space-y-1 text-sm">
+                            <li>• Generic PETG</li>
+                            <li>• Generic PLA</li>
+                            <li>• Prusament PETG</li>
+                            <li>• Prusament PLA</li>
+                            <li>• Prusament Woodfill</li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div className="mt-10 flex items-center justify-between rounded-3xl bg-[#C2D8DA] px-4 py-3">
+                        <div className="flex items-center gap-3">
+                          <img src={Filament} className="h-13 w-13" />
+                          <span className="font-bold text-[#214C50]">Usikker på filament?</span>
+                        </div>
+                        <button className="rounded-xl bg-[#214C50] hover:bg-[#122B2D] px-4 py-2 text-sm text-white shadow">
+                          Les mer
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 4 */}
+                  <div className="flex items-start gap-5">
+                    <div className="flex h-9 w-9 flex-none items-center justify-center rounded-full border-2 border-[#E69138] font-bold leading-none text-[#E69138]">
+                      4
+                    </div>
+                    <div className="w-full space-y-3">
+                      <p className="text-base font-normal">Velg printer</p>
+                      <div className="grid gap-4 lg:grid-cols-[1fr_220px]">
+                        <img src={Trinn4Prusa} className="rounded-lg border border-2 border-[#E69138]" />
+                        <div className="rounded-lg border-2 border-[#E69138] bg-[#EBECEB] p-3 text-xs">
+                          <p className="text-base font-semibold">Tilgjengelig:</p>
+                          <ul className="mt-2 space-y-1 text-sm">
+                            <li>• Original Prusa MK4S</li>
+                            <li>• Original Prusa MINI+</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 5 */}
+                  <div className="flex items-start gap-5">
+                    <div className="flex h-9 w-9 flex-none items-center justify-center rounded-full border-2 border-[#E69138] bg-[#E69138] font-bold leading-none text-white">
+                      5
+                    </div>
+                    <div className="w-full">
+                      <p className="text-base font-normal">Velg supports…</p>
+                      <p className="text-base font-normal">Sett infill</p>
+                      <p className="text-red-600 text-base font-normal">
+                        Tommelfinger: 15% – 20% er mer enn nok!
+                      </p>
+                      <img src={Trinn5Prusa} className="rounded-lg border border-2 border-[#E69138]" />
+                    </div>
+                  </div>
+
+                  {/* 6 */}
+                  <div className="flex items-start gap-5">
+                    <div className="flex h-9 w-9 flex-none items-center justify-center rounded-full border-2 border-[#E69138] font-bold leading-none text-[#E69138]">
+                      6
+                    </div >
+                    <p className="text-base font-normal">Velg “Slice now” → Export G-code → Lagre som .bgcode</p>
+                  </div>
+
+                  {/* 7 */}
+                  <div className="flex items-start gap-5">
+                    <div className="flex h-9 w-9 flex-none items-center justify-center rounded-full border-2 border-[#E69138] bg-[#E69138] font-bold leading-none text-white">
+                      7
+                    </div>
+                    <p className="text-base font-normal">Lagre filen på minnepennen til printeren</p>
+                  </div>
+
+                </div>
+
+                {/*knappene, burde kanskje lages som et component?*/}
+                <div className="mt-auto flex items-end justify-between">
+                  <button className="mt-20 rounded-xl bg-[#EBA65F] px-10 py-3 font-semibold shadow hover:bg-[#C28B53]">
+                    Forrige
+                  </button>
+                  <button className="mt-20 rounded-xl bg-[#EBA65F] px-10 py-3 font-semibold shadow hover:bg-[#C28B53]">
+                    Neste
                   </button>
                 </div>
 
               </section>
             </div>
-
           </div>
         </div>
       </section>
