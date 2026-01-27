@@ -12,6 +12,7 @@ import RegisterProject from './pages/RegisterProject/RegisterProject';
 import LogIn from './pages/LogIn/LogIn';
 import GuideStep1 from './pages/GuideStep1/GuideStep1';
 import GuideStep2 from './pages/GuideStep2/GuideStep2';
+import FilamentPage from './pages/FilamentPage/FilamentPage';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path='/guide' element={<GuidePage/>}/>
           <Route path='/step1' element={<GuideStep1/>}/>
           <Route path='/step2' element={<GuideStep2/>}/>
+          <Route path='/filaments' element={<FilamentPage/>}/>
           <Route path='/courses' element={<DigitalCourses/>}/>
           <Route path='/projects' element={<Projects/>}/>
           <Route path='/register' element={<RegisterProject/>}/>
