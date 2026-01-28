@@ -24,8 +24,9 @@ function DigitalCourses() {
     <div className="mx-auto w-full max-w-6xl px-10 py-14">
         {/* Overskrifter */}
         <div className="grid grid-cols-2 gap-12 text-2xl">
-          <h2 className="font-semibold">Informerende kurs:</h2>
-          <h2 className="font-semibold">Kurs for ditt område:</h2>
+          <h2 className="font-semibold">Informerende digitale kurs:</h2>
+          <h2 className="font-semibold">Digitale kurs for ditt område:</h2>
+          <h2 className="font-semibold">Fysiske kurs for ditt område:</h2>
         </div>
 
      {/* Kolonner */}

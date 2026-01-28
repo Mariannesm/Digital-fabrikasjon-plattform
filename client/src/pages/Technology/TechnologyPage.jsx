@@ -74,16 +74,7 @@ function TechnologyPage() {
               alt="Podcast ikon"
               className="w-24 h-24 mx-auto mb-5 mt-5"
             />
-            <span className="block mb-6 text-center">VINYLKUTTING</span>
-          </CardButton>
-
-           <CardButton>
-            <img
-              src={TskjortePrinting}
-              alt="Podcast ikon"
-              className="w-24 h-24 mx-auto mb-5 mt-5"
-            />
-            <span className="block mb-6 text-center">T-SKJORTE PRINT</span>
+            <span className="block mb-6 text-center">TRYKK & PROFILERING</span>
           </CardButton>
 
           
