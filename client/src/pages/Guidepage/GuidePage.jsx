@@ -12,9 +12,9 @@ function GuidePage() {
       <section className="flex-1">
         <div className="w-full px-4 py-12">
           <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-[420px_1fr]">
+            
             {/* Venstre kolonne */}
             <aside className="flex flex-col items-start self-start sticky top-6 z-10">
-              {/* bilde av valgte printer med linje */}
               <div className="mb-8 flex items-center gap-4">
                 <span className="h-24 w-1 bg-[#488B90]" />
                 <img
@@ -24,21 +24,20 @@ function GuidePage() {
                 />
               </div>
 
-              {/* Steg navigasjon */}
-              <nav className="w-full space-y-6 ">
-                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white ">
+              <nav className="w-full space-y-6">
+                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white">
                   1. Lag modellen
                 </button>
 
-                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white ">
+                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white">
                   2. Forbered printen
                 </button>
 
-                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white ">
+                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white">
                   3. Print
                 </button>
 
-                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white ">
+                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white">
                   4. Etterbehandling
                 </button>
               </nav>
@@ -47,8 +46,9 @@ function GuidePage() {
             {/* Høyre seksjon */}
             <div className="w-full">
               <section className="w-full max-w-7xl mr-auto rounded-2xl bg-white p-12 shadow-lg">
-                <div className="flex flex-col gap-2">
-                  <h2 className="text-lg font-semibold">Fire Steg</h2>
+                
+                <div className="flex flex-col gap-2 text-left">
+                  <h2 className="text-lg font-bold">Fire Steg</h2>
                   <span className="h-1 w-full bg-[#488B90]" />
                 </div>
 
@@ -92,6 +92,7 @@ function GuidePage() {
                     Start 3D-printingen
                   </button>
                 </div>
+
               </section>
             </div>
           </div>

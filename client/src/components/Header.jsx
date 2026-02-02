@@ -37,7 +37,7 @@ function Header({ title = "", showSelectInstitution = false }) {
         )}
       </div>
       <div className="col-span-1 row-span-3 flex items-end justify-center">
-        <h2 className="text-5xl font-semibold text-center">
+        <h2 className="text-5xl font-medium text-center">
           {title}
         </h2>
       </div>

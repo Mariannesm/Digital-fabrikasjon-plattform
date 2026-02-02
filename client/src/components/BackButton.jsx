@@ -11,7 +11,7 @@ function BackButton({ children }) {
   return (
     <button
       onClick={handleGoBack}
-      className="flex flex-col items-center justify-center w-18 h-18 rounded-full bg-[#E69138] shadow-md hover:bg-[#FF9E38] transition mt-5"
+      className="flex flex-col items-center justify-center w-17 h-17 rounded-full bg-[#E69138] shadow-md hover:bg-[#FF9E38] transition mt-5"
     >
       <img src={BackIcon} alt="back" className="w-7 h-7 pt-1" />
       <span className="text-white text-sm font-semibold pt-1">Tilbake</span>
