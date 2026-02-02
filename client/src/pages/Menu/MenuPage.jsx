@@ -20,8 +20,8 @@ function MenuPage() {
         </CardButton>
 
         <CardButton>
-          <span className="block">KOM I GANG MED</span>
-          <span className="block">ET PROSJEKT</span>
+          <span className="block">OM OMRÅDET</span>
+          <span className="block">DITT</span>
         </CardButton>
 
         <CardButton onClick={() => navigate('/courses')}>
