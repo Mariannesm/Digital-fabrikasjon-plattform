@@ -46,10 +46,10 @@ function GuideStep2() {
             </aside>
 
             {/* Høyre seksjon */}
-            <div className="w-full">
+            <div className="w-full pr-15">
               <section className="w-full max-w-7xl mr-auto rounded-2xl bg-white p-12 shadow-lg text-left">
                 <div className="flex flex-col gap-2">
-                  <h2 className="text-lg font-bold">2. Forbered printeren</h2>
+                  <h2 className="text-2xl font-bold">2. Forbered printeren</h2>
                   <span className="h-1 w-full bg-[#488B90]" />
                 </div>
 

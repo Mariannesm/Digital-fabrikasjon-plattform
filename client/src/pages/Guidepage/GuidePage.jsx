@@ -44,11 +44,11 @@ function GuidePage() {
             </aside>
 
             {/* Høyre seksjon */}
-            <div className="w-full">
-              <section className="w-full max-w-7xl mr-auto rounded-2xl bg-white p-12 shadow-lg">
+            <div className="w-full pr-15">
+              <section className="w-full max-w-7xl mr-auto ml-4 rounded-2xl bg-white p-12 shadow-lg">
                 
                 <div className="flex flex-col gap-2 text-left">
-                  <h2 className="text-lg font-bold">Fire Steg</h2>
+                  <h2 className="font-bold text-2xl">Fire Steg</h2>
                   <span className="h-1 w-full bg-[#488B90]" />
                 </div>
 

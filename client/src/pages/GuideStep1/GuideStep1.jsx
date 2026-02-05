@@ -58,11 +58,11 @@ function GuideStep1() {
             </aside>
 
             {/* HØYRE */}
-            <div className="w-full">
+            <div className="w-full pr-15">
               <section className="w-full max-w-7xl mr-auto min-h-[420px] rounded-2xl bg-white p-12 shadow-lg text-left flex flex-col">
 
                 <div className="flex flex-col gap-2">
-                  <h2 className="text-lg font-bold">Steg 1. Lag modellen</h2>
+                  <h2 className="text-2xl font-bold">Steg 1. Lag modellen</h2>
                   <span className="h-1 w-full bg-[#488B90]" />
                 </div>
 
