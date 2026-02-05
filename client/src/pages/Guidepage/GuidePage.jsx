@@ -17,6 +17,7 @@ function GuidePage() {
             <aside className="flex flex-col items-start self-start sticky top-6 z-10">
               <div className="mb-8 flex items-center gap-4">
                 <span className="h-24 w-1 bg-[#488B90]" />
+                 {/* Bilde av den valgte maskinen/teknologien*/}
                 <img
                   src={Printer}
                   alt="3D-printer"
@@ -24,6 +25,7 @@ function GuidePage() {
                 />
               </div>
 
+                {/* skal kunne legge til flere steg*/}
               <nav className="w-full space-y-6">
                 <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white">
                   1. Lag modellen
