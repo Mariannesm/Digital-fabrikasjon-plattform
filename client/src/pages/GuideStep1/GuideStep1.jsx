@@ -57,7 +57,7 @@ function GuideStep1() {
               </nav>
             </aside>
 
-            {/* HØYRE */}
+            {/* HØYRE tenker at i tilegg til tekstlig innhold og bilder, at det kan være mulig å linke til videor som f.eks fra youtube? eller legge inn video?*/}
             <div className="w-full pr-15">
               <section className="w-full max-w-7xl mr-auto min-h-[420px] rounded-2xl bg-white p-12 shadow-lg text-left flex flex-col">
 

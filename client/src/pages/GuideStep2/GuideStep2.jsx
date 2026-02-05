@@ -7,8 +7,10 @@ import Trinn3Prusa from "../../assets/bilder/Trinn3Prusa.png";
 import Trinn4Prusa from "../../assets/bilder/Trinn4Prusa.png";
 import Trinn5Prusa from "../../assets/bilder/Trinn5Prusa.png";
 import Filament from "../../assets/bilder/Filament.png";
+import { useNavigate } from "react-router-dom";
 
 function GuideStep2() {
+   let navigate = useNavigate()
   return (
     <MainWrapper classNames="bg-[#FFFCF8]">
       {/* HEADER */}
@@ -125,7 +127,7 @@ function GuideStep2() {
                             Usikker på filament?
                           </span>
                         </div>
-                        <button className="rounded-xl bg-[#214C50] hover:bg-[#122B2D] px-4 py-2 text-sm text-white shadow">
+                        <button onClick={() => navigate('/filaments')} className="rounded-xl bg-[#214C50] hover:bg-[#122B2D] px-4 py-2 text-sm text-white shadow">
                           Les mer
                         </button>
                       </div>

@@ -2,15 +2,16 @@ import "./FilamentPage.css";
 import Header from "../../components/Header";
 import MainWrapper from "../../components/MainWrapper";
 
+
 function FilamentPage() {
   return (
     <MainWrapper classNames="bg-[#FFFCF8]">
       {/* HEADER */}
       <Header title="FILAMENT VED DITT OMRÅDE" showSelectInstitution={false} />
 
-      <div className="max-w-[980px] px-4 pb-16 pt-7 text-left">
+      <div className="mx-auto max-w-[980px] px-4 pb-16 pt-7 text-center">
         {/* Intro */}
-        <section className="ml-15 text-left">
+        <section>
           <h2 className="mb-2 text-lg font-bold">Filament</h2>
           <p className="m-0 font-normal">
             Filament er...
@@ -21,7 +22,7 @@ function FilamentPage() {
         </section>
 
         {/* Valg */}
-        <section className="mt-6 ml-15 text-left">
+        <section className="mt-6">
           <h3 className="mb-2 text-lg font-bold">Valg av filament</h3>
           <p className="m-0 font-normal">
             Når du skal velge filament og printer er det viktig å tenke på hva det
@@ -30,8 +31,8 @@ function FilamentPage() {
         </section>
 
         {/* FILAMENT CARDS */}
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(3,minmax(350px,1fr))] gap-10 mt-20 ml-15">
-          
+        {/* Om du kan få til at de kortene er litt bredere så hadde det vært supert om du ser på figma filen*/}
+        <section className="mt-20 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
           {/* PLA */}
           <article className="rounded-xl border border-[#488B90] bg-white shadow-sm overflow-hidden">
             <div className="h-60 bg-[#488B90]" />
@@ -39,8 +40,12 @@ function FilamentPage() {
               <h4 className="mb-2 text-lg font-bold text-[#2F7D80]">PLA</h4>
 
               <div className="mb-3 space-y-1">
-                <div><span className="font-bold">Nozzle (°C):</span> 200-220</div>
-                <div><span className="font-bold">Bed (°C):</span> 0-60</div>
+                <div>
+                  <span className="font-bold">Nozzle (°C):</span> 200-220
+                </div>
+                <div>
+                  <span className="font-bold">Bed (°C):</span> 0-60
+                </div>
               </div>
 
               <div className="mt-2">
@@ -77,8 +82,12 @@ function FilamentPage() {
               <h4 className="mb-2 text-lg font-bold text-[#2F7D80]">PETG</h4>
 
               <div className="mb-3 space-y-1">
-                <div><span className="font-bold">Nozzle (°C):</span> 220-250</div>
-                <div><span className="font-bold">Bed (°C):</span> 70-90</div>
+                <div>
+                  <span className="font-bold">Nozzle (°C):</span> 220-250
+                </div>
+                <div>
+                  <span className="font-bold">Bed (°C):</span> 70-90
+                </div>
               </div>
 
               <div className="mt-2">
@@ -109,14 +118,18 @@ function FilamentPage() {
           </article>
 
           {/* ABS */}
-            <article className="rounded-xl border border-[#488B90] bg-white shadow-sm overflow-hidden">
+          <article className="rounded-xl border border-[#488B90] bg-white shadow-sm overflow-hidden">
             <div className="h-60 bg-[#488B90]" />
             <div className="px-4 pb-4 pt-3 text-left">
               <h4 className="mb-2 text-lg font-bold text-[#2F7D80]">ABS</h4>
 
               <div className="mb-3 space-y-1">
-                <div><span className="font-bold">Nozzle (°C):</span> 220-250</div>
-                <div><span className="font-bold">Bed (°C):</span> 70-90</div>
+                <div>
+                  <span className="font-bold">Nozzle (°C):</span> 220-250
+                </div>
+                <div>
+                  <span className="font-bold">Bed (°C):</span> 70-90
+                </div>
               </div>
 
               <div className="mt-2">
@@ -145,7 +158,6 @@ function FilamentPage() {
               </div>
             </div>
           </article>
-
         </section>
       </div>
     </MainWrapper>
