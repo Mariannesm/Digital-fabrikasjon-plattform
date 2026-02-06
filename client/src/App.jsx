@@ -16,7 +16,11 @@ import GuideStep3 from './pages/GuideStep3/GuideStep3';
 import FilamentPage from './pages/FilamentPage/FilamentPage';
 import RegistraionCourses from './pages/RegistrationCourses/RegistrationCourses';
 import Quiz from './pages/Quiz/Quiz';
-import RegisterQuiz from './pages/RegisterQuiz/RegisterQuiz';
+import RegisterQuiz from './pages/RegisterQuiz/RegisterQuiz'
+import ProjectRegistered from './pages/ProjectRegistered/ProjectRegistered'
+import LogInAdmin from './pages/LogInAdmin/LogInAdmin';
+import AboutUs from './pages/AboutUs/AboutUs';
+import Staff from './pages/Staff/Staff';
 
 
 function App() {
@@ -37,9 +41,13 @@ function App() {
           <Route path='/quiz' element={<Quiz/>}/>
           <Route path='/registerquiz' element={<RegisterQuiz/>}/>
           <Route path='/RegCourses' element={<RegistraionCourses/>}/>
+          <Route path='/RegisteredProject' element={<ProjectRegistered/>}/>
           <Route path='/projects' element={<Projects/>}/>
           <Route path='/register' element={<RegisterProject/>}/>
           <Route path='/login' element={<LogIn/>}/>
+          <Route path='/loginAdmin' element={<LogInAdmin/>}/>
+          <Route path='/AboutUs' element={<AboutUs/>}/>
+          <Route path='/Staff' element={<Staff/>}/>
           {/* <Route path="/about" element={<AboutPage />} /> */}
           {/* Legg til flere ruter her */}
         </Routes>

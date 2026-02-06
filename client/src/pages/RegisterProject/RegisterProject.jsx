@@ -49,6 +49,32 @@ function RegisterProject() {
             </select>
           </div>
 
+           {/* mulighet på om de ønsker at den skal være public på siden eller ikke, så admin ser hvem som har lyst til at den skal lastes opp*/}
+          <div className="flex justify-center gap-6 mb-3 mt-3">
+          <label className="flex items-center gap-2">
+            <input
+              type="radio"
+              name="visibility"
+              className="h-4 w-4"
+            />
+            <span className="text-xl font-medium text-black leading-none">
+              Public
+            </span>
+          </label>
+
+          <label className="flex items-center gap-2">
+            <input
+              type="radio"
+              name="visibility"
+              className="h-4 w-4"
+            />
+            <span className="text-xl font-medium text-black leading-none">
+              Private
+            </span>
+          </label>
+        </div>
+           
+
           <div>
             <label className="block text-xl mb-1">
               Beskrivelse av prosjektet:
@@ -100,7 +126,7 @@ function RegisterProject() {
           </div>
 
           <div className="flex justify-center mt-6">
-            <StartButton>
+            <StartButton onClick={() => navigate('/RegisteredProject')} >
               Registrer prosjektet
             </StartButton>
           </div>

@@ -19,7 +19,7 @@ function MenuPage() {
           <span className="block">TEKNOLOGIENE</span>
         </CardButton>
 
-        <CardButton>
+        <CardButton onClick={() => navigate('/AboutUs')}>
           <span className="block">OM OMRÅDET</span>
           <span className="block">DITT</span>
         </CardButton>

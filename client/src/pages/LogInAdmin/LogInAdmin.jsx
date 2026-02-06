@@ -1,4 +1,4 @@
-import './LogIn.css'
+import './LogInAdmin.css'
 import MainWrapper from '../../components/MainWrapper'
 import Header from '../../components/Header'
 import StartButton from '../../components/StartButton'
@@ -7,14 +7,14 @@ import { useState } from 'react'
 import OpenEye from '../../assets/ikoner/OpenEye.png'
 import ClosedEye from '../../assets/ikoner/ClosedEye.png'
 
-function LogIn() {
+function LogInAdmin() {
   const [projectName, setProjectName] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
 
   return (
     <MainWrapper classNames="pt-0 bg-[#FFFCF8]">
-      <Header title="REGISTRER ET PROSJEKT" showSelectInstitution={true} />
+      <Header title="ADMINISTRASJON" showSelectInstitution={true} />
 
       <div className="flex justify-center px-4 mt-10 sm:mt-16">
         <div className="w-full max-w-[420px] flex flex-col gap-4">
@@ -60,4 +60,4 @@ function LogIn() {
   )
 }
 
-export default LogIn
+export default LogInAdmin
