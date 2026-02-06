@@ -28,11 +28,10 @@ function SelectedTechnology() {
 
       <h2 className="font-bold text-xl mt-5">Velg printeren du skal bruke</h2>
 
-      <div className="flex justify-center gap-40">
-        {printers.map((card) => {
-          return <VersionTech data={card} />
-        })}
-      </div>
+     <div className="mt-6 flex flex-wrap justify-center gap-6 lg:gap-10 px-4">
+    {printers.map((card) => (
+    <VersionTech key={card.title} data={card} />))}
+    </div>
 
 
     </MainWrapper>

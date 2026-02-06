@@ -12,8 +12,12 @@ import RegisterProject from './pages/RegisterProject/RegisterProject';
 import LogIn from './pages/LogIn/LogIn';
 import GuideStep1 from './pages/GuideStep1/GuideStep1';
 import GuideStep2 from './pages/GuideStep2/GuideStep2';
+import GuideStep3 from './pages/GuideStep3/GuideStep3';
 import FilamentPage from './pages/FilamentPage/FilamentPage';
 import RegistraionCourses from './pages/RegistrationCourses/RegistrationCourses';
+import Quiz from './pages/Quiz/Quiz';
+import RegisterQuiz from './pages/RegisterQuiz/RegisterQuiz';
+
 
 function App() {
   return (
@@ -27,8 +31,11 @@ function App() {
           <Route path='/guide' element={<GuidePage/>}/>
           <Route path='/step1' element={<GuideStep1/>}/>
           <Route path='/step2' element={<GuideStep2/>}/>
+          <Route path='/step3' element={<GuideStep3/>}/>
           <Route path='/filaments' element={<FilamentPage/>}/>
           <Route path='/courses' element={<DigitalCourses/>}/>
+          <Route path='/quiz' element={<Quiz/>}/>
+          <Route path='/registerquiz' element={<RegisterQuiz/>}/>
           <Route path='/RegCourses' element={<RegistraionCourses/>}/>
           <Route path='/projects' element={<Projects/>}/>
           <Route path='/register' element={<RegisterProject/>}/>

@@ -14,7 +14,7 @@ function GuidePage() {
           <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-[420px_1fr]">
             
             {/* Venstre kolonne */}
-            <aside className="flex flex-col items-start self-start sticky top-6 z-10">
+            <aside className="flex flex-col items-start self-start top-6 z-10">
               <div className="mb-8 flex items-center gap-4">
                 <span className="h-24 w-1 bg-[#488B90]" />
                  {/* Bilde av den valgte maskinen/teknologien*/}

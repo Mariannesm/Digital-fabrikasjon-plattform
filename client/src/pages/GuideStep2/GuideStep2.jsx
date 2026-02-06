@@ -21,7 +21,7 @@ function GuideStep2() {
         <div className="w-full px-4 py-12">
           <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-[420px_1fr]">
             {/* Venstre kolonne */}
-            <aside className="flex flex-col items-start self-start sticky top-6 z-10">
+            <aside className="flex flex-col items-start self-start top-6 z-10">
               <div className="mb-8 flex items-center gap-4">
                 <span className="h-24 w-1 bg-[#488B90]" />
                 <img
@@ -67,8 +67,8 @@ function GuideStep2() {
                     <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#E69138] font-bold text-white">
                       1
                     </div>
-                    <div className="text-base font-normal">
-                      <p>Last STL-filen inn i PrusaSlicer</p>
+                    <div className="text-base font-normal text-black">
+                      <p className="font-semibold">Last STL-filen inn i PrusaSlicer</p>
                       <p>
                         Sørg for at modellen er midtstilt og ligger flatt på
                         platen
@@ -82,7 +82,7 @@ function GuideStep2() {
                       2
                     </div>
                     <div className="text-base font-normal">
-                      <p>Velg print setting</p>
+                      <p className="font-semibold text-black">Velg print setting</p>
                       <p className="mb-3 text-red-600">
                         Tommelfinger: 0.2 mm fungerer for det meste!
                       </p>
@@ -99,8 +99,9 @@ function GuideStep2() {
                     <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#E69138] font-bold text-white">
                       3
                     </div>
-                    <div className="w-full space-y-3">
-                      <p className="text-base font-normal">Velg filament</p>
+                    <div className="w-full space-y-3 text-black">
+                      <p className="text-base font-semibold text-black">Velg filament</p>
+                      <p className="text-base font-normal text-black">bla bla</p>
                       <div className="flex flex-col gap-4 lg:flex-row lg:items-start">
                         <img
                           src={Trinn3Prusa}
@@ -123,7 +124,7 @@ function GuideStep2() {
                       <div className="mt-10 flex items-center justify-between rounded-3xl bg-[#C2D8DA] px-4 py-3">
                         <div className="flex items-center gap-3">
                           <img src={Filament} className="h-13 w-13" alt="" />
-                          <span className="font-bold text-[#214C50]">
+                          <span className="font-bold text-base text-[#214C50]">
                             Usikker på filament?
                           </span>
                         </div>
@@ -139,8 +140,8 @@ function GuideStep2() {
                     <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-[#E69138] font-bold text-[#E69138]">
                       4
                     </div>
-                    <div className="w-full space-y-3">
-                      <p className="text-base font-normal">Velg printer</p>
+                    <div className="w-full space-y-3 text-black">
+                      <p className="text-base font-semibold">Velg printer</p>
                       <div className="flex flex-col gap-4 lg:flex-row lg:items-start">
                         <img
                           src={Trinn4Prusa}
@@ -163,8 +164,8 @@ function GuideStep2() {
                     <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#E69138] font-bold text-white">
                       5
                     </div>
-                    <div className="w-full">
-                      <p className="text-base font-normal">Velg supports…</p>
+                    <div className="w-full text-black">
+                      <p className="text-base font-semibold">Velg supports…</p>
                       <p className="text-base font-normal">Sett infill</p>
                       <p className="text-red-600 text-base font-normal">
                         Tommelfinger: 15% – 20% er mer enn nok!
@@ -182,7 +183,7 @@ function GuideStep2() {
                     <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-[#E69138] font-bold text-[#E69138]">
                       6
                     </div>
-                    <p className="text-base font-normal">
+                    <p className="text-base font-semibold text-black">
                       Velg “Slice now” → Export G-code → Lagre som .bgcode
                     </p>
                   </div>
@@ -192,7 +193,7 @@ function GuideStep2() {
                     <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#E69138] font-bold text-white">
                       7
                     </div>
-                    <p className="text-base font-normal">
+                    <p className="text-base font-semibold text-black">
                       Lagre filen på minnepennen til printeren
                     </p>
                   </div>

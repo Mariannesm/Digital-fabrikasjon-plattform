@@ -25,7 +25,7 @@ function MenuPage() {
         </CardButton>
 
         <CardButton onClick={() => navigate('/courses')}>
-          <span className="block">DIGITALE KURS</span>
+          <span className="block">KURS</span>
         </CardButton>
 
         <CardButton onClick={() => navigate('/projects')}>

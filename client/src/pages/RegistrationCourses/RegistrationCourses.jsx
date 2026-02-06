@@ -14,7 +14,7 @@ function RegistrationCourses() {
           <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-[420px_1fr]">
             
             {/* Venstre kolonne */}
-            <aside className="flex flex-col items-start self-start sticky top-6 z-10">
+            <aside className="flex flex-col items-start self-start top-6 z-10">
               <div className="mb-8 flex items-center gap-4">
                 {/* Skal kunne endre tittel */}
                 <h2 className="font-bold text-2xl">Vårsemester 2026</h2>
