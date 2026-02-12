@@ -13,7 +13,7 @@ function RegisterQuiz() {
         {/* Samme wrapper som GuidePage */}
         <div className="w-full px-4 py-12">
           <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-[420px_1fr]">
-            {/* Venstre kolonne */}
+            {/* Venstre kolonne  MELLE OPP TIL FYSISK KURS PÅ STANDEN?? */}
             <aside className="flex flex-col items-start self-start top-6 z-10">
 
               <nav className="w-full space-y-6">

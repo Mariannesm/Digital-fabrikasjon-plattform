@@ -27,7 +27,7 @@ function GuideStep1() {
               <nav className="w-full">
 
                 <div className="flex flex-col ">
-                  <button className="w-full bg-[#214C50] px-8 py-6 text-left text-lg text-white mb-2 ">
+                  <button className="w-full bg-[#214C50] px-8 py-6 text-left text-lg text-white mb-2">
                     1. Lag modellen
                   </button>
 
@@ -35,13 +35,13 @@ function GuideStep1() {
                     1.1 Eksisterende modell
                   </button>
 
-                  <button className="w-full bg-[#214C50] hover:bg-[#122B2D] px-8 py-6 text-left text-lg text-white pl-12">
+                  <button className="w-full bg-[#214C50] hover:bg-[#122B2D] px-8 py-6 text-left text-lg text-white pl-12 shadow-lg">
                     1.2 3D-modellering
                   </button>
                 </div>
 
                 <div className="mt-6 space-y-6">
-                  <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white">
+                  <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg">
                     2. Forbered printen
                   </button>
 

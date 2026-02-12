@@ -40,7 +40,7 @@ function Quiz() {
                   <span className="h-1 w-full bg-[#488B90]" />
                 </div>
 
-                {/* QUIZ (kun UI) */}
+                {/* QUIZcd*/}
                 <div className="mt-12 ml-10">
                 <div className="w-full max-w-4xl space-y-8">
                     {Array.from({ length: 10 }, (_, i) => i + 1).map((nr) => (
