@@ -1,9 +1,11 @@
 import "./SelectedTechnology.css";
+import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import MainWrapper from "../../components/MainWrapper";
 import VersionTech from "../../components/VersionTech";
 
 function SelectedTechnology() {
+    let navigate = useNavigate();
 
   const printers = [
     { title: "Original Prusa MK4S", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
