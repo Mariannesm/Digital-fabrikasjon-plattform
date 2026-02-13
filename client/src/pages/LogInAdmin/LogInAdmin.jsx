@@ -45,7 +45,7 @@ function LogInAdmin() {
               >
                 <img
                   src={showPassword ? ClosedEye : OpenEye}
-                  alt=""
+                  alt={showPassword ? "Skjul passord" : "Vis passord"}
                   className="w-5 h-5"
                 />
               </button>

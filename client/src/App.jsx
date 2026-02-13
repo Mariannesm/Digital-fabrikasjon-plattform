@@ -21,6 +21,7 @@ import ProjectRegistered from './pages/ProjectRegistered/ProjectRegistered'
 import LogInAdmin from './pages/LogInAdmin/LogInAdmin';
 import AboutUs from './pages/AboutUs/AboutUs';
 import Staff from './pages/Staff/Staff';
+import EditProject from './pages/EditProject/EditProject';
 
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
           <Route path='/loginAdmin' element={<LogInAdmin/>}/>
           <Route path='/AboutUs' element={<AboutUs/>}/>
           <Route path='/Staff' element={<Staff/>}/>
+          <Route path='/EditProject' element={<EditProject/>}/>
           {/* <Route path="/about" element={<AboutPage />} /> */}
           {/* Legg til flere ruter her */}
         </Routes>

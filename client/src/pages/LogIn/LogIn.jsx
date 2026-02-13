@@ -14,10 +14,12 @@ function LogIn() {
 
   return (
     <MainWrapper classNames="pt-0 bg-[#FFFCF8]">
-      <Header title="REGISTRER ET PROSJEKT" showSelectInstitution={true} />
+      <Header title="LOGG INN PÅ DITT PROSJEKT" showSelectInstitution={true} />
 
       <div className="flex justify-center px-4 mt-10 sm:mt-16">
         <div className="w-full max-w-[420px] flex flex-col gap-4">
+            {/*Kan du få til at teksten går på en linje? SE FIGMA*/}
+           <p className='mb-10 text-lg font-normal'>Logg inn på ditt prosjekt for å kunne oppdatere informasjon</p>
           {/* Prosjektnavn */}
           <label className="block text-black text-xl mb-1">Prosjektnavn:</label>
           <input

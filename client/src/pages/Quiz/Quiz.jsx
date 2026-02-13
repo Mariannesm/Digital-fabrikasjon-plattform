@@ -17,17 +17,20 @@ function Quiz() {
             <aside className="flex flex-col items-start self-start top-6 z-10">
 
               <nav className="w-full space-y-6">
-                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-md">
-                  1. Lag modellen
+                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg">
+                  Hva er bærekraft?
                 </button>
-                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-md">
-                  2. Forbered printen
+                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg">
+                  Bærekraftig bruk
                 </button>
-                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-md">
-                  3. Print
+                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg">
+                  Resirkulering og gjenbruk
                 </button>
-                <button className="w-full bg-[#214C50] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-md">
-                  4. Etterbehandling
+                <button className="w-full bg-[#214C50] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg font-semibold">
+                  Quiz
+                </button>
+                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg">
+                  Registrering
                 </button>
               </nav>
             </aside>
@@ -40,7 +43,10 @@ function Quiz() {
                   <span className="h-1 w-full bg-[#488B90]" />
                 </div>
 
-                {/* QUIZcd*/}
+                <p className=" text-lg font-medium text-black mt-12 ml-10">
+                  Det vil være et riktig alternativ på hvert spørsmål</p>
+
+                {/* QUIZ SE PÅ FIGMA -  SKAL LEGGES INN SVAR FEIL OSV*/}
                 <div className="mt-12 ml-10">
                 <div className="w-full max-w-4xl space-y-8">
                     {Array.from({ length: 10 }, (_, i) => i + 1).map((nr) => (
@@ -73,7 +79,7 @@ function Quiz() {
                 </div>
                 </div>
 
-                 <div className="mt-12 flex justify-center">
+                 <div className="mt-12 flex ml-10">
                   <button className="rounded-md bg-[#214C50] px-8 py-3 text-white shadow hover:bg-[#122B2D]">
                     Sjekk svar
                   </button>

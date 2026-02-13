@@ -74,7 +74,7 @@ function RegistrationCourses() {
                   </ul>
                 </div>
 
-                 {/* Kan legge til lenke selv på knappen til nettskjema påmeldingskjema*/}
+                 {/* Kan legge til lenke selv på knappen til nettskjema påmeldingskjema og den er ulik fra kurs til kurs*/}
                 <div className="mt-12 flex justify-center">
                   <button onClick={() => window.open("https://nettskjema.no/", "_blank", "noopener,noreferrer")} className="rounded-md bg-[#214C50] px-8 py-3 text-white shadow hover:bg-[#122B2D]">
                     Meld deg på her gjennom Nettskjema

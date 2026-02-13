@@ -17,9 +17,9 @@ function GuideStep2() {
       <Header title="ORIGINAL PRUSA MK4S" showSelectInstitution={false} />
 
       <section className="flex-1">
-        {/* Samme wrapper som GuidePage */}
         <div className="w-full px-4 py-12">
           <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-[420px_1fr]">
+            
             {/* Venstre kolonne */}
             <aside className="flex flex-col items-start self-start top-6 z-10">
               <div className="mb-8 flex items-center gap-4">
@@ -30,20 +30,38 @@ function GuideStep2() {
                   className="h-24 w-24 object-contain opacity-80"
                 />
               </div>
-
               <nav className="w-full space-y-6">
-                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-md">
-                  1. Lag modellen
+                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg">
+                  Introduksjon og sikkerhet
                 </button>
+
+                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg">
+                  1. 3D-modell
+                </button>
+
                 <button className="w-full bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-md">
-                  2. Forbered printen
+                   2. Forbered printen (Slicing) 
                 </button>
-                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-md">
-                  3. Print
-                </button>
-                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-md">
-                  4. Etterbehandling
-                </button>
+
+                 <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg">
+                    3. Klargjøring av printeren
+                  </button>
+
+                  <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg">
+                    4. Kjøre printeren
+                  </button>
+
+                   <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg">
+                    5. Oppfølging av printen
+                  </button>
+
+                  <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg">
+                    6. Ferdig print
+                  </button>
+
+                   <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg">
+                    7. Etterbehandling
+                  </button>
               </nav>
             </aside>
 
@@ -51,7 +69,7 @@ function GuideStep2() {
             <div className="w-full pr-15">
               <section className="w-full max-w-7xl mr-auto rounded-2xl bg-white p-12 shadow-lg text-left">
                 <div className="flex flex-col gap-2">
-                  <h2 className="text-2xl font-bold">2. Forbered printeren</h2>
+                  <h2 className="text-2xl font-bold">2. Forbered printeren (Slicing)</h2>
                   <span className="h-1 w-full bg-[#488B90]" />
                 </div>
 
@@ -120,7 +138,7 @@ function GuideStep2() {
                         </div>
                       </div>
 
-                      {/*Den usikker på filament skal være litt kortere*/}
+                      {/*OBS OBS HUSKE!! Den usikker på filament skal være litt kortere. SE FIGMA*/}
                       <div className="mt-10 flex items-center justify-between rounded-3xl bg-[#C2D8DA] px-4 py-3">
                         <div className="flex items-center gap-3">
                           <img src={Filament} className="h-13 w-13" alt="" />

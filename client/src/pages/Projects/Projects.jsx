@@ -26,12 +26,12 @@ function Projects() {
         </CardButton>
 
         <CardButton onClick={() => navigate('/register')}>
-          <span className="block">REGISTRER ET</span>
+          <span className="block">REGISTRER DITT</span>
           <span className="block">PROSJEKT</span>
         </CardButton>
 
         <CardButton onClick={() => navigate('/login')}>
-          <span className="block">REDIGER DITT</span>
+          <span className="block">OPPDATER DITT</span>
           <span className="block">PROSJEKT</span>
         </CardButton>
         

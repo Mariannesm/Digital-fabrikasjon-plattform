@@ -12,11 +12,15 @@ function DigitalCourses() {
 
       <div className="mx-auto w-full max-w-6xl px-10 py-14">
         {/* Digitale kurs */}
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
+        <p className="grid grid-cols-1 text-center text-lg font-medium text-black mb-15">
+        Nå skal du gjennomføre en quiz med 10 spørsmål om bærekraftig bruk. Du må få 10/10 riktig for å beså kuset. 
+        Det vil være et riktig alternativ på hvert spørsmål, og det er ikke mulig å gå ut av quizzen underveis.</p>
+
+        <div className="grid grid-cols-1 gap-30 md:grid-cols-2">
           {/* VENSTRE */}
           <div>
-            <h2 className="text-2xl font-semibold">
-              Informerende digitale kurs:
+            <h2 className="text-xl font-medium">
+              Digitale obligatoriske kurs:
             </h2>
 
             <div className="mt-6 flex items-center justify-between rounded-2xl bg-[#C2D8DA] px-6 py-5">
@@ -36,11 +40,11 @@ function DigitalCourses() {
 
           {/* HØYRE */}
           <div>
-            <h2 className="text-2xl font-semibold">
+            <h2 className="text-xl font-medium">
               Digitale kurs for ditt område:
             </h2>
 
-            <div className="mt-6 flex items-center justify-between rounded-2xl bg-[#C2D8DA] px-6 py-5">
+            <div className="mt-6 flex items-center justify-between rounded-2xl bg-[#C2D8DA] px-6 py-5 ">
               <div className="flex items-center gap-4">
                 <div className="flex h-12 w-12 items-center justify-center">
                   <img src={PrinterIkon} alt="3D printer ikon" />
@@ -57,9 +61,9 @@ function DigitalCourses() {
         </div>
 
         {/* Fysiske kurs */}
-        <div className="mt-10 grid grid-cols-1 gap-12 md:grid-cols-2">
+        <div className="mt-10 grid grid-cols-1 gap-30 md:grid-cols-2">
           <div>
-            <h2 className="text-2xl font-semibold">
+            <h2 className="text-xl font-medium">
               Fysiske kurs for ditt område:
             </h2>
 
@@ -72,7 +76,7 @@ function DigitalCourses() {
             </div>
           </div>
 
-          {/* Tom høyre kolonne på desktop */}
+          {/* Tom høyre kolonne på desktop kanskje gjør dette på en bedre måte??*/}
           <div className="hidden md:block" />
         </div>
       </div>

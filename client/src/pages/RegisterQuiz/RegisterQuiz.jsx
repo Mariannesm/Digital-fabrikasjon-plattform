@@ -1,6 +1,8 @@
 import "./RegisterQuiz.css";
 import Header from "../../components/Header";
 import MainWrapper from "../../components/MainWrapper";
+import PrinterIkon from "../../assets/ikoner/3Dprinter.png";
+import StartButton from "../../components/StartButton";
 
 
 function RegisterQuiz() {
@@ -18,16 +20,19 @@ function RegisterQuiz() {
 
               <nav className="w-full space-y-6">
                 <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-md">
-                  1. Lag modellen
+                   Hva er bærekraft?
                 </button>
                 <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-md">
-                  2. Forbered printen
+                  Bærekraftig bruk
                 </button>
                 <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-md">
-                  3. Print
+                  Resirkulering og gjenbruk
                 </button>
                 <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-md">
-                  4. Etterbehandling
+                  Quiz
+                </button>
+                <button className="w-full bg-[#214C50] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg font-semibold">
+                  Registrering
                 </button>
               </nav>
             </aside>
@@ -42,8 +47,8 @@ function RegisterQuiz() {
 
                 {/* Register email*/}
                 <div className="mt-10 max-w-xl">
-                <p className="text-black text-base lg:whitespace-nowrap">
-                    For å kunne vite at du har fullført kurset er det viktig at du registrerer din skolemail
+                <p className="text-black text-lg font-normal lg:whitespace-nowrap">
+                    For at ansvarlige kan vite at du har fullført kurset er det viktig at du registrerer din skolemail
                 </p>
 
                 <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center">
@@ -58,13 +63,20 @@ function RegisterQuiz() {
                 </div>
                 </div>
 
-                {/* Navigasjon */}
-                <div className="mt-16 flex items-center justify-between">
-                  <button className="rounded-xl bg-[#EBA65F] px-10 py-3 font-semibold shadow hover:bg-[#C28B53]">
-                    Forrige
-                  </button>
-        
+                <p className="mt-15 text-black text-lg font-normal lg:whitespace-nowrap">Ved feilskrevet mail, ta fysisk kontakt med de ansatte eller bruk kontaktinformasjonen som du finner på linken under.</p>
+
+                <div className="mt-6 flex items-center justify-between rounded-2xl bg-[#C2D8DA] px-4 py-3 max-w-xl">
+                <div className="flex items-center gap-4">
+                <div className="flex h-12 w-12 items-center justify-center">
+                  <img src={PrinterIkon} alt="3D printer ikon" />
                 </div>
+                <h3 className="text-lg font-semibold tracking-wide text-[#214C50]">
+                  Finn kontaktinformasjon her 
+                </h3>
+              </div>
+              <StartButton>Gå</StartButton>
+            </div>
+                
               </section>
             </div>
           </div>

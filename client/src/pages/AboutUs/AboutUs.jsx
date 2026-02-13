@@ -18,14 +18,14 @@ let navigate = useNavigate()
             <aside className="flex flex-col items-start self-start top-6 z-10">
 
               <nav className="w-full space-y-6">
-                <button className="w-full bg-[#214C50] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-md">
+                <button className="w-full bg-[#214C50] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg">
                   Kart over området
                 </button>
                 <button onClick={() => navigate('/Staff')} 
-                    className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-md">
+                    className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg">
                   Ansatte
                 </button>
-                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-md">
+                <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg">
                   Åpningstider
                 </button>
               </nav>

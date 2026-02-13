@@ -9,6 +9,7 @@ import Steg2Display from "../../assets/Bilder/Steg2Display.png"
 import Steg3Display from "../../assets/Bilder/Steg3Display.png"
 import Steg4Display from "../../assets/Bilder/Steg4Display.png"
 import Steg41Display from "../../assets/Bilder/Steg41Display.png"
+import UnderKatPil from "../../assets/ikoner/UnderKatPil.png";
 
 function GuideStep3() {
   return (
@@ -30,41 +31,62 @@ function GuideStep3() {
                 />
               </div>
 
-              {/* NAVIGASJON SÅNN DEN SKAL SE UT NÅR MAN TRYKKER MED FLERE STEG UNDER */}
+              {/* NAVIGASJON SÅNN DEN SKAL SE UT NÅR MAN TRYKKER MED FLERE STEG UNDER DEN SOM ER VALGT ER SEMIBOLD*/}
               <nav className="w-full">
-
-
                 <div className="mt-6 space-y-6">
-                  <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white">
-                    1. Lag modellen
+                  <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg">
+                    Introduksjon og sikkerhet
                   </button>
 
-                  <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white">
-                    4. Forbered printen
+                  <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg">
+                    1. 3D-modell
+                  </button>
+
+                  <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg">
+                    2. Forbered printen (Slicing) 
                   </button>
 
                   <div className="flex flex-col ">
-                  <button className="w-full bg-[#214C50] px-8 py-6 text-semibold text-left font-semibold text-lg text-white mb-2 ">
-                    3. Print
+                  <button className="w-full bg-[#214C50] px-8 py-6 text-semibold text-left font-semibold text-lg text-white mb-2 shadow-lg">
+                   3. Klargjøring av printeren
                   </button>
 
-                  <button className="w-full bg-[#214C50] hover:bg-[#122B2D] px-8 py-6 text-left text-lg text-white pl-12 ">
-                    3.1 Desinfisering
-                  </button>
+                  <button className="w-full bg-[#214C50] hover:bg-[#122B2D] px-8 py-6 text-left text-lg text-white pl-12 flex items-center gap-3">
+                    <img src={UnderKatPil} alt="Under kategori ikon" className="w-2 h-3"></img>
+                      <span>1 Desinfisering av platen</span>
+                      </button>
+                  
+                  <button className="w-full bg-[#214C50] hover:bg-[#122B2D] px-8 py-6 text-left text-lg text-white pl-12 shadow-lg flex items-center gap-3">
+                    <img src={UnderKatPil} alt="Under kategori ikon" className="w-2 h-3"></img>
+                     <span>2 Start printeren</span>
+                     </button>
 
-                   <button className="w-full bg-[#214C50] hover:bg-[#122B2D] px-8 py-6 text-left font-semibold text-lg text-white pl-12 ">
-                    3.2 Filamentrull
-                  </button>
 
-                  <button className="w-full bg-[#214C50] hover:bg-[#122B2D] px-8 py-6 text-left text-lg text-white pl-12">
-                    3.3 Minnepenn
-                  </button>
+                  {/* SEMIBOLD PÅ DET SOM ER VALGT SE FIGMA, FIKK DET IKKE TIL HER */}
+                  <button className="w-full bg-[#214C50] hover:bg-[#122B2D] px-8 py-6 text-left text-semibold text-lg text-white pl-12 shadow-lg flex items-center gap-3">
+                    <img src={UnderKatPil} alt="Under kategori ikon" className="w-2 h-3"></img>
+                     <span>3 Filament</span>
+                     </button>
+
+                  <button className="w-full bg-[#214C50] hover:bg-[#122B2D] px-8 py-6 text-left text-lg text-white pl-12 shadow-lg flex items-center gap-3">
+                    <img src={UnderKatPil} alt="Under kategori ikon" className="w-2 h-3"></img>
+                     <span>4 Preheat</span>
+                     </button>
+
                 </div>
                 
-                  <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white">
-                    4. Etterbehandling
+                  <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg">
+                    4. Kjøre printeren
                   </button>
-
+                  <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg">
+                    5. Oppfølging av printen
+                  </button>
+                  <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg">
+                    6. Ferdig print
+                  </button>
+                  <button className="w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg">
+                    7. Etterbehandling
+                  </button>
                 </div>
 
               </nav>

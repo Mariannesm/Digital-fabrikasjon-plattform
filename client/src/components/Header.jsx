@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import BackButton from "./BackButton";
+import MakingIcon from "../assets/ikoner/SmartMakingIkon.png";
 
 function Header({ title = "", showSelectInstitution = false }) {
   const location = useLocation();
@@ -7,24 +8,33 @@ function Header({ title = "", showSelectInstitution = false }) {
   const isOnFrontPage = ["/", "/meny"].includes(location.pathname);
 
   return (
-    <header className="mb-6 sm:mb-10 w-screen ml-[calc(50%-50vw)] pl-6 sm:pl-10 text-left bg-[#FFE8C2] grid grid-cols-3 grid-rows-4 gap-0 pb-5">
-      <div className="col-span-0 row-span-4">
+    <header className="mb-6 sm:mb-10 w-screen ml-[calc(50%-50vw)] pl-6 sm:pl-10 pr-6 sm:pr-10 text-left bg-[#FFE8C2] grid grid-cols-3 grid-rows-4 gap-0 pb-5">
+    
+      <div className="col-span-1 row-span-4">
+        
         {/* Venstre innhold – SmartMaking + select + tilbake */}
         <h1
           onClick={() => navigate("/menu")}
-          className="text-4xl sm:text-1xl font-extrabold tracking-tight text-[#E69138] mt-8 cursor-pointer"
+          className="text-4xl sm:text-1xl font-extrabold tracking-tight text-[#E69138] mt-8 cursor-pointer flex items-center gap-2"
         >
           SmartMaking
+          {/* Fikk ikke til å sentrere den på lik linje med SmartMaking brukte margin top til å justere men tror det er ganske så feil */}
+          <img 
+            src={MakingIcon} 
+            alt="SmartMaking Ikon" 
+            className="w-10 h-10 object-contain mt-2"
+          />
         </h1>
 
         <select
           className="mt-3 inline-flex items-center gap-2 text-lg rounded-md px-1  
                hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-orange-400 
                font-semibold text-black bg-gray-100 p-1"
-          defaultValue="Høgskolen i Østfold"
+          defaultValue="Høgskolen i Østfold: Halden"
           disabled={!showSelectInstitution}
         >
-          <option>Høgskolen i Østfold</option>
+          <option>Høgskolen i Østfold: Halden</option>
+          <option>Høgskolen i Østfold: Fredrikstad</option>
           <option>OsloMet</option>
         </select>
 
@@ -36,10 +46,43 @@ function Header({ title = "", showSelectInstitution = false }) {
           </div>
         )}
       </div>
+
+      {/* MIDTEN – Tittel */}
       <div className="col-span-1 row-span-3 flex items-end justify-center">
         <h2 className="text-5xl font-medium text-center">
           {title}
         </h2>
+      </div>
+
+      {/* Språk og innloggingsvalg på høyre side */}
+      <div className="col-start-3 row-start-1 flex justify-end items-start gap-4 mt-6">
+        
+        {/* Språkvalg */}
+        <select
+          className="bg-gray-100 text-sm px-3 py-2 rounded-md border border-black/10
+               hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-orange-400 font-semibold text-black"
+          defaultValue="Norsk"
+        >
+          <option>Norsk</option>
+          <option>English</option>
+        </select>
+
+        {/* Innloggingsvalg Den skal være lik som på FIGMA filen samme med insitiusjonsvalg greia */}
+         <select
+          className="bg-gray-100 text-sm px-3 py-2 rounded-md border border-black/10
+               hover:bg-black/5 focus:outline-nonefocus:ring-orange-400 font-semibold text-black"
+          defaultValue="guest"
+          onChange={(e) => {
+            const role = e.target.value;
+            
+            if (role === "admin") navigate("/LogInAdmin");
+            if (role === "Gjest") navigate("//menu");
+          }}
+        >
+          <option value="guest">Gjest</option>
+          <option value="admin">Admin</option>
+        </select>
+
       </div>
     </header>
   );

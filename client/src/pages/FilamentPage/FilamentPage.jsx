@@ -31,7 +31,7 @@ function FilamentPage() {
         </section>
 
         {/* FILAMENT CARDS */}
-        {/* Om du kan få til at de kortene er litt bredere så hadde det vært supert om du ser på figma filen*/}
+        {/* OBS OBS. Om du kan få til at de kortene er litt bredere så hadde det vært supert om du ser på figma filen*/}
         <section className="mt-20 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
           {/* PLA */}
           <article className="rounded-xl border border-[#488B90] bg-white shadow-sm overflow-hidden">

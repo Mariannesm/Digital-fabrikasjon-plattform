@@ -87,6 +87,15 @@ function TechnologyPage() {
             <span className="block mb-6 text-center">AIRBRUSHING</span>
           </CardButton>
 
+           <CardButton>
+            <img
+              src={AirBrushing}
+              alt="Podcast ikon"
+              className="w-24 h-24 mx-auto mb-5 mt-5"
+            />
+            <span className="block mb-6 text-center">PLAKAT PRINTING</span>
+          </CardButton>
+
 
         </div>
       </section>

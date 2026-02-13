@@ -20,8 +20,9 @@ function RegisterProject() {
 
       <div className="flex justify-center mt-16 px-4">
         <form className="grid gap-y-5 max-w-[520px] w-full">
-
           <div>
+            {/*Kan du få til at teksten går på en linje? SE FIGMA*/}
+            <p className='mb-10 text-lg font-normal'>Her skal du registrere ditt prosjekt ved å fylle inn informasjon i feltene under:</p>
             <label className="block text-xl mb-1">
               Prosjektnavn:
             </label>
@@ -32,24 +33,19 @@ function RegisterProject() {
             />
           </div>
 
-          <div>
+           <div>
             <label className="block text-xl mb-1">
-              Velg kategori:
+              Velg område/instutuisjon:
             </label>
             <select className="bg-gray-200 rounded px-3 py-2 w-full">
-              <option value="" />
-              <option>Utendørs</option>
-              <option>Husholdning</option>
-              <option>3D-Print</option>
-              <option>Laserkutting</option>
-              <option>Modell</option>
-              <option>Gadget</option>
-              <option>Diverse</option>
-              <option>Leker og spill</option>
-            </select>
+            <option value="Hiof Halden">Høgskolen i Østfold: Halden</option>
+            <option value="Hiof Fredrikstad">Høgskolen i Østfold: Fredrikstad</option>
+            <option value="OsloMet">OsloMet</option>
+          </select>
           </div>
 
            {/* mulighet på om de ønsker at den skal være public på siden eller ikke, så admin ser hvem som har lyst til at den skal lastes opp*/}
+          <p className='text-lg mb-1'>Ønsker du at prosjektet ditt skal være tilgjengelig for andre?</p>
           <div className="flex justify-center gap-6 mb-3 mt-3">
           <label className="flex items-center gap-2">
             <input
@@ -58,7 +54,7 @@ function RegisterProject() {
               className="h-4 w-4"
             />
             <span className="text-xl font-medium text-black leading-none">
-              Public
+              Privat
             </span>
           </label>
 
@@ -69,21 +65,10 @@ function RegisterProject() {
               className="h-4 w-4"
             />
             <span className="text-xl font-medium text-black leading-none">
-              Private
+              Offentlig
             </span>
           </label>
         </div>
-           
-
-          <div>
-            <label className="block text-xl mb-1">
-              Beskrivelse av prosjektet:
-            </label>
-            <textarea
-              className="bg-gray-200 rounded px-3 py-2 w-full min-h-[120px]"
-              placeholder="Kort beskrivelse av prosjektet. Hva har du eller dere laget? Hvordan?"
-            />
-          </div>
 
           <div>
             <label className="block text-xl mb-1">
