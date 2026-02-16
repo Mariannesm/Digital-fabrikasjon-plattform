@@ -23,7 +23,7 @@ function RegisterProject() {
           <div>
             {/*Kan du få til at teksten går på en linje? SE FIGMA*/}
             <p className='mb-10 text-lg font-normal'>Her skal du registrere ditt prosjekt ved å fylle inn informasjon i feltene under:</p>
-            <label className="block text-xl mb-1">
+            <label className="block text-xl mb-3 text-left">
               Prosjektnavn:
             </label>
             <input
@@ -34,7 +34,7 @@ function RegisterProject() {
           </div>
 
            <div>
-            <label className="block text-xl mb-1">
+            <label className="block text-xl mb-3 text-left">
               Velg område/instutuisjon:
             </label>
             <select className="bg-gray-200 rounded px-3 py-2 w-full">
@@ -71,7 +71,7 @@ function RegisterProject() {
         </div>
 
           <div>
-            <label className="block text-xl mb-1">
+            <label className="block text-xl mb-3 text-left">
               Navn på medlemmer:
             </label>
             <textarea
@@ -82,7 +82,7 @@ function RegisterProject() {
 
           {/* Passord */}
           <div>
-            <label className="block text-xl mb-1">
+            <label className="block text-xl mb-3 text-left">
               Lag et passord:
             </label>
 

@@ -19,9 +19,9 @@ function LogInAdmin() {
       <div className="flex justify-center px-4 mt-10 sm:mt-16">
         <div className="w-full max-w-[420px] flex flex-col gap-4">
           {/* Prosjektnavn */}
-          <label className="block text-black text-xl mb-1">Prosjektnavn:</label>
+          <label className="block text-black text-xl mb-1">Brukernavn:</label>
           <input
-            placeholder="Prosjektnavn"
+            placeholder="Brukernavn"
             value={projectName}
             onChange={(e) => setProjectName(e.target.value)}
             className="h-12 w-full rounded-md bg-[#EFEFEF] px-4 text-left"

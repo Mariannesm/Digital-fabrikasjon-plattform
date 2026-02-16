@@ -30,6 +30,8 @@ function SelectedTechnology() {
 
       <h2 className="font-bold text-xl mt-5">Velg printeren du skal bruke</h2>
 
+        
+      {/*OBS OBS HELE GREIA SKAL KUNNE TRYKKES PÅ IKKE BARE PÅ "VELG"*/}
      <div className="mt-6 flex flex-wrap justify-center gap-6 lg:gap-10 px-4">
     {printers.map((card) => (
     <VersionTech key={card.title} data={card} />))}

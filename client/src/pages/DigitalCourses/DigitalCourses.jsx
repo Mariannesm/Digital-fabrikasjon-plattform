@@ -12,14 +12,16 @@ function DigitalCourses() {
 
       <div className="mx-auto w-full max-w-6xl px-10 py-14">
         {/* Digitale kurs */}
-        <p className="grid grid-cols-1 text-center text-lg font-medium text-black mb-15">
-        Nå skal du gjennomføre en quiz med 10 spørsmål om bærekraftig bruk. Du må få 10/10 riktig for å beså kuset. 
-        Det vil være et riktig alternativ på hvert spørsmål, og det er ikke mulig å gå ut av quizzen underveis.</p>
+        <p className="grid grid-cols-1 text-center text-lg font-medium text-black mb-3 text-left">
+       Her kan du gjennomføre ulike digitale kurs, i tillegg til å melde deg opp til fysiske kurs. 
+       Et av de digitale kursene er obligatoriske, mens de andre er anbefalt å fullføre før bruk av teknologiene.</p>
+       <br/>
+       <p className="grid grid-cols-1 text-center text-lg font-medium text-black mb-15 text-left">Anbefalt opplæring: gjennomfør det digitale kurset før et fysisk kurs.</p>
 
         <div className="grid grid-cols-1 gap-30 md:grid-cols-2">
           {/* VENSTRE */}
           <div>
-            <h2 className="text-xl font-medium">
+            <h2 className="text-xl font-bold">
               Digitale obligatoriske kurs:
             </h2>
 
@@ -40,7 +42,7 @@ function DigitalCourses() {
 
           {/* HØYRE */}
           <div>
-            <h2 className="text-xl font-medium">
+            <h2 className="text-xl font-bold">
               Digitale kurs for ditt område:
             </h2>
 
@@ -63,7 +65,7 @@ function DigitalCourses() {
         {/* Fysiske kurs */}
         <div className="mt-10 grid grid-cols-1 gap-30 md:grid-cols-2">
           <div>
-            <h2 className="text-xl font-medium">
+            <h2 className="text-xl  font-bold">
               Fysiske kurs for ditt område:
             </h2>
 

@@ -21,7 +21,7 @@ function LogIn() {
             {/*Kan du få til at teksten går på en linje? SE FIGMA*/}
            <p className='mb-10 text-lg font-normal'>Logg inn på ditt prosjekt for å kunne oppdatere informasjon</p>
           {/* Prosjektnavn */}
-          <label className="block text-black text-xl mb-1">Prosjektnavn:</label>
+          <label className="block text-black text-xl text-left">Prosjektnavn:</label>
           <input
             placeholder="Prosjektnavn"
             value={projectName}
@@ -29,7 +29,7 @@ function LogIn() {
             className="h-12 w-full rounded-md bg-[#EFEFEF] px-4 text-left"
           />
 
-          <label className="block text-black text-xl">Passord:</label>
+          <label className="block text-black text-xl text-left">Passord:</label>
             <div className="relative">
               <input
                 type={showPassword ? 'text' : 'password'}

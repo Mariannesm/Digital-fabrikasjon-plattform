@@ -1,7 +1,9 @@
 import MainWrapper from '../../components/MainWrapper'
 import Header from '../../components/Header'
+import "./EditProject.css";
 import { useNavigate } from "react-router-dom"
 import StartButton from '../../components/StartButton'
+
 
 function EditProject() {
   const navigate = useNavigate()
@@ -14,7 +16,7 @@ function EditProject() {
         <div className="w-full max-w-[980px]">
 
           {/* Infotekst */}
-          <p className="mx-auto mb-6 max-w-[720px]  font-normal text-base text-left mb-10">
+          <p className="mx-auto mb-6 font-normal text-lg text-left mb-15">
             Her skal du oppdatere informasjonen på prosjektet ditt ved å fylle inn informasjon og bilder i tekstboksene.
             Ved ferdig oppdatering trykk på lagre og logg ut.
           </p>
@@ -32,6 +34,8 @@ function EditProject() {
                 />
               </div>
 
+              {/*OBS OBS SE FIGMA*/}
+              
               <div>
                 <label className="block text-xl text-black text-left mb-3">Prosjektbilde (Utviklet produkt):</label>
                 <button
@@ -108,7 +112,7 @@ function EditProject() {
                   <option>Gadget</option>
                   <option>Leker og spill</option>
                   <option>Interiør</option>
-                  <option>Diverse</option>
+                  <option>Annet</option>
                 </select>
               </div>
 
@@ -136,7 +140,7 @@ function EditProject() {
                 </div>
 
                 <button type="button" className="mt-2 rounded bg-gray-200 px-4 py-2">
-                  + ny rute
+                  + Ny rute
                 </button>
               </div>
 

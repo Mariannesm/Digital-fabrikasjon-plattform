@@ -11,26 +11,30 @@ function FilamentPage() {
 
       <div className="mx-auto max-w-[980px] px-4 pb-16 pt-7 text-center">
         {/* Intro */}
+
+         {/*OBS OBS. OM DU FÅR DENNE TEKSTEN ENDA MER TIL VENSTRE HADDE DET VÆRT SUPERT :) SE PÅ FIGMA*/}
         <section>
-          <h2 className="mb-2 text-lg font-bold">Filament</h2>
-          <p className="m-0 font-normal">
+          <h3 className="mb-2 text-lg font-bold text-left">Filament</h3>
+          <p className="m-0 font-normal text-left">
             Filament er...
             <br />
             Det finnes store mengder filament å velge mellom med ulike kvaliteter...
           </p>
-          <p className="m-0 font-normal">Grader osv</p>
+          <br/>
+
+          <p className="m-0 font-normal text-left">Grader osv</p>
         </section>
 
         {/* Valg */}
         <section className="mt-6">
-          <h3 className="mb-2 text-lg font-bold">Valg av filament</h3>
-          <p className="m-0 font-normal">
+          <h3 className="mb-2 text-lg font-bold text-left">Valg av filament</h3>
+          <p className="m-0 font-normal text-left">
             Når du skal velge filament og printer er det viktig å tenke på hva det
             skal brukes til.
           </p>
         </section>
 
-        {/* FILAMENT CARDS */}
+        {/* FILAMENT KORTE */}
         {/* OBS OBS. Om du kan få til at de kortene er litt bredere så hadde det vært supert om du ser på figma filen*/}
         <section className="mt-20 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
           {/* PLA */}
