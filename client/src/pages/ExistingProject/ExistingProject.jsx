@@ -6,7 +6,7 @@ import Skisse from "../../assets/Bilder/Skisse.png";
 function ExistingProject() {
   return (
     <MainWrapper classNames="bg-[#FFFCF8]">
-      <Header title="SE EKSISTERENDE PROSJEKTER" showSelectInstitution={false} />
+      <Header title="EKSISTERENDE PROSJEKTER" showSelectInstitution={false} />
 
       <div className="mx-auto w-full max-w-6xl px-4 pb-12 pt-6">
         {/* Intro */}
