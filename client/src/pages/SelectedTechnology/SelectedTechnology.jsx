@@ -28,7 +28,7 @@ function SelectedTechnology() {
       path
       */}
 
-      <h2 className="font-bold text-xl mt-5">Velg printeren du skal bruke</h2>
+      <h2 className="mt-10 text-2xl">Teknologier ved ditt valgte område</h2>
 
         
       {/*OBS OBS HELE GREIA SKAL KUNNE TRYKKES PÅ IKKE BARE PÅ "VELG"*/}
