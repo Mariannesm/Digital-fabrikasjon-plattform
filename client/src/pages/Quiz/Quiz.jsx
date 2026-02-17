@@ -44,7 +44,8 @@ function Quiz() {
                 </div>
 
                 <p className=" text-lg font-medium text-black mt-12 ml-10">
-                  Det vil være et riktig alternativ på hvert spørsmål</p>
+                  Nå skal du gjennomføre en quiz med 10 spørsmål om bærekraftig bruk. Du må få 10/10 riktig for å beså kuset. 
+                  Det vil være et riktig alternativ på hvert spørsmål, og det er ikke mulig å gå ut av quizzen underveis.</p>
 
                 {/* QUIZ SE PÅ FIGMA -  SKAL LEGGES INN SVAR FEIL OSV*/}
                 <div className="mt-12 ml-10">

@@ -74,7 +74,7 @@ function GuideStep2() {
                 </div>
 
                 {/* Intro */}
-                <div className="mt-6 text-base font-semibold text-black">
+                <div className="mt-6 font-normal text-base text-black">
                   <p>For å klargjøre modellen for printing følg disse stegene:</p>
                 </div>
 

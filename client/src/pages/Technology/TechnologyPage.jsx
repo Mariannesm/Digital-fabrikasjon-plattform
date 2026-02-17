@@ -9,8 +9,8 @@ import ElektronikkIkon from "../../assets/ikoner/Elektronikk.png";
 import LaserkutterIkon from "../../assets/ikoner/Laserkutter.png";
 import Chatbot from "../../components/ChatBot";
 import Vinylkutter from "../../assets/ikoner/VinylKutter.png";
-import TskjortePrinting from "../../assets/ikoner/TskjortePrinting.png";
 import AirBrushing from "../../assets/ikoner/AirBrushing.png";
+import StorPrinter from "../../assets/Bilder/StorPrinter.png"
 
 function TechnologyPage() {
     let navigate = useNavigate()
@@ -91,7 +91,7 @@ function TechnologyPage() {
 
            <CardButton>
             <img
-              src={AirBrushing}
+              src={StorPrinter}
               alt="Podcast ikon"
               className="w-24 h-24 mx-auto mb-5 mt-5"
             />

@@ -21,7 +21,7 @@ function DigitalCourses() {
         <div className="grid grid-cols-1 gap-30 md:grid-cols-2">
           {/* VENSTRE */}
           <div>
-            <h2 className="text-xl font-bold">
+            <h2 className="text-xl font-bold text-left">
               Digitale obligatoriske kurs:
             </h2>
 
@@ -42,7 +42,7 @@ function DigitalCourses() {
 
           {/* HØYRE */}
           <div>
-            <h2 className="text-xl font-bold">
+            <h2 className="text-xl font-bold text-left">
               Digitale kurs for ditt område:
             </h2>
 
@@ -65,9 +65,10 @@ function DigitalCourses() {
         {/* Fysiske kurs */}
         <div className="mt-10 grid grid-cols-1 gap-30 md:grid-cols-2">
           <div>
-            <h2 className="text-xl  font-bold">
+            <h2 className="text-xl text-left font-bold mb-2">
               Fysiske kurs for ditt område:
             </h2>
+            <p className="text-left text-lg font-medium text-black">Må gjennomføre obligatorisk kurs før de fysiske kursene</p>
 
             <div className="mt-6 flex items-center justify-between rounded-2xl bg-[#C2D8DA] px-6 py-5">
               <h3 className="text-lg font-bold tracking-wide text-[#214C50]">

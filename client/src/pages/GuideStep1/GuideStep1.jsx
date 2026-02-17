@@ -88,34 +88,13 @@ function GuideStep1() {
                   <span className="h-1 w-full bg-[#488B90]" />
                 </div>
 
-                <div className="mt-6 text-base font-semibold text-black">
+                <div className="mt-6 text-base font-nprm text-black">
                   <p>
                     I det første steget skal du enten finne en eksisterende modell
                     eller 3D-modellere din egen.
                   </p>
                 </div>
 
-                <div className=" font-normal mt-3">
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt tempora magni placeat nihil at ad sit error tempore, 
-                    delectus esse pariatur sunt, neque similique ex veritatis explicabo provident a laboriosam.</p>
-                </div>
-
-                {/*OBS OBS Muligheter til å linke til relevante kurs i  modulen*/}
-                
-                 <div className="mt-6 flex items-center justify-between rounded-2xl bg-[#C2D8DA] px-4 py-3 max-w-xl">
-              <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center">
-                  <img src={PrinterIkon} alt="3D printer ikon" />
-                </div>
-                <h3 className="text-lg font-semibold tracking-wide text-[#214C50]">
-                  KURS OM 3D MODELLERING
-                </h3>
-              </div>
-              <StartButton>Gå til</StartButton>
-            </div>
-
-            
-  
                 {/* Sticky knappær i bunn */}
                 <div className="mt-auto flex items-end justify-between">
                   <button className="rounded-xl bg-[#EBA65F] px-10 py-3 font-semibold text-black shadow hover:bg-[#C28B53] transition">
