@@ -70,7 +70,7 @@ function Header({ title = "", showSelectInstitution = false }) {
         {/* Innloggingsvalg Den skal være lik som på FIGMA filen samme med insitiusjonsvalg greia */}
          <select
           className="bg-gray-100 text-sm px-3 py-2 rounded-md border border-black/10
-               hover:bg-black/5 focus:outline-nonefocus:ring-orange-400 font-semibold text-black"
+               hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-orange-400 font-semibold text-black"
           defaultValue="guest"
           onChange={(e) => {
             const role = e.target.value;

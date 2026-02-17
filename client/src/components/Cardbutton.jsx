@@ -11,7 +11,7 @@ function CardButton({ children, onClick }) {
                  transition-transform duration-200 hover:-translate-y-0.5
                  grid place-items-center text-center
                  uppercase tracking-wide text-xl sm:text-2xl font-bold
-                 hover:bg-[#214C50] text-white"
+                 hover:bg-[#214C50] text-white focus:outline-none focus:ring-2 focus:ring-[#214C50]"
     >
       <div className="leading-tight">{children}</div>
     </button>

@@ -37,7 +37,7 @@ function TechnologyPage() {
           <CardButton onClick={() => navigate('/select')} >
             <img
               src={PrinterIkon}
-              alt="3D printer ikon"
+              alt="" aria-hidden="true"
               className="w-24 h-24 mx-auto mb-5 mt-5"
             />
             <span className="block mb-6 text-center">3D-PRINTING</span>
@@ -46,7 +46,7 @@ function TechnologyPage() {
           <CardButton>
             <img
               src={LaserkutterIkon}
-              alt="Laserkutter ikon"
+              alt="" aria-hidden="true"
               className="w-24 h-24 mx-auto mb-5 mt-5"
             />
             <span className="block mb-6 text-center">LASERKUTTING</span>
@@ -55,7 +55,7 @@ function TechnologyPage() {
           <CardButton>
             <img
               src={CNCfreserIkon}
-              alt="CNC freser ikon"
+              alt="" aria-hidden="true"
               className="w-24 h-24 mx-auto mb-5 mt-5"
             />
             <span className="block mb-6 text-center">CNC-FRESING</span>
@@ -64,7 +64,7 @@ function TechnologyPage() {
           <CardButton>
             <img
               src={ElektronikkIkon}
-              alt="Elektronikk ikon"
+              alt="" aria-hidden="true"
               className="w-24 h-24 mx-auto mb-5 mt-5"
             />
             <span className="block mb-6 text-center">ELEKTRONIKK</span>
@@ -73,7 +73,7 @@ function TechnologyPage() {
           <CardButton>
             <img
               src={Vinylkutter}
-              alt="Podcast ikon"
+              alt="" aria-hidden="true"
               className="w-24 h-24 mx-auto mb-5 mt-5"
             />
             <span className="block mb-6 text-center">TRYKK & PROFILERING</span>
@@ -83,7 +83,7 @@ function TechnologyPage() {
            <CardButton>
             <img
               src={AirBrushing}
-              alt="Podcast ikon"
+              alt="" aria-hidden="true"
               className="w-24 h-24 mx-auto mb-5 mt-5"
             />
             <span className="block mb-6 text-center">AIRBRUSHING</span>
@@ -92,7 +92,7 @@ function TechnologyPage() {
            <CardButton>
             <img
               src={StorPrinter}
-              alt="Podcast ikon"
+              alt="" aria-hidden="true"
               className="w-24 h-24 mx-auto mb-5 mt-5"
             />
             <span className="block mb-6 text-center">PLAKAT PRINTING</span>
