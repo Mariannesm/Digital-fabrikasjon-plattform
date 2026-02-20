@@ -17,7 +17,7 @@ function TechnologyPage() {
   return (
     <MainWrapper classNames="bg-[#FFFCF8]">
       {/* HEADER */}
-      <Header title="TEKNOLOGIER" showSelectInstitution={false} />
+      <Header title="LÆR Å BRUK TEKNOLOGIENE" showSelectInstitution={false} />
 
       {/* Innholdsknappene */}
       <section className="mx-auto w-full max-w-6xl px-4 sm:px-10 py-8 sm:py-10">

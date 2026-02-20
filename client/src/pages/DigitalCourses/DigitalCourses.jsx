@@ -3,12 +3,16 @@ import Header from "../../components/Header";
 import MainWrapper from "../../components/MainWrapper";
 import StartButton from "../../components/StartButton";
 import PrinterIkon from "../../assets/ikoner/3Dprinter.png";
+import OppmeldingKurs from "../../assets/ikoner/OppmeldingKurs.png";
+import Sikkerhetogbaer from "../../assets/ikoner/Sikkerhetogbaer.png";
+import ModelleringIkon from "../../assets/ikoner/3Dmodellering.png";
+
 
 function DigitalCourses() {
   return (
     <MainWrapper classNames="bg-[#FFFCF8]">
       {/* HEADER */}
-      <Header title="KURS" showSelectInstitution={false} />
+      <Header title="DIGITALE OG FYSISKE KURS" showSelectInstitution={false} />
 
       <div className="mx-auto w-full max-w-6xl px-10 py-14">
         {/* Digitale kurs */}
@@ -28,7 +32,7 @@ function DigitalCourses() {
             <div className="mt-6 flex items-center justify-between rounded-2xl bg-[#C2D8DA] px-6 py-5">
               <div className="flex items-center gap-4">
                 <div className="flex h-12 w-12 items-center justify-center">
-                  <img src={PrinterIkon} alt="3D printer ikon" />
+                  <img src={Sikkerhetogbaer} alt="3D printer ikon" />
                 </div>
 
                 <h3 className="text-lg font-bold tracking-wide text-[#214C50]">
@@ -49,7 +53,7 @@ function DigitalCourses() {
             <div className="mt-6 flex items-center justify-between rounded-2xl bg-[#C2D8DA] px-6 py-5 ">
               <div className="flex items-center gap-4">
                 <div className="flex h-12 w-12 items-center justify-center">
-                  <img src={PrinterIkon} alt="3D printer ikon" />
+                  <img src={ModelleringIkon} alt="3D printer ikon" />
                 </div>
 
                 <h3 className="text-lg font-bold tracking-wide text-[#214C50]">
@@ -70,10 +74,16 @@ function DigitalCourses() {
             </h2>
             <p className="text-left text-lg font-medium text-black">Må gjennomføre obligatorisk kurs før de fysiske kursene</p>
 
-            <div className="mt-6 flex items-center justify-between rounded-2xl bg-[#C2D8DA] px-6 py-5">
-              <h3 className="text-lg font-bold tracking-wide text-[#214C50]">
-                OPPMELDING TIL KURS
-              </h3>
+               <div className="mt-6 flex items-center justify-between rounded-2xl bg-[#C2D8DA] px-6 py-5 ">
+              <div className="flex items-center gap-4">
+                <div className="flex h-12 w-12 items-center justify-center">
+                  <img src={OppmeldingKurs} alt="Oppmeldingskurs ikon" />
+                </div>
+
+                <h3 className="text-lg font-bold tracking-wide text-[#214C50]">
+                  OPPMELDING TIL KURS
+                </h3>
+              </div>
 
               <StartButton>Gå</StartButton>
             </div>

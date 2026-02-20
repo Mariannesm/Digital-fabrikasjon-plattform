@@ -31,7 +31,7 @@ function SelectedTechnology() {
       <h2 className="mt-10 text-2xl">Teknologier ved ditt valgte område</h2>
 
         
-      {/*OBS OBS HELE GREIA SKAL KUNNE TRYKKES PÅ IKKE BARE PÅ "VELG"*/}
+      {/*OBS OBS HELE GREIA SKAL KUNNE TRYKKES PÅ IKKE BARE PÅ "VELG ALTSÅ HELE BOKSEN."*/}
      <div className="mt-6 flex flex-wrap justify-center gap-6 lg:gap-10 px-4">
     {printers.map((card) => (
     <VersionTech key={card.title} data={card} />))}

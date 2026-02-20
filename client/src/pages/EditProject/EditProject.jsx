@@ -118,10 +118,16 @@ function EditProject() {
 
               <div>
                 <label className="block text-xl text-black text-left mb-3">Legg til dato for prosjektet:</label>
-                <input
-                  type="date"
-                  className="bg-gray-200 rounded px-3 py-2 w-full"
-                />
+                <select className="bg-gray-200 rounded px-3 py-2 w-full">
+                  <option>Vår 2026</option>
+                  <option>Høst 2026</option>
+                  <option>Vår 2027</option>
+                  <option>Høst 2027</option>
+                  <option>Vår 2028</option>
+                  <option>Høst 2028</option>
+                  <option>Vår 2029</option>
+                  <option>Høst 2029</option>
+                </select>
               </div>
             </div>
 

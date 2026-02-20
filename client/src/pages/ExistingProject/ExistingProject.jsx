@@ -46,10 +46,14 @@ function ExistingProject() {
 
           <select className="rounded-md bg-gray-200 px-8 py-2 text-m font-medium text-black shadow-sm ring-1 ring-black/5 hover:bg-[#C7C7C7]">
             <option>Filtrer tidsrom:</option>
-            <option>Vår 2023</option>
-            <option>Vår 2024</option>
-            <option>Vår 2025</option>
-            <option>Vår 2026</option>
+             <option>Vår 2026</option>
+             <option>Høst 2026</option>
+             <option>Vår 2027</option>
+             <option>Høst 2027</option>
+             <option>Vår 2028</option>
+             <option>Høst 2028</option>
+             <option>Vår 2029</option>
+             <option>Høst 2029</option>
           </select>
 
         </div>

@@ -82,9 +82,11 @@ function RegisterProject() {
 
           {/* Passord */}
           <div>
-            <label className="block text-xl mb-3 text-left">
+            <label className="block text-xl mb-1 text-left">
               Lag et passord:
             </label>
+
+            <p className="text-left mb-1">(Passordet vil være gjeldene for hele gruppen din)</p>
 
             <div className="relative w-full">
               <input

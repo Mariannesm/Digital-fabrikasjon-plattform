@@ -72,7 +72,7 @@ function GuidePage() {
 
                   <div className="mt-6 mb-6 font-normal text-base text-black">
                     <p>
-                      Skkerhet er spesielt viktig ved bruk av forskjellige teknologier. Ved 3D-printig må du tenke på sikkerhetspunktene i figuren under.
+                      Sikkerhet er spesielt viktig ved bruk av forskjellige teknologier. Ved 3D-printig må du tenke på sikkerhetspunktene i figuren under.
                     </p>
                   </div>
 
