@@ -4,6 +4,7 @@ import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { createProject } from '@/lib/project/actions'
+import { useTranslation } from '@/providers/LanguageProvider'
 
 interface Props {
   organizationId: string
@@ -12,6 +13,7 @@ interface Props {
 
 export default function RegisterProjectForm({ organizationId, organizationSlug }: Props) {
   const router = useRouter()
+  const { t } = useTranslation()
   const [showPassword, setShowPassword] = useState(false)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -37,7 +39,7 @@ export default function RegisterProjectForm({ organizationId, organizationSlug }
       const { slug } = await createProject(formData)
       router.push(`/${organizationSlug}/projects/${slug}`)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Noe gikk galt')
+      setError(err instanceof Error ? err.message : t('common.error'))
     } finally {
       setIsSubmitting(false)
     }
@@ -52,7 +54,7 @@ export default function RegisterProjectForm({ organizationId, organizationSlug }
 
         {/* Prosjektnavn */}
         <div>
-          <label className="block text-xl mb-3 text-left">Prosjektnavn:</label>
+          <label className="block text-xl mb-3 text-left">{t('project.fieldTitle')}:</label>
           <input
             name="title"
             type="text"
@@ -64,7 +66,7 @@ export default function RegisterProjectForm({ organizationId, organizationSlug }
 
         {/* Prosjektbilde */}
         <div>
-          <label className="block text-xl mb-3 text-left">Prosjektbilde:</label>
+          <label className="block text-xl mb-3 text-left">{t('project.fieldCoverImage')}:</label>
           <input
             ref={fileInputRef}
             name="coverImage"
@@ -121,7 +123,7 @@ export default function RegisterProjectForm({ organizationId, organizationSlug }
               type="button"
               onClick={() => setShowPassword((prev) => !prev)}
               className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center justify-center"
-              aria-label={showPassword ? 'Skjul passord' : 'Vis passord'}
+              aria-label={showPassword ? t('project.hidePassword') : t('project.showPassword')}
             >
               <Image
                 src={showPassword ? '/icons/ClosedEye.png' : '/icons/OpenEye.png'}
@@ -143,7 +145,7 @@ export default function RegisterProjectForm({ organizationId, organizationSlug }
             disabled={isSubmitting}
             className="rounded-2xl bg-[#214C50] px-10 py-3 text-lg font-bold text-white shadow-md hover:bg-[#488B90] disabled:opacity-60 transition-colors"
           >
-            {isSubmitting ? 'Registrerer...' : 'Registrer prosjektet'}
+            {isSubmitting ? t('common.loading') : t('project.submitRegister')}
           </button>
         </div>
       </form>

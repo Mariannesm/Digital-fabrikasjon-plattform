@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { cookies } from 'next/headers'
 import NextTopLoader from 'nextjs-toploader';
 import { UserProvider } from '@/providers/UserProvider';
+import { LanguageProvider, type Locale } from '@/providers/LanguageProvider';
 import { createClient } from '@/lib/supabase/client'
 import "@/globals.css";
 
@@ -18,6 +20,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Les språkinnstilling fra cookie
+  const cookieStore = await cookies()
+  const localeCookie = cookieStore.get('locale')?.value
+  const initialLocale: Locale =
+    localeCookie === 'en' || localeCookie === 'no' ? localeCookie : 'no'
+
   // Opprett Supabase klient for server (med cookies)
   const supabase = createClient();
 
@@ -43,14 +51,15 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="no">
+    <html lang={initialLocale}>
       <body className="antialiased">
         <NextTopLoader color="#3b82f6" />
 
-        {/* UserProvider omslutter hele appen og får initial data fra server */}
-        <UserProvider initialUser={initialUser}>
-          {children}
-        </UserProvider>
+        <LanguageProvider initialLocale={initialLocale}>
+          <UserProvider initialUser={initialUser}>
+            {children}
+          </UserProvider>
+        </LanguageProvider>
 
         <footer className="mt-auto p-4 text-center text-sm text-gray-600">
           <p className="font-mono">© 2025 Høgskolen i Østfold</p>

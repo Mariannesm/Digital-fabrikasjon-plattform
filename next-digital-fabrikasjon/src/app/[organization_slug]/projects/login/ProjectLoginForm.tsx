@@ -8,6 +8,7 @@ import Image from 'next/image'
 import { projectLoginSchema, type ProjectLoginData } from '@/lib/validation/projectLogin'
 import { loginToProject } from '@/lib/project/auth'
 import { Button } from '@/components/ui/Button'
+import { useTranslation } from '@/providers/LanguageProvider'
 
 interface Props {
   organizationSlug: string
@@ -15,6 +16,7 @@ interface Props {
 
 export default function ProjectLoginForm({ organizationSlug }: Props) {
   const router = useRouter()
+  const { t } = useTranslation()
   const [showPassword, setShowPassword] = useState(false)
   const [serverError, setServerError] = useState<string | null>(null)
 
@@ -61,7 +63,7 @@ export default function ProjectLoginForm({ organizationSlug }: Props) {
             type="button"
             onClick={() => setShowPassword((prev) => !prev)}
             className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center"
-            aria-label={showPassword ? 'Skjul passord' : 'Vis passord'}
+            aria-label={showPassword ? t('project.hidePassword') : t('project.showPassword')}
           >
             <Image
               src={showPassword ? '/icons/ClosedEye.png' : '/icons/OpenEye.png'}
@@ -82,7 +84,7 @@ export default function ProjectLoginForm({ organizationSlug }: Props) {
 
       <div className="flex justify-center mt-2">
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? 'Logger inn...' : 'Logg inn'}
+          {isSubmitting ? t('common.loading') : t('project.loginBtn')}
         </Button>
       </div>
     </form>

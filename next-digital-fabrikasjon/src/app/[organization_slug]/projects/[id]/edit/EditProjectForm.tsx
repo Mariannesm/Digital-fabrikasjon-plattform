@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { updateProject } from '@/lib/project/actions'
 import { logoutFromProject } from '@/lib/project/auth'
+import { useTranslation } from '@/providers/LanguageProvider'
 
 interface Props {
   projectId: string
@@ -22,6 +23,7 @@ export default function EditProjectForm({
   initialImageUrl,
 }: Props) {
   const router = useRouter()
+  const { t } = useTranslation()
   const [imagePreview, setImagePreview] = useState<string | null>(initialImageUrl ?? null)
   const [error, setError] = useState<string | null>(null)
   const [isSaving, setIsSaving] = useState(false)
@@ -45,7 +47,7 @@ export default function EditProjectForm({
       router.push(`/${organizationSlug}/projects/${projectId}`)
       router.refresh()
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Noe gikk galt ved lagring')
+      setError(err instanceof Error ? err.message : t('common.error'))
     } finally {
       setIsSaving(false)
     }
@@ -135,7 +137,7 @@ export default function EditProjectForm({
               disabled={isSaving}
               className="bg-[#E69138] text-white font-semibold px-10 py-3 rounded-lg hover:bg-[#d47e20] transition-colors disabled:opacity-60"
             >
-              {isSaving ? 'Lagrer...' : 'Lagre'}
+              {isSaving ? t('common.loading') : t('project.submitSave')}
             </button>
             <button
               type="button"
@@ -143,7 +145,7 @@ export default function EditProjectForm({
               disabled={isLoggingOut}
               className="bg-gray-200 text-gray-800 font-semibold px-10 py-3 rounded-lg hover:bg-gray-300 transition-colors disabled:opacity-60"
             >
-              {isLoggingOut ? '...' : 'Logg ut'}
+              {isLoggingOut ? '…' : t('project.logoutWithoutSaving')}
             </button>
           </div>
         </form>
