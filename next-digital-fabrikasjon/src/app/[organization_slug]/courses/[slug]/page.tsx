@@ -4,6 +4,7 @@ import { PortableText } from '@portabletext/react'
 import Header from '@/components/ui/Header'
 import MainWrapper from '@/components/templates/MainWrapper'
 import { getCourseBySlug, getCoursesByOrganization } from '@/lib/sanity/queries/course'
+import { getTranslations } from '@/lib/i18n'
 
 type Props = {
   params: Promise<{ organization_slug: string; slug: string }>
@@ -11,6 +12,7 @@ type Props = {
 
 export default async function CoursePage({ params }: Props) {
   const { organization_slug, slug } = await params
+  const { t } = await getTranslations()
 
   const [course, allCourses] = await Promise.all([
     getCourseBySlug(organization_slug, slug),
@@ -27,7 +29,6 @@ export default async function CoursePage({ params }: Props) {
         <div className="w-full px-4 py-12">
           <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-[420px_1fr]">
 
-            {/* Venstre: kurs-navigasjon */}
             <aside className="flex flex-col items-start self-start">
               <nav className="w-full space-y-6" aria-label="Kursnavigasjon">
                 {allCourses.map((c) => (
@@ -47,12 +48,11 @@ export default async function CoursePage({ params }: Props) {
                   href={`/${organization_slug}/courses/${slug}/quiz`}
                   className="block w-full bg-[#488B90] hover:bg-[#214C50] px-8 py-6 text-left text-lg text-white shadow-lg transition"
                 >
-                  Quiz
+                  {t('course.quizTitle')}
                 </Link>
               </nav>
             </aside>
 
-            {/* Høyre: kursinnhold */}
             <div className="w-full pr-0 lg:pr-15">
               <section className="w-full rounded-2xl bg-white p-12 shadow-lg text-left">
                 <div className="flex flex-col gap-2 mb-8">
@@ -77,7 +77,7 @@ export default async function CoursePage({ params }: Props) {
                     href={`/${organization_slug}/courses/${slug}/quiz`}
                     className="rounded-2xl bg-[#214C50] px-10 py-3 text-lg font-bold text-white shadow-md hover:bg-[#488B90] transition"
                   >
-                    Start quiz
+                    {t('course.startQuizBtn')}
                   </Link>
                 </div>
               </section>

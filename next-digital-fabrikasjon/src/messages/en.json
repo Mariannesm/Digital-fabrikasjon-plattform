@@ -18,6 +18,12 @@
   "nav.editor": "Editor",
 
   "project.listTitle": "PROJECTS",
+  "project.listIntro": "Here you can find all projects registered in the platform.",
+  "project.registerNew": "+ Register new project",
+  "project.loginLink": "Log in to your project",
+  "project.noProjects": "No projects registered yet.",
+  "project.noImage": "No image",
+  "project.noContent": "This project has not added any content yet.",
   "project.loginTitle": "PROJECT LOGIN",
   "project.registerTitle": "REGISTER YOUR PROJECT",
   "project.editTitle": "EDIT PROJECT",

@@ -4,17 +4,11 @@ import Link from 'next/link'
 import { getProjectById } from '@/lib/sanity/queries/project'
 import MainWrapper from '@/components/templates/MainWrapper'
 import Header from '@/components/ui/Header'
-import BackButton from '@/components/ui/BackButton'
+import { getTranslations } from '@/lib/i18n'
+import type { TranslationKey } from '@/providers/LanguageProvider'
 
 interface Props {
   params: Promise<{ organization_slug: string; id: string }>
-}
-
-const STATUS_LABELS: Record<string, string> = {
-  draft: 'Utkast',
-  pending: 'Venter på godkjenning',
-  approved: 'Godkjent',
-  rejected: 'Avslått',
 }
 
 const STATUS_COLORS: Record<string, string> = {
@@ -24,13 +18,22 @@ const STATUS_COLORS: Record<string, string> = {
   rejected: 'bg-red-100 text-red-700',
 }
 
+const STATUS_KEYS: Record<string, TranslationKey> = {
+  draft: 'project.status.draft',
+  pending: 'project.status.pending',
+  approved: 'project.status.approved',
+  rejected: 'project.status.rejected',
+}
+
 export default async function ProjectDetailPage({ params }: Props) {
   const { organization_slug, id } = await params
+  const { t } = await getTranslations()
 
   const project = await getProjectById(id)
   if (!project) notFound()
 
   const imageUrl = project.coverImage?.asset?.url
+  const statusKey = STATUS_KEYS[project.status ?? 'draft'] ?? 'project.status.draft'
 
   return (
     <MainWrapper classNames="pt-0 bg-[#FFFCF8]">
@@ -38,23 +41,26 @@ export default async function ProjectDetailPage({ params }: Props) {
 
       <div className="mx-auto w-full max-w-5xl px-4 pb-12 pt-6">
         <div className="flex items-center justify-between mb-6">
-          <BackButton>Tilbake til prosjekter</BackButton>
+          <Link
+            href={`/${organization_slug}/projects`}
+            className="text-sm font-semibold text-[#214C50] hover:underline"
+          >
+            ← {t('project.listTitle')}
+          </Link>
           <Link
             href={`/${organization_slug}/projects/${id}/edit`}
             className="bg-[#E69138] text-white font-semibold px-6 py-2 rounded-lg hover:bg-[#d47e20] transition-colors"
           >
-            Rediger prosjekt
+            {t('project.editBtn')}
           </Link>
         </div>
 
-        {/* Status badge */}
         <div className="mb-6">
           <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${STATUS_COLORS[project.status ?? 'draft']}`}>
-            {STATUS_LABELS[project.status ?? 'draft']}
+            {t(statusKey)}
           </span>
         </div>
 
-        {/* Bilde */}
         {imageUrl && (
           <div className="relative w-full aspect-video rounded-2xl overflow-hidden mb-8 shadow-md">
             <Image
@@ -68,9 +74,7 @@ export default async function ProjectDetailPage({ params }: Props) {
         )}
 
         {!imageUrl && !project.content && (
-          <p className="text-gray-500 text-center py-12">
-            Dette prosjektet har ikke lagt til innhold ennå.
-          </p>
+          <p className="text-gray-500 text-center py-12">{t('project.noContent')}</p>
         )}
       </div>
     </MainWrapper>

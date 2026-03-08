@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Header from '@/components/ui/Header'
 import MainWrapper from '@/components/templates/MainWrapper'
 import { getCoursesByOrganization } from '@/lib/sanity/queries/course'
+import { getTranslations } from '@/lib/i18n'
 
 type Props = {
   params: Promise<{ organization_slug: string }>
@@ -9,20 +10,20 @@ type Props = {
 
 export default async function DigitalCoursesPage({ params }: Props) {
   const { organization_slug } = await params
+  const { t } = await getTranslations()
   const courses = await getCoursesByOrganization(organization_slug)
 
   return (
     <MainWrapper classNames="bg-[#FFFCF8]">
-      <Header title="DIGITALE KURS" />
+      <Header title={t('course.listTitle')} />
 
       <div className="mx-auto w-full max-w-6xl px-10 py-14">
         <p className="mb-3 text-lg font-medium text-black">
-          Her kan du gjennomføre ulike digitale kurs. Gjennomfør det digitale
-          kurset før du tar et fysisk kurs.
+          {t('course.listIntro')}
         </p>
 
         {courses.length === 0 ? (
-          <p className="mt-10 text-gray-500">Ingen kurs er tilgjengelige for øyeblikket.</p>
+          <p className="mt-10 text-gray-500">{t('course.noCourses')}</p>
         ) : (
           <div className="mt-10 flex flex-col gap-4">
             {courses.map((course) => (
@@ -42,7 +43,7 @@ export default async function DigitalCoursesPage({ params }: Props) {
                   href={`/${organization_slug}/courses/${course.slug.current}`}
                   className="rounded-2xl bg-[#214C50] px-7 py-2 text-base font-bold text-white shadow hover:bg-[#488B90] transition"
                 >
-                  Start
+                  {t('course.startBtn')}
                 </Link>
               </div>
             ))}

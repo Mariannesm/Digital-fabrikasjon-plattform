@@ -18,6 +18,12 @@
   "nav.editor": "Redaktør",
 
   "project.listTitle": "PROSJEKTER",
+  "project.listIntro": "Her finner du alle prosjekter registrert i plattformen.",
+  "project.registerNew": "+ Registrer nytt prosjekt",
+  "project.loginLink": "Logg inn på ditt prosjekt",
+  "project.noProjects": "Ingen prosjekter er registrert ennå.",
+  "project.noImage": "Ingen bilde",
+  "project.noContent": "Dette prosjektet har ikke lagt til innhold ennå.",
   "project.loginTitle": "LOGG INN PÅ PROSJEKT",
   "project.registerTitle": "REGISTRER DITT PROSJEKT",
   "project.editTitle": "REDIGER PROSJEKT",
