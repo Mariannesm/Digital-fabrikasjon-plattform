@@ -1,74 +1,53 @@
-import Image from 'next/image'
+import Link from 'next/link'
 import Header from '@/components/ui/Header'
 import MainWrapper from '@/components/templates/MainWrapper'
-import { Button } from '@/components/ui/Button'
+import { getCoursesByOrganization } from '@/lib/sanity/queries/course'
 
-export default function DigitalCoursesPage() {
+type Props = {
+  params: Promise<{ organization_slug: string }>
+}
+
+export default async function DigitalCoursesPage({ params }: Props) {
+  const { organization_slug } = await params
+  const courses = await getCoursesByOrganization(organization_slug)
+
   return (
     <MainWrapper classNames="bg-[#FFFCF8]">
-      <Header title="DIGITALE KURS" showSelectInstitution={false} />
-
-      {/* Erstattes med API-kall
-      title
-      icon {
-        src
-        alt
-      }
-      path
-      */}
+      <Header title="DIGITALE KURS" />
 
       <div className="mx-auto w-full max-w-6xl px-10 py-14">
-        {/* Overskrifter */}
-        <div className="grid grid-cols-2 gap-12 text-2xl">
-          <h2 className="font-semibold">Informerende kurs:</h2>
-          <h2 className="font-semibold">Kurs for ditt område:</h2>
-        </div>
+        <p className="mb-3 text-lg font-medium text-black">
+          Her kan du gjennomføre ulike digitale kurs. Gjennomfør det digitale
+          kurset før du tar et fysisk kurs.
+        </p>
 
-        {/* Kolonner */}
-        <div className="mt-10 grid grid-cols-2 gap-30 items-start">
-          {/* VENSTRE: Informerende kurs */}
-          <div>
-            {/* Boks 1 */}
-            <div className="flex items-center justify-between rounded-2xl bg-[#C2D8DA] px-6 py-5">
-              <div className="flex items-center gap-4">
-                {/* Ikon */}
-                <div className="flex h-12 w-12 items-center justify-center">
-                  <Image
-                    src="/icons/3Dprinter.png"
-                    alt="3D printer ikon"
-                    width={48}
-                    height={48}
-                  />
-                </div>
-
+        {courses.length === 0 ? (
+          <p className="mt-10 text-gray-500">Ingen kurs er tilgjengelige for øyeblikket.</p>
+        ) : (
+          <div className="mt-10 flex flex-col gap-4">
+            {courses.map((course) => (
+              <div
+                key={course._id}
+                className="flex items-center justify-between rounded-2xl bg-[#C2D8DA] px-6 py-5"
+              >
                 <h3 className="text-lg font-bold tracking-wide text-[#214C50]">
-                  SIKKERHET
+                  {course.title.toUpperCase()}
                 </h3>
+                {course.description && (
+                  <p className="hidden text-sm text-[#214C50] md:block max-w-md">
+                    {course.description}
+                  </p>
+                )}
+                <Link
+                  href={`/${organization_slug}/courses/${course.slug.current}`}
+                  className="rounded-2xl bg-[#214C50] px-7 py-2 text-base font-bold text-white shadow hover:bg-[#488B90] transition"
+                >
+                  Start
+                </Link>
               </div>
-              <Button type="button">Start</Button>
-            </div>
+            ))}
           </div>
-
-          {/* HØYRE: Kurs for ditt område */}
-          <div className="flex items-center justify-between rounded-2xl bg-[#C2D8DA] px-6 py-5">
-            <div className="flex items-center gap-4">
-              {/* Ikon */}
-              <div className="flex h-12 w-12 items-center justify-center">
-                <Image
-                  src="/icons/3Dprinter.png"
-                  alt="3D printer ikon"
-                  width={48}
-                  height={48}
-                />
-              </div>
-
-              <h3 className="text-lg font-bold tracking-wide text-[#214C50]">
-                3D-MODELLERING
-              </h3>
-            </div>
-            <Button type="button">Start</Button>
-          </div>
-        </div>
+        )}
       </div>
     </MainWrapper>
   )
