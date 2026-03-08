@@ -3,65 +3,62 @@ import Link from 'next/link'
 import type { CardGridBlockProps, CardItem } from './types'
 import { urlFor } from './sanityImage'
 
-const columnClasses = {
+const columnClasses: Record<number, string> = {
   2: 'grid-cols-1 sm:grid-cols-2',
   3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
   4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
 }
 
 function Card({ card }: { card: CardItem }) {
-  const content = (
-    <div className="h-full bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden transition-all duration-200 hover:shadow-md hover:border-[#488B90]">
+  const inner = (
+    <div
+      className="
+        w-full rounded-[28px] bg-[#488B90]
+        shadow-[0_12px_30px_rgba(0,0,0,0.18)]
+        hover:shadow-[0_16px_36px_rgba(0,0,0,0.22)]
+        transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#214C50]
+        flex flex-col items-center justify-center text-center
+        px-6 py-8 min-h-[180px] sm:min-h-[210px]
+        uppercase tracking-wide text-xl sm:text-2xl font-bold text-white
+      "
+    >
       {card.icon?.asset && (
-        <div className="h-20 bg-[#488B90]/10 flex items-center justify-center p-4">
-          <Image
-            src={urlFor(card.icon.asset).width(80).height(80).url()}
-            alt=""
-            width={48}
-            height={48}
-            className="object-contain"
-          />
-        </div>
+        <Image
+          src={urlFor(card.icon.asset).width(96).height(96).url()}
+          alt=""
+          width={96}
+          height={96}
+          className="object-contain mb-4 opacity-90"
+        />
       )}
-      <div className="p-6">
-        <h3 className="text-xl font-semibold text-[#214C50] mb-2">
-          {card.title}
-        </h3>
-        {card.description && (
-          <p className="text-gray-600 text-sm">
-            {card.description}
-          </p>
-        )}
-      </div>
+      <span className="leading-tight">{card.title}</span>
     </div>
   )
 
   if (card.link) {
     return (
-      <Link href={card.link} className="block h-full">
-        {content}
+      <Link href={card.link} className="block">
+        {inner}
       </Link>
     )
   }
 
-  return content
+  return inner
 }
 
 export function CardGrid({ heading, cards, columns = 3 }: CardGridBlockProps) {
   if (!cards?.length) return null
 
-  const colClass = columnClasses[columns]
+  const colClass = columnClasses[columns] ?? columnClasses[3]
 
   return (
     <section className="w-full max-w-6xl mx-auto px-6 py-12">
       {heading && (
-        <h2 className="text-3xl font-bold text-[#214C50] mb-8 text-center">
-          {heading}
-        </h2>
+        <h2 className="text-2xl text-left mb-10">{heading}</h2>
       )}
-      <div className={`grid ${colClass} gap-6`}>
+      <div className={`grid ${colClass} gap-x-12 gap-y-10 justify-items-center`}>
         {cards.map((card, index) => (
-          <Card key={card._key || index} card={card} />
+          <Card key={card._key || String(index)} card={card} />
         ))}
       </div>
     </section>

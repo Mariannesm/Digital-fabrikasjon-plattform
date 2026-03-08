@@ -8,6 +8,10 @@ export { VideoEmbed } from './VideoEmbed'
 export { Accordion } from './Accordion'
 export { CardGrid } from './CardGrid'
 export { Divider } from './Divider'
+export { VersionListBlock } from './VersionListBlock'
+export { GuideBlock } from './GuideBlock'
+export { MaterialCardBlock } from './MaterialCardBlock'
+export { StaffGridBlock } from './StaffGridBlock'
 
 // Block renderer
 export { BlockRenderer, blockComponents } from './BlockRenderer'
@@ -29,6 +33,17 @@ export type {
   CardItem,
   DividerBlockProps,
   GalleryImage,
+  VersionListBlockProps,
+  VersionListItem,
+  GuideBlockProps,
+  GuideStep,
+  GuideInfoBox,
+  GuideCourseLink,
+  MaterialCardBlockProps,
+  MaterialItem,
+  MaterialSpec,
+  StaffGridBlockProps,
+  StaffMember,
 } from './types'
 
 // Utilities

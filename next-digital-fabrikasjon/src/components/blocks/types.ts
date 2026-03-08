@@ -1,5 +1,5 @@
 import type { PortableTextBlock } from '@portabletext/types'
-import type { SanityImageSource } from '@sanity/image-url/lib/types/types'
+import type { SanityImageSource } from '@sanity/image-url'
 
 // Base block type with _key and _type
 export interface BaseBlock {
@@ -54,6 +54,7 @@ export interface ImageBlockProps extends BaseBlock {
 
 // Image Gallery Block
 export interface GalleryImage extends SanityImage {
+  _key?: string
   alt?: string
   caption?: string
 }
@@ -118,6 +119,86 @@ export interface DividerBlockProps extends BaseBlock {
   style?: 'line' | 'dots' | 'space'
 }
 
+// Version List Block
+export interface VersionListItem {
+  _key: string
+  title: string
+  description?: string
+  image?: SanityImage
+  link?: string
+}
+
+export interface VersionListBlockProps extends BaseBlock {
+  _type: 'versionListBlock'
+  heading?: string
+  items: VersionListItem[]
+}
+
+// Guide Block
+export interface GuideInfoBox {
+  title?: string
+  items: string[]
+}
+
+export interface GuideCourseLink {
+  label?: string
+  href: string
+}
+
+export interface GuideStep {
+  _key: string
+  title: string
+  content: PortableTextBlock[]
+  infoBox?: GuideInfoBox
+  courseLink?: GuideCourseLink
+}
+
+export interface GuideBlockProps extends BaseBlock {
+  _type: 'guideBlock'
+  icon?: SanityImage
+  steps: GuideStep[]
+}
+
+// Material Card Block
+export interface MaterialSpec {
+  _key: string
+  label: string
+  value: string
+}
+
+export interface MaterialItem {
+  _key: string
+  name: string
+  image?: SanityImage
+  specs: MaterialSpec[]
+  fordeler: string[]
+  ulemper: string[]
+  anbefalingBruk: string[]
+}
+
+export interface MaterialCardBlockProps extends BaseBlock {
+  _type: 'materialCardBlock'
+  heading?: string
+  intro?: string
+  materials: MaterialItem[]
+}
+
+// Staff Grid Block
+export interface StaffMember {
+  _key: string
+  name: string
+  role?: string
+  photo?: SanityImage
+  contact?: string
+}
+
+export interface StaffGridBlockProps extends BaseBlock {
+  _type: 'staffGridBlock'
+  heading?: string
+  intro?: string
+  staff: StaffMember[]
+}
+
 // Union type of all blocks
 export type PageBlock =
   | HeroBlockProps
@@ -129,3 +210,7 @@ export type PageBlock =
   | AccordionBlockProps
   | CardGridBlockProps
   | DividerBlockProps
+  | VersionListBlockProps
+  | GuideBlockProps
+  | MaterialCardBlockProps
+  | StaffGridBlockProps

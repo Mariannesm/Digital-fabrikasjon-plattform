@@ -9,6 +9,10 @@ import { VideoEmbed } from './VideoEmbed'
 import { Accordion } from './Accordion'
 import { CardGrid } from './CardGrid'
 import { Divider } from './Divider'
+import { VersionListBlock } from './VersionListBlock'
+import { GuideBlock } from './GuideBlock'
+import { MaterialCardBlock } from './MaterialCardBlock'
+import { StaffGridBlock } from './StaffGridBlock'
 
 // Map block types to their components
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -22,6 +26,10 @@ const blockComponents: Record<string, ComponentType<any>> = {
   accordionBlock: Accordion,
   cardGridBlock: CardGrid,
   dividerBlock: Divider,
+  versionListBlock: VersionListBlock,
+  guideBlock: GuideBlock,
+  materialCardBlock: MaterialCardBlock,
+  staffGridBlock: StaffGridBlock,
 }
 
 interface BlockRendererProps {
