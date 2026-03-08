@@ -21,7 +21,7 @@ type OrganizationContextType = {
   organization: Organization
 }
 
-const OrganizationContext = createContext<OrganizationContextType | undefined>(undefined)
+export const OrganizationContext = createContext<OrganizationContextType | undefined>(undefined)
 
 export function OrganizationProvider({
   children,

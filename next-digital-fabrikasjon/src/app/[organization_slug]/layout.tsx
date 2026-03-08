@@ -4,18 +4,22 @@ import { client } from '@/lib/sanity/client'
 import { OrganizationProvider } from '@/providers/OrganizationProvider'
 
 const ORGANIZATION_BY_SLUG = defineQuery(`
-  *[_type == "organization" && slug.current == $slug && active == true]{
+  *[_type == "organization" && slug.current == $slug && active == true][0]{
     _id,
     _type,
     name,
-    slug
+    slug,
+    url,
+    icon{ asset->{ url }, alt }
   }
 `)
 
 type Organization = {
   _id: string
   name: string
-  slug: string
+  slug: { current: string }
+  url: string
+  icon?: { asset?: { url: string }; alt?: string }
 }
 
 type Props = {
