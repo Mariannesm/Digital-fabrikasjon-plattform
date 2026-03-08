@@ -56,6 +56,22 @@ export const project = defineType({
       initialValue: 'draft',
     }),
     defineField({
+      name: 'coverImage',
+      title: 'Cover Image',
+      type: 'image',
+      description: 'Preview image shown in the project overview',
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt text',
+          type: 'string',
+        }),
+      ],
+    }),
+    defineField({
       name: 'attachments',
       title: 'Attachments',
       type: 'array',

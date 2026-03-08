@@ -491,6 +491,316 @@ export const dividerBlock = defineType({
   },
 })
 
+/**
+ * Version List Block – Grid of machine/variant cards (like SelectedTechnology)
+ * Each card: image (teal header), title, description, "Velg"-button
+ */
+export const versionListBlock = defineType({
+  name: 'versionListBlock',
+  title: 'Version List',
+  type: 'object',
+  fields: [
+    defineField({
+      name: 'heading',
+      title: 'Heading',
+      type: 'string',
+    }),
+    defineField({
+      name: 'items',
+      title: 'Items',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'title',
+              title: 'Title',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'description',
+              title: 'Description',
+              type: 'text',
+              rows: 3,
+            }),
+            defineField({
+              name: 'image',
+              title: 'Image',
+              type: 'image',
+              options: { hotspot: true },
+            }),
+            defineField({
+              name: 'link',
+              title: 'Link (relative path)',
+              type: 'string',
+              description: 'Relative path to the guide page, e.g. /org/teknologi/3d-printing/prusa-mk4s',
+            }),
+          ],
+          preview: {
+            select: { title: 'title', media: 'image' },
+          },
+        }),
+      ],
+      validation: (Rule) => Rule.required().min(1),
+    }),
+  ],
+  preview: {
+    select: { title: 'heading', items: 'items' },
+    prepare({ title, items }) {
+      return {
+        title: title || 'Version List',
+        subtitle: `${items?.length || 0} items`,
+      }
+    },
+  },
+})
+
+/**
+ * Guide Block – Left sidebar step nav + right content panel (like GuidePage)
+ * Steps with title, rich text content, optional safety info box, optional course link
+ */
+export const guideBlock = defineType({
+  name: 'guideBlock',
+  title: 'Guide (Step-by-step)',
+  type: 'object',
+  fields: [
+    defineField({
+      name: 'icon',
+      title: 'Icon / Machine image',
+      type: 'image',
+      description: 'Shown in the sidebar above the step navigation',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'steps',
+      title: 'Steps',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'title',
+              title: 'Step title',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'content',
+              title: 'Content',
+              type: 'blockContent',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'infoBox',
+              title: 'Info / Safety box (optional)',
+              type: 'object',
+              fields: [
+                defineField({
+                  name: 'title',
+                  title: 'Box title',
+                  type: 'string',
+                }),
+                defineField({
+                  name: 'items',
+                  title: 'Bullet points',
+                  type: 'array',
+                  of: [defineArrayMember({ type: 'string' })],
+                }),
+              ],
+            }),
+            defineField({
+              name: 'courseLink',
+              title: 'Course link (optional)',
+              type: 'object',
+              fields: [
+                defineField({ name: 'label', title: 'Label', type: 'string' }),
+                defineField({ name: 'href', title: 'Path', type: 'string' }),
+              ],
+            }),
+          ],
+          preview: {
+            select: { title: 'title' },
+          },
+        }),
+      ],
+      validation: (Rule) => Rule.required().min(1),
+    }),
+  ],
+  preview: {
+    select: { steps: 'steps' },
+    prepare({ steps }) {
+      return {
+        title: 'Guide',
+        subtitle: `${steps?.length || 0} steps`,
+      }
+    },
+  },
+})
+
+/**
+ * Material Card Block – Grid of material/filament cards with specs (like FilamentPage)
+ */
+export const materialCardBlock = defineType({
+  name: 'materialCardBlock',
+  title: 'Material Cards',
+  type: 'object',
+  fields: [
+    defineField({
+      name: 'heading',
+      title: 'Heading',
+      type: 'string',
+    }),
+    defineField({
+      name: 'intro',
+      title: 'Intro text',
+      type: 'text',
+      rows: 3,
+    }),
+    defineField({
+      name: 'materials',
+      title: 'Materials',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'name',
+              title: 'Name (e.g. PLA)',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'image',
+              title: 'Image',
+              type: 'image',
+              options: { hotspot: true },
+            }),
+            defineField({
+              name: 'specs',
+              title: 'Specs (e.g. Nozzle: 200-220°C)',
+              type: 'array',
+              of: [
+                defineArrayMember({
+                  type: 'object',
+                  fields: [
+                    defineField({ name: 'label', title: 'Label', type: 'string' }),
+                    defineField({ name: 'value', title: 'Value', type: 'string' }),
+                  ],
+                  preview: { select: { title: 'label', subtitle: 'value' } },
+                }),
+              ],
+            }),
+            defineField({
+              name: 'fordeler',
+              title: 'Fordeler (advantages)',
+              type: 'array',
+              of: [defineArrayMember({ type: 'string' })],
+            }),
+            defineField({
+              name: 'ulemper',
+              title: 'Ulemper (disadvantages)',
+              type: 'array',
+              of: [defineArrayMember({ type: 'string' })],
+            }),
+            defineField({
+              name: 'anbefalingBruk',
+              title: 'Anbefalt bruk (recommended use)',
+              type: 'array',
+              of: [defineArrayMember({ type: 'string' })],
+            }),
+          ],
+          preview: {
+            select: { title: 'name', media: 'image' },
+          },
+        }),
+      ],
+      validation: (Rule) => Rule.required().min(1),
+    }),
+  ],
+  preview: {
+    select: { title: 'heading', materials: 'materials' },
+    prepare({ title, materials }) {
+      return {
+        title: title || 'Material Cards',
+        subtitle: `${materials?.length || 0} materials`,
+      }
+    },
+  },
+})
+
+/**
+ * Staff Grid Block – List of staff members with photo, name, role, contact (like Staff.jsx)
+ */
+export const staffGridBlock = defineType({
+  name: 'staffGridBlock',
+  title: 'Staff List',
+  type: 'object',
+  fields: [
+    defineField({
+      name: 'heading',
+      title: 'Heading',
+      type: 'string',
+      initialValue: 'Ansatte',
+    }),
+    defineField({
+      name: 'intro',
+      title: 'Intro text',
+      type: 'text',
+      rows: 2,
+    }),
+    defineField({
+      name: 'staff',
+      title: 'Staff members',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'name',
+              title: 'Name',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'role',
+              title: 'Role / Title',
+              type: 'string',
+            }),
+            defineField({
+              name: 'photo',
+              title: 'Photo',
+              type: 'image',
+              options: { hotspot: true },
+            }),
+            defineField({
+              name: 'contact',
+              title: 'Contact (email or phone)',
+              type: 'string',
+            }),
+          ],
+          preview: {
+            select: { title: 'name', subtitle: 'role', media: 'photo' },
+          },
+        }),
+      ],
+    }),
+  ],
+  preview: {
+    select: { title: 'heading', staff: 'staff' },
+    prepare({ title, staff }) {
+      return {
+        title: title || 'Staff',
+        subtitle: `${staff?.length || 0} members`,
+      }
+    },
+  },
+})
+
 // Export all block types as an array for easy importing
 export const pageBlocks = [
   heroBlock,
@@ -502,4 +812,8 @@ export const pageBlocks = [
   accordionBlock,
   cardGridBlock,
   dividerBlock,
+  versionListBlock,
+  guideBlock,
+  materialCardBlock,
+  staffGridBlock,
 ]
