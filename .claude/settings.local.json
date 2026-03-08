@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xargs grep -l \"useContext\\\\|createContext\\\\|useState\\\\|useEffect\\\\|useReducer\")",
+      "Bash(npm install jsonwebtoken @types/jsonwebtoken resend)",
+      "Bash(powershell.exe -Command \"Set-Location ''C:\\\\Users\\\\Mathi\\\\Documents\\\\GitHub\\\\Digital-fabrikasjon-plattform\\\\next-digital-fabrikasjon''; npm install jsonwebtoken ''@types/jsonwebtoken'' resend 2>&1\")",
+      "Bash(powershell -Command \"Stop-Process -Name node -Force -ErrorAction SilentlyContinue\")",
+      "Bash(npm install @sanity/vision)",
+      "Bash(npm run build)",
+      "Bash(npm install resend)"
+    ]
+  }
+}

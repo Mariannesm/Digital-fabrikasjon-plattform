@@ -1,0 +1,544 @@
+================================================================================
+Digital Fabrikasjon Platform – Utviklingsplan
+================================================================================
+
+STATUS-NØKKEL:
+  ✅ Ferdig
+  🟡 Påbegynt / Stub
+  ❌ Ikke startet
+  🚫 Blokkert
+
+================================================================================
+ARKITEKTUR-OVERSIKT
+================================================================================
+
+Plattformen er et multi-tenant system for digital fabrikasjon ("SmartMaking").
+
+  client/                    – Gammel React/Vite-app (designreferanse, IKKE i bruk, Men design fra komponenter som ikke er opprettet i next-digital-fabrikasjon skal brukes for å opprette komponenter. Og vi må ha veldig likt design som er tiltenkt i /client.) 
+  next-digital-fabrikasjon/  – Ny Next.js 16 app (TypeScript, App Router). AKTIV.
+  server/                    – Sanity Studio v5 (headless CMS / database)
+
+Autentisering:
+  - Admin / Super Admin  → Supabase (e-post + passord)
+  - Prosjektbrukere      → httpOnly JWT-cookie per prosjekt (INGEN Supabase-konto)
+
+Rolle-hierarki:
+  SUPER_ADMIN → full tilgang (alle orgs, alt innhold)
+  ADMIN       → begrenset til sin organisasjon
+  Prosjektbruker → kun eget prosjekt via cookie
+
+Sanity prosjekt-ID: rnl5hcxh  |  Dataset: production
+
+================================================================================
+FASE 1 – PROSJEKT-SYSTEM (Høyest prioritet)
+================================================================================
+
+✅ 1.1  Installer avhengigheter
+         npm install jsonwebtoken @types/jsonwebtoken resend
+         OBS: Må kjøres manuelt i terminalen (npm var ikke tilgjengelig i shell)
+
+✅ 1.2  Legg til env-variabler i .env.local (MANUELT – gjøres av utvikler)
+         COOKIE_SECRET=<sterk random string>
+         SANITY_API_TOKEN=<token med write-tilgang til assets>
+         RESEND_API_KEY=<fra resend.com>
+
+✅ 1.3  Sanity-spørringer (server-side GROQ)
+         Opprettet: src/lib/sanity/queries/project.ts
+         - getProjectBySlug(slug)
+         - getProjectById(id)
+         - getProjectsByOrganization(slug)
+         - updateProjectStatus(projectId, status, writeClient)
+
+✅ 1.4  Prosjekt-auth med JWT cookies
+         Opprettet: src/lib/project/auth.ts
+         - loginToProject(slug, password)
+         - logoutFromProject(slug)
+         - getProjectAccess(slug)
+
+         Opprettet: src/lib/project/actions.ts
+         - createProject(formData) ← med bildeopplasting
+         - updateProject(projectId, formData)
+         - adminUpdateProjectStatus(projectDocId, status)
+
+✅ 1.5  Zod-validering for prosjekt-login
+         Opprettet: src/lib/validation/projectLogin.ts
+
+✅ 1.6  Prosjekt-login-side
+         Oppdatert: src/app/[organization_slug]/projects/login/page.tsx
+         Opprettet: src/app/[organization_slug]/projects/login/ProjectLoginForm.tsx
+
+✅ 1.7  Prosjektopprettelse med bildeopplasting
+         Opprettet: src/app/[organization_slug]/projects/register/page.tsx
+         Opprettet: src/app/[organization_slug]/projects/register/RegisterProjectForm.tsx
+
+✅ 1.8  Prosjektvisning (individual)
+         Oppdatert: src/app/[organization_slug]/projects/[id]/page.tsx
+
+✅ 1.9  Prosjekt edit-side (krever auth)
+         Opprettet: src/app/[organization_slug]/projects/[id]/edit/page.tsx
+         Opprettet: src/app/[organization_slug]/projects/[id]/edit/EditProjectForm.tsx
+
+✅ 1.10 Prosjektoversikt med preview-kort
+         Oppdatert: src/app/[organization_slug]/projects/page.tsx
+         Kort-design: 5-kolonne grid, bilde høyre, tittel+status venstre (lik ExistingProject.jsx)
+
+✅ Bugfix: [organization_slug]/layout.tsx – lagt til [0] i GROQ-spørring
+
+── STOPP 2026-03-03 ──────────────────────────────────────────────────────────
+  Fase 1 er implementert i kode. Gjenstår å verifisere at det fungerer:
+  1. Kjør npm install jsonwebtoken @types/jsonwebtoken resend
+  2. Legg til COOKIE_SECRET og SANITY_API_TOKEN i .env.local
+  3. Test registrering, login og redigering av prosjekter
+  4. Fortsett med Fase 2 (block-system) neste gang.
+──────────────────────────────────────────────────────────────────────────────
+
+================================================================================
+FASE 2 – INNHOLDSSIDER OG BLOCK-SYSTEM
+================================================================================
+
+Tilnærming: Teknologi-, filament-, om-oss- og ansatt-sider bruker
+Page/Block-systemet i Sanity. Vi forbedrer eksisterende blokker og
+legger til nye basert på komponentene i client/.
+
+SIDE-HIERARKI (ubegrenset dybde):
+  Page-dokumentet i Sanity får et valgfritt `parentPage`-felt (ref til Page).
+  Dette bygger et tre der filament kan ha undersider, som igjen har undersider.
+  Eksempel:
+    Filament
+      └── PLA
+            └── Egenskaper
+            └── Bruksområder
+      └── PETG
+
+  I Next.js bruker vi catch-all rute:
+    src/app/[organization_slug]/[...slug]/page.tsx
+  Denne håndterer alle dybder: /org/filament, /org/filament/pla, /org/filament/pla/egenskaper
+  Sanity-oppslag: hent Page-dokument med full slug-path.
+
+  Navigasjon:
+    - Breadcrumbs fra parentPage-kjeden
+    - Sidebar med søsken-sider (sider med samme parentPage)
+    - Menyen i [organization_slug]/page.tsx viser kun toppnivå-kategorier
+
+✅ 2.0  Legg til parentPage + layout i Sanity Page-schema
+         server/schemaTypes/documentTypes/page.ts
+         - parentPage (reference til page, valgfritt) ✅
+         - layout ('full' | 'sidebar', default 'full') ✅
+
+[ ] 2.1  Ny Sanity-schema: Staff (VURDERES – se note)
+         OBS: StaffGridBlock-blokken støtter nå embedded staff direkte i blokken.
+         Separat Staff-dokument-schema kan lages later om man ønsker det.
+
+✅ 2.2  Nye Sanity block-typer (alle lagt i pageBlocks.ts)
+         versionListBlock  ← liste av maskin-varianter (VersionTech.jsx)
+         guideBlock        ← steg-for-steg guide med sidebar (GuidePage.jsx)
+         materialCardBlock ← materialkort (FilamentPage.jsx)
+         staffGridBlock    ← ansatt-liste (Staff.jsx)
+
+         Oppdatert: server/schemaTypes/documentTypes/page.ts ✅
+         Oppdatert: server/schemaTypes/customTypes/pageBlocks.ts ✅
+
+✅ 2.3  Nye Next.js block-komponenter
+         src/components/blocks/CardGrid.tsx        (oppdatert til Cardbutton-stil)
+         src/components/blocks/VersionListBlock.tsx (ny – matcher VersionTech.jsx)
+         src/components/blocks/GuideBlock.tsx       (ny – matcher GuidePage.jsx, klient)
+         src/components/blocks/MaterialCardBlock.tsx (ny – matcher FilamentPage.jsx)
+         src/components/blocks/StaffGridBlock.tsx   (ny – matcher Staff.jsx)
+
+         Oppdatert: src/components/blocks/BlockRenderer.tsx ✅
+         Oppdatert: src/components/blocks/types.ts ✅
+         Oppdatert: src/components/blocks/index.ts ✅
+
+         GuideBlock er en 'use client' komponent med useState for steg-navigasjon.
+         @portabletext/react brukes for rich text rendering i GuideBlock og TextSection.
+
+✅ 2.4  Catch-all innholdsside (erstatter alle hardkodede innholdssider)
+         Ny fil: src/app/[organization_slug]/[...slug]/page.tsx
+         Ny fil: src/lib/sanity/queries/page.ts (getPageBySlug, getTopLevelPages)
+         - Henter Page-dokument fra Sanity med full slug-path
+         - Rendrer via BlockRenderer
+         - Viser breadcrumbs fra parentPage-kjeden
+         - Viser sidebar med søsken-sider (sider med samme parentPage)
+         - 404 om ingen Page-dokument finnes for slugen
+
+         VIKTIG: Ingen hardkodede innholdssider (filament, teknologi, om-oss osv.)
+         All innholdsnavigasjon er dynamisk per org i Sanity.
+         Organisasjon A kan ha "Filament", "3D-printing", "Om oss"
+         Organisasjon B kan ha "Utstyr", "Kurs", "Kontakt" – alt styres i Sanity Studio.
+
+         Kategorier vises som knapper på org-menysiden:
+           src/app/[organization_slug]/page.tsx
+           Henter kategorier og toppnivå-sider for denne org fra Sanity.
+
+         Sanity-spørring (GROQ):
+           // Finn Page-dokument med denne org og slug-path
+           *[_type == "page"
+             && organization->slug.current == $orgSlug
+             && slug.current == $fullSlug
+             && active == true][0] { ... }
+
+         Faste ruter (spesiell funksjonalitet, IKKE catch-all):
+           /[org]/projects/*   – prosjektsystem med JWT-cookie-auth
+           /[org]/courses/*    – kurs med quiz-logikk og Supabase-lagring
+
+================================================================================
+FASE 3 – KURS OG QUIZ-SYSTEM
+================================================================================
+
+✅ 3.1  Ny Sanity-schema: Course
+         Ny fil: server/schemaTypes/documentTypes/course.ts
+         Felt:
+           title, slug, description, organization (ref), category (ref)
+           active (bool), order (number), content (blockContent)
+           quizQuestions: array av { question, options[], correctOptionIndex, explanation }
+           passingScore: number (default 70 = 70%)
+         Oppdater: server/schemaTypes/index.ts
+
+➡ 3.2  Quiz-fullføringer lagres i Sanity (quizCompletion-dokument), IKKE Supabase.
+         Sanity-schema: server/schemaTypes/documentTypes/quizCompletion.ts
+         Ingen SQL nødvendig.
+
+✅ 3.3  Sanity-spørringer for kurs
+         Ny fil: src/lib/sanity/queries/course.ts
+         - getCoursesByOrganization(orgSlug)
+         - getCourseBySlug(slug)          ← inkl. quizQuestions
+
+✅ 3.4  Quiz server action
+         Ny fil: src/lib/course/quiz.ts
+         - submitQuiz(courseSlug, answers[], email):
+             1. Hent kursspørsmål fra Sanity
+             2. Beregn score (antall riktige)
+             3. Hvis bestått: INSERT i quiz_completions + send e-post
+             4. Returner { passed, score, total }
+
+✅ 3.5  E-post ved bestått kurs (placeholder)
+         Ny fil: src/lib/email/sendCourseCompletion.ts
+         Bruker Resend API (RESEND_API_KEY i .env.local)
+         Innhold er placeholder foreløpig
+
+✅ 3.6  Kurs-sider
+         Oppdater: src/app/[organization_slug]/courses/page.tsx (fra stub)
+         Ny fil:   src/app/[organization_slug]/courses/[slug]/page.tsx
+         Ny fil:   src/app/[organization_slug]/courses/[slug]/quiz/page.tsx
+         Ny fil:   src/app/[organization_slug]/courses/[slug]/quiz/QuizForm.tsx
+
+✅ 3.7  Admin: Kursgjennomføring-oversikt
+         Ny fil: src/app/admin/courses/completions/page.tsx
+         - Henter fra Supabase quiz_completions
+         - Gruppert per kurs og e-post
+         - Krever ADMIN eller SUPER_ADMIN rolle
+
+================================================================================
+FASE 4 – ADMIN-PANEL
+================================================================================
+
+✅ 4.1  Admin-layout med tilgangskontroll
+         Ny/oppdater: src/app/admin/layout.tsx
+         - Sjekker profiles.role via getCurrentUserWithRole()
+         - Redirect til /login om ikke admin
+         - Viser admin-navigasjon (sidebar/topbar)
+
+✅ 4.2  Admin dashboard
+         Oppdater: src/app/admin/page.tsx (fra stub)
+         - Oversikt: antall prosjekter, kurs, org (avh. av rolle)
+
+✅ 4.3  Organisasjonsstyring (SUPER_ADMIN)
+         Ny fil: src/app/admin/organizations/page.tsx
+         Ny fil: src/app/admin/organizations/OrgForm.tsx
+         Ny fil: src/app/admin/organizations/actions.ts
+         - Liste over alle org med aktiv/inaktiv status
+         - Opprett ny org (navn, slug, URL)
+         - Aktiver / deaktiver org (ingen sletting)
+
+✅ 4.4  Prosjektgodkjenning (ADMIN)
+         Ny fil: src/app/admin/projects/page.tsx
+         - Alle prosjekter for adminens org
+         - Approve / Decline knapper
+         Server action: updateProjectStatus(projectId, status)
+         - Bruker SANITY_API_TOKEN for skriving
+
+✅ 4.5  Admin-registrering (kun SUPER_ADMIN)
+         Oppdater: src/app/admin/register/page.tsx
+         Ny fil:   src/app/admin/register/RegisterAdminForm.tsx
+         Ny fil:   src/app/admin/register/actions.ts
+         Ny fil:   src/lib/supabase/admin.ts (service role klient)
+         - Opprett ny admin med e-post, passord, rolle, org-tilknytning
+         - Bruker supabase.auth.admin.createUser() + insert i profiles
+         OBS: Krever SUPABASE_SERVICE_ROLE_KEY i .env.local
+
+================================================================================
+VIDEO-KOMPONENT (BLOKK)
+================================================================================
+
+STATUS: ✅ Ferdig implementert
+
+VideoEmbed er allerede laget og koblet til:
+  Frontend:  src/components/blocks/VideoEmbed.tsx
+  Renderer:  src/components/blocks/BlockRenderer.tsx (nøkkel: "videoBlock")
+  Sanity:    Definert som videoBlock i page.ts-schema
+
+Støttede formater:
+  - YouTube-lenker (youtu.be, youtube.com/watch)
+  - Vimeo-lenker
+  - Direkte videofiler (.mp4, .webm, .ogg)
+
+Felt i Sanity-blokken (title, videoUrl, caption) er klare til bruk i Studio.
+Ingen ytterligere kode er nødvendig for video-støtte i Page/Block-systemet.
+
+================================================================================
+KOMPONENT-SJEKKLISTE: Client → Next.js
+================================================================================
+
+Fullstendig oversikt over alle komponenter og sider i /client og deres status
+i next-digital-fabrikasjon/. Design fra /client skal følges tett.
+
+STATUS-NØKKEL: ✅ Ferdig | 🟡 Stub/delvis | ❌ Ikke startet | ➡ Erstattet av annen løsning
+
+── UI-KOMPONENTER (client/src/components/) ─────────────────────────────────
+
+  BackButton.jsx          → ✅ src/components/ui/BackButton.tsx
+  Cardbutton.jsx          → ✅ src/components/ui/Cardbutton.tsx
+  ChatBot.jsx             → ✅ src/components/ui/ChatBot.tsx (placeholder)
+  GuideButton.jsx         → ❌ Mangler (trenger tilsvarende i GuideBlock)
+  Header.jsx              → ✅ src/components/ui/Header.tsx
+  MainWrapper.jsx         → ✅ src/components/templates/MainWrapper.tsx
+  StartButton.jsx         → ➡ Erstattet av Button.tsx (submit) og inline-knapper
+  VersionTech.jsx         → ❌ Planlagt som VersionListBlock (Fase 2)
+
+── BLOCK-KOMPONENTER (nye, finnes ikke i /client) ──────────────────────────
+
+  HeroSection             → ✅ src/components/blocks/HeroSection.tsx
+  TextSection             → ✅ src/components/blocks/TextSection.tsx
+  ImageBlock              → ✅ src/components/blocks/ImageBlock.tsx
+  ImageGallery            → ✅ src/components/blocks/ImageGallery.tsx
+  CallToAction            → ✅ src/components/blocks/CallToAction.tsx
+  VideoEmbed              → ✅ src/components/blocks/VideoEmbed.tsx
+  Accordion               → ✅ src/components/blocks/Accordion.tsx
+  CardGrid                → 🟡 src/components/blocks/CardGrid.tsx (placeholder)
+  Divider                 → ✅ src/components/blocks/Divider.tsx
+  VersionListBlock        → ✅ src/components/blocks/VersionListBlock.tsx
+  GuideBlock              → ✅ src/components/blocks/GuideBlock.tsx
+  MaterialCardBlock       → ✅ src/components/blocks/MaterialCardBlock.tsx
+  StaffGridBlock          → ✅ src/components/blocks/StaffGridBlock.tsx
+
+── SIDER (client/src/pages/) ───────────────────────────────────────────────
+
+  landingpage/LandingPage.jsx        → ✅ src/app/page.tsx (org-velger)
+  Menu/MenuPage.jsx                  → ✅ src/app/[org]/page.tsx (kategori-meny)
+  LogIn/LogIn.jsx                    → ✅ src/app/[org]/projects/login/ (prosjekt-login)
+  LogInAdmin/LogInAdmin.jsx          → ✅ src/app/login/ (admin-login)
+
+  Projects/Projects.jsx              → ✅ src/app/[org]/projects/page.tsx
+  RegisterProject/RegisterProject.jsx→ ✅ src/app/[org]/projects/register/page.tsx
+  EditProject/EditProject.jsx        → ✅ src/app/[org]/projects/[id]/edit/page.tsx
+  ExistingProject/ExistingProject.jsx→ ✅ src/app/[org]/projects/[id]/page.tsx
+  ProjectRegistered/ProjectRegistered.jsx → 🟡 Redirect-melding etter registrering (vurderes)
+
+  DigitalCourses/DigitalCourses.jsx  → ✅ src/app/[org]/courses/page.tsx
+  Quiz/Quiz.jsx                      → ✅ src/app/[org]/courses/[slug]/quiz/ + QuizForm.tsx
+  RegisterQuiz/RegisterQuiz.jsx      → ✅ Håndteres av submitQuiz() (e-post + Supabase)
+  RegistrationCourses/RegistrationCourses.jsx → ✅ src/app/[org]/courses/[slug]/page.tsx
+
+  Technology/TechnologyPage.jsx      → ✅ Dynamisk via [org]/[...slug] catch-all + CardGridBlock
+  SelectedTechnology/SelectedTechnology.jsx → ✅ Dynamisk via [org]/[...slug] + VersionListBlock
+  Guidepage/GuidePage.jsx            → ✅ Dynamisk via [org]/[...slug] + GuideBlock
+  GuideStep1/GuideStep1.jsx          → ✅ Del av GuideBlock (steg-navigasjon)
+  GuideStep2/GuideStep2.jsx          → ✅ Del av GuideBlock
+  GuideStep3/GuideStep3.jsx          → ✅ Del av GuideBlock
+  FilamentPage/FilamentPage.jsx      → ✅ Dynamisk via [org]/[...slug] + MaterialCardBlock
+
+  AboutUs/AboutUs.jsx                → ✅ Dynamisk via [org]/[...slug] + TextBlock/ImageBlock
+  Staff/Staff.jsx                    → ✅ Dynamisk via [org]/[...slug] + StaffGridBlock
+
+── KNAPP-FILOSOFI ───────────────────────────────────────────────────────────
+
+  Vi bruker IKKE én enkelt Button-komponent for alt. Fleksibel tilnærming:
+  - Teal (bg-[#214C50] → hover bg-[#488B90]): Primære handlingsknapper
+  - Orange (bg-[#E69138] → hover bg-[#d47e20]): Navigasjons-/aksent-knapper
+  - Grå (bg-gray-200): Sekundære/avbryt-knapper (logg ut, avbryt)
+  Button.tsx (med useFormStatus) brukes kun for Server Action-skjemaer.
+  Kontekstbasert styling er OK der det gir mening.
+
+── OPPSUMMERING ────────────────────────────────────────────────────────────
+
+  ✅ Ferdig:        30+ komponenter/sider
+  🟡 Stub/delvis:    3 (ChatBot, ProjectRegistered, admin/register)
+  ❌ Gjenstår:       1 (admin/organizations – SUPER_ADMIN)
+
+================================================================================
+KRITISKE FILER – REFERANSE
+================================================================================
+
+NEXT.JS (next-digital-fabrikasjon/src/):
+  lib/sanity/client.ts           – Sanity-klient
+  lib/sanity/env.ts              – Sanity env-vars
+  lib/supabase/server.ts         – Supabase server-klient + getCurrentUserWithRole()
+  lib/supabase/client.ts         – Supabase browser-klient
+  lib/auth/roles.ts              – Rollekonstanter + hjelpefunksjoner
+  lib/constants/routes.tsx       – Rute-konstanter
+  providers/UserProvider.tsx     – Auth state context (useUser())
+  providers/OrganizationProvider.tsx – Org context (useOrganization())
+  components/blocks/BlockRenderer.tsx – Block-til-komponent mapping
+  middleware.ts                  – Session-oppdatering (Supabase)
+
+SANITY (server/schemaTypes/):
+  documentTypes/organization.ts    – Org-schema
+  documentTypes/project.ts        – Prosjekt-schema
+  documentTypes/category.ts       – Kategori-schema
+  documentTypes/page.ts           – Side-schema med 13 blokk-typer
+  documentTypes/course.ts         – Kurs-schema med quiz-spørsmål
+  documentTypes/quizCompletion.ts – Quiz-fullføring (skrives programmatisk)
+  index.ts                        – Eksporterer alle schemas
+
+================================================================================
+AVHENGIGHETER
+================================================================================
+
+Mangler – kjør manuelt i next-digital-fabrikasjon/:
+  npm install jsonwebtoken @types/jsonwebtoken resend
+
+Allerede installert:
+  @sanity/client, @supabase/supabase-js, next-sanity
+  react-hook-form, zod, @hookform/resolvers
+  nextjs-toploader, @sanity/image-url
+  @portabletext/react
+
+Env-variabler som må legges til i .env.local:
+  COOKIE_SECRET=<sterk random string>
+  SANITY_API_TOKEN=<token med write-tilgang til assets>
+  RESEND_API_KEY=<fra resend.com>
+  SUPABASE_SERVICE_ROLE_KEY=<fra Supabase Project Settings → API>
+
+================================================================================
+FARGEPALLET
+================================================================================
+
+  Orange:       #E69138
+  Teal mørk:    #214C50
+  Teal lys:     #488B90
+  Bakgrunn:     #FFFCF8 / #FFE8C2
+  Lys teal:     #C2D8DA
+
+================================================================================
+FASE 5 – WCAG-GJENNOMGANG (Tilgjengelighet / UU-tilsynet)
+================================================================================
+
+Mål: Alle sider og komponenter skal oppfylle WCAG 2.1 nivå AA i henhold til
+kravene fra UUtilsynet.no (Digitaliseringsdirektoratet).
+
+Referanse: https://www.uutilsynet.no/wcag-standarden/wcag-standarden/86
+
+[ ] 5.1  FARGEKONTRAST
+         - Minimum kontrastratio: 4.5:1 for vanlig tekst, 3:1 for stor tekst (≥18pt/14pt bold)
+         - Sjekk alle tekst/bakgrunn-kombinasjoner:
+             Teal mørk (#214C50) på hvit (#FFFFFF):  ✅ (ca. 9:1)
+             Teal lys (#488B90) på hvit (#FFFFFF):   ✅ (ca. 4.6:1)
+             Orange (#E69138) på hvit (#FFFFFF):      ⚠ Sjekk (ca. 3:1 – kun OK for stor tekst)
+             Hvit tekst på teal (#488B90):            ✅ (ca. 4.6:1)
+             Hvit tekst på teal mørk (#214C50):       ✅ (ca. 9:1)
+         - Verktøy: https://webaim.org/resources/contrastchecker/
+         - OBS: Orange (#E69138) på hvit/lys bakgrunn er IKKE tilstrekkelig for vanlig tekst.
+           Bruk kun til ikoner, dekorative elementer, eller legg hvit tekst på orange bakgrunn.
+
+[ ] 5.2  ALTERNATIV TEKST (alt-attributt)
+         - Alle <Image>-komponenter med informasjonsinnhold må ha meningsfull alt-tekst
+         - Dekorative bilder: alt="" (tom streng – ikke manglende)
+         - Sjekk i: HeroSection, ImageBlock, ImageGallery, CardGrid, VersionListBlock,
+           GuideBlock, MaterialCardBlock, StaffGridBlock
+         - Sanity-skjema: Felt `alt` er allerede definert på SanityImage – påse at
+           innholdsredaktører fyller det ut (legg til `validation: Rule => Rule.required()`)
+
+[ ] 5.3  TASTATURNAVIGASJON
+         - Alle interaktive elementer (knapper, lenker, skjemafelt) skal nås med Tab
+         - Korrekt tab-rekkefølge (logisk DOM-rekkefølge)
+         - Ingen tastaturfeller (kan alltid navigere videre med Tab/Escape)
+         - GuideBlock: Steg-navigasjon (Forrige/Neste) og sidebar-knapper skal være keyboard-tilgjengelige
+         - Accordion: Sjekk at åpne/lukke fungerer med Enter og Space
+         - ImageGallery: Eventuelle lightbox/modal-elementer trenger fokus-trap og Escape-støtte
+
+[ ] 5.4  FOKUS-SYNLIGHET
+         - Alle fokuserbare elementer skal ha tydelig visuell fokus-indikator
+         - Tailwind fjerner outline som standard – legg til `focus-visible:ring-2 focus-visible:ring-[#214C50]`
+           på alle <button>, <a>, og <input>-elementer (eller globalt i globals.css)
+         - Sjekk at fokusindikator har kontrastratio ≥ 3:1 mot bakgrunnen
+
+[ ] 5.5  SEMANTISK HTML OG LANDMARKS
+         - Bruk korrekte HTML-elementer: <main>, <nav>, <header>, <footer>, <section>, <article>, <aside>
+         - Én <h1> per side (ikke i blokker)
+         - Korrekt overskrifthierarki: h1 → h2 → h3 (ingen hopp)
+         - GuideBlock sin venstre sidebar bør bruke <nav aria-label="Steg-navigasjon">
+         - StaffGridBlock: Bruk <ul>/<li> for lister av ansatte
+
+[ ] 5.6  SKJEMATILGJENGELIGHET
+         - Alle skjemafelt (<input>, <select>, <textarea>) skal ha tilhørende <label>
+         - Feilmeldinger: aria-describedby kobler felt til feilmelding
+         - Obligatoriske felt: aria-required="true"
+         - Sjekk ProjectLoginForm, RegisterProjectForm, EditProjectForm, QuizForm
+         - Suksess- og feilmeldinger skal annonseres via aria-live="polite"
+
+[ ] 5.7  BILDER OG MEDIA
+         - Video (VideoEmbed): Tekstalternativ eller undertekst for video med tale/informasjon
+         - Animasjoner/karuseller: Gi brukeren mulighet til å pause (WCAG 2.2.2)
+         - Ingen blinkende innhold raskere enn 3 ganger per sekund
+
+[ ] 5.8  LENKER OG KNAPPER
+         - Alle lenker skal ha beskrivende tekst (ikke bare "Klikk her" eller "Les mer")
+         - Knapper uten synlig tekst (kun ikon) trenger aria-label
+         - Lenker som åpner nytt vindu: legg til "(åpner i nytt vindu)" eller tilsvarende aria-label
+
+[ ] 5.9  HOPP TIL INNHOLD (Skip link)
+         - Legg til en "Hopp til hovedinnhold"-lenke øverst på siden (synlig ved fokus)
+         - Implementer i Header.tsx eller layout.tsx:
+           <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute ...">
+             Hopp til hovedinnhold
+           </a>
+         - Legg id="main-content" på <main>-elementet
+
+[ ] 5.10 TESTING
+         - Automatisk: Kjør axe DevTools (Chrome-extension) på alle nøkkelsider
+         - Manuell tastaturtest: Tab gjennom alle interaktive elementer på hver side
+         - Skjermleser: Test med NVDA (Windows) eller VoiceOver (Mac/iOS)
+         - Fargeblindhet: Bruk f.eks. Colour Blindness Simulator i Chrome DevTools
+         - Verktøy: https://www.uutilsynet.no/veiledning/verktoy-for-testing/895
+
+[ ] 5.11 PRIORITERTE FILER Å GJENNOMGÅ
+         - src/components/ui/Header.tsx            (skip link, nav-landmarks)
+         - src/components/blocks/GuideBlock.tsx    (sidebar nav, fokus, steg-nav)
+         - src/components/blocks/Accordion.tsx     (keyboard, aria-expanded)
+         - src/components/blocks/ImageGallery.tsx  (alt-tekst, modal-fokus)
+         - src/app/[org]/projects/login/ProjectLoginForm.tsx  (skjema-labels)
+         - src/app/[org]/projects/register/RegisterProjectForm.tsx
+         - src/app/[org]/projects/[id]/edit/EditProjectForm.tsx
+         - Alle sider i src/app/ (h1-hierarki, main-landmark)
+
+[ ] 5.12 DOKUMENTASJON
+         - Logg alle funn og rettelser med dato i endringsloggen nedenfor
+         - Vurder å legge til automatisk akseptansetest (f.eks. jest-axe) for kritiske komponenter
+
+
+
+
+5.13 DOBBELSJEKK OM DET ER MULIG Å LAGE SIDER SOM "AboutUs" som er i /client og at vi kan legge til dette i samme liste som de "main" kategoriene
+
+================================================================================
+ENDRINGSLOGG
+================================================================================
+
+2026-03-03  Plan opprettet. Kodebase kartlagt. Prioritet: Fase 1.
+2026-03-03  Fase 1 implementert (prosjekt-system). Stopp etter 1.10.
+2026-03-07  Fase 2 block-system delvis ferdig (2.0, 2.2, 2.3).
+            Gjenstår: 2.4 (catch-all side-rute), Fase 3 (kurs/quiz), Fase 4 (admin).
+            OBS: GuideBlock krever @portabletext/react (sjekk om den er installert).
+            Neste: Verifiser Fase 1 fungerer med npm-pakker + env-vars.
+2026-03-07  Fase 5 WCAG-gjennomgang lagt til planen.
+2026-03-07  Fase 2.4: Catch-all rute + page queries ferdig.
+            Fase 3: Course-schema, queries, quiz-action, e-post, alle kurs-sider ferdig.
+            Fase 4: Admin-layout, dashboard, prosjektgodkjenning, kursgjennomføringer ferdig.
+            4.5 admin-register ferdig (SUPER_ADMIN oppretter admin + org-tilknytning).
+            Quiz-fullføringer lagres i Sanity (quizCompletion), IKKE Supabase.
+            Supabase brukes KUN til admin/super-admin login (auth + profiles-tabell).
+            4.3 org-styring ferdig (opprett, rediger, aktiver/deaktiver – ingen sletting).
+            3.2 Supabase quiz_completions fjernet – quizCompletion Sanity-dokument brukes.
+            Gjenstår: Fase 5 WCAG-gjennomgang.
+            OBS: Legg til SUPABASE_SERVICE_ROLE_KEY i .env.local for admin-registrering.
+
