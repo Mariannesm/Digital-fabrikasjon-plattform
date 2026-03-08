@@ -35,11 +35,12 @@ export function GuideBlock({ icon, steps }: GuideBlockProps) {
               </div>
             )}
 
-            <nav className="w-full space-y-4">
+            <nav className="w-full space-y-4" aria-label="Steg-navigasjon">
               {steps.map((s, i) => (
                 <button
                   key={s._key || String(i)}
                   onClick={() => setCurrentStep(i)}
+                  aria-current={i === currentStep ? 'step' : undefined}
                   className={`
                     w-full px-8 py-5 text-left text-lg text-white shadow-md transition-colors
                     ${i === currentStep
@@ -77,9 +78,9 @@ export function GuideBlock({ icon, steps }: GuideBlockProps) {
                       {step.infoBox.title.toUpperCase()}:
                     </p>
                   )}
-                  <ul className="space-y-1 text-sm ml-2">
+                  <ul className="list-disc space-y-1 text-sm ml-5">
                     {step.infoBox.items.map((item, i) => (
-                      <li key={i}>• {item}</li>
+                      <li key={i}>{item}</li>
                     ))}
                   </ul>
                 </div>
@@ -105,6 +106,7 @@ export function GuideBlock({ icon, steps }: GuideBlockProps) {
                 <button
                   onClick={() => setCurrentStep((s) => Math.max(0, s - 1))}
                   disabled={currentStep === 0}
+                  aria-label={`Forrige steg: ${currentStep > 0 ? steps[currentStep - 1]?.title : ''}`}
                   className="rounded-xl bg-[#EBA65F] px-10 py-3 font-semibold text-black shadow hover:bg-[#C28B53] transition disabled:opacity-40"
                 >
                   Forrige
@@ -112,6 +114,7 @@ export function GuideBlock({ icon, steps }: GuideBlockProps) {
                 <button
                   onClick={() => setCurrentStep((s) => Math.min(steps.length - 1, s + 1))}
                   disabled={currentStep === steps.length - 1}
+                  aria-label={`Neste steg: ${currentStep < steps.length - 1 ? steps[currentStep + 1]?.title : ''}`}
                   className="rounded-xl bg-[#EBA65F] px-10 py-3 font-semibold text-black shadow hover:bg-[#C28B53] transition disabled:opacity-40"
                 >
                   Neste

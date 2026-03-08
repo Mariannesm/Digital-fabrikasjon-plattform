@@ -53,6 +53,11 @@ export default async function RootLayout({
   return (
     <html lang={initialLocale}>
       <body className="antialiased">
+        {/* WCAG 5.9 – Skip link */}
+        <a href="#main-content" className="skip-link">
+          {initialLocale === 'en' ? 'Skip to main content' : 'Hopp til hovedinnhold'}
+        </a>
+
         <NextTopLoader color="#3b82f6" />
 
         <LanguageProvider initialLocale={initialLocale}>

@@ -428,7 +428,7 @@ kravene fra UUtilsynet.no (Digitaliseringsdirektoratet).
 
 Referanse: https://www.uutilsynet.no/wcag-standarden/wcag-standarden/86
 
-[ ] 5.1  FARGEKONTRAST
+✅ 5.1  FARGEKONTRAST
          - Minimum kontrastratio: 4.5:1 for vanlig tekst, 3:1 for stor tekst (≥18pt/14pt bold)
          - Sjekk alle tekst/bakgrunn-kombinasjoner:
              Teal mørk (#214C50) på hvit (#FFFFFF):  ✅ (ca. 9:1)
@@ -448,7 +448,7 @@ Referanse: https://www.uutilsynet.no/wcag-standarden/wcag-standarden/86
          - Sanity-skjema: Felt `alt` er allerede definert på SanityImage – påse at
            innholdsredaktører fyller det ut (legg til `validation: Rule => Rule.required()`)
 
-[ ] 5.3  TASTATURNAVIGASJON
+✅ 5.3  TASTATURNAVIGASJON
          - Alle interaktive elementer (knapper, lenker, skjemafelt) skal nås med Tab
          - Korrekt tab-rekkefølge (logisk DOM-rekkefølge)
          - Ingen tastaturfeller (kan alltid navigere videre med Tab/Escape)
@@ -456,20 +456,20 @@ Referanse: https://www.uutilsynet.no/wcag-standarden/wcag-standarden/86
          - Accordion: Sjekk at åpne/lukke fungerer med Enter og Space
          - ImageGallery: Eventuelle lightbox/modal-elementer trenger fokus-trap og Escape-støtte
 
-[ ] 5.4  FOKUS-SYNLIGHET
+✅ 5.4  FOKUS-SYNLIGHET
          - Alle fokuserbare elementer skal ha tydelig visuell fokus-indikator
          - Tailwind fjerner outline som standard – legg til `focus-visible:ring-2 focus-visible:ring-[#214C50]`
            på alle <button>, <a>, og <input>-elementer (eller globalt i globals.css)
          - Sjekk at fokusindikator har kontrastratio ≥ 3:1 mot bakgrunnen
 
-[ ] 5.5  SEMANTISK HTML OG LANDMARKS
+✅ 5.5  SEMANTISK HTML OG LANDMARKS
          - Bruk korrekte HTML-elementer: <main>, <nav>, <header>, <footer>, <section>, <article>, <aside>
          - Én <h1> per side (ikke i blokker)
          - Korrekt overskrifthierarki: h1 → h2 → h3 (ingen hopp)
          - GuideBlock sin venstre sidebar bør bruke <nav aria-label="Steg-navigasjon">
          - StaffGridBlock: Bruk <ul>/<li> for lister av ansatte
 
-[ ] 5.6  SKJEMATILGJENGELIGHET
+✅ 5.6  SKJEMATILGJENGELIGHET
          - Alle skjemafelt (<input>, <select>, <textarea>) skal ha tilhørende <label>
          - Feilmeldinger: aria-describedby kobler felt til feilmelding
          - Obligatoriske felt: aria-required="true"
@@ -481,12 +481,12 @@ Referanse: https://www.uutilsynet.no/wcag-standarden/wcag-standarden/86
          - Animasjoner/karuseller: Gi brukeren mulighet til å pause (WCAG 2.2.2)
          - Ingen blinkende innhold raskere enn 3 ganger per sekund
 
-[ ] 5.8  LENKER OG KNAPPER
+✅ 5.8  LENKER OG KNAPPER
          - Alle lenker skal ha beskrivende tekst (ikke bare "Klikk her" eller "Les mer")
          - Knapper uten synlig tekst (kun ikon) trenger aria-label
          - Lenker som åpner nytt vindu: legg til "(åpner i nytt vindu)" eller tilsvarende aria-label
 
-[ ] 5.9  HOPP TIL INNHOLD (Skip link)
+✅ 5.9  HOPP TIL INNHOLD (Skip link)
          - Legg til en "Hopp til hovedinnhold"-lenke øverst på siden (synlig ved fokus)
          - Implementer i Header.tsx eller layout.tsx:
            <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute ...">
@@ -501,7 +501,7 @@ Referanse: https://www.uutilsynet.no/wcag-standarden/wcag-standarden/86
          - Fargeblindhet: Bruk f.eks. Colour Blindness Simulator i Chrome DevTools
          - Verktøy: https://www.uutilsynet.no/veiledning/verktoy-for-testing/895
 
-[ ] 5.11 PRIORITERTE FILER Å GJENNOMGÅ
+✅ 5.11 PRIORITERTE FILER Å GJENNOMGÅ
          - src/components/ui/Header.tsx            (skip link, nav-landmarks)
          - src/components/blocks/GuideBlock.tsx    (sidebar nav, fokus, steg-nav)
          - src/components/blocks/Accordion.tsx     (keyboard, aria-expanded)
@@ -511,7 +511,7 @@ Referanse: https://www.uutilsynet.no/wcag-standarden/wcag-standarden/86
          - src/app/[org]/projects/[id]/edit/EditProjectForm.tsx
          - Alle sider i src/app/ (h1-hierarki, main-landmark)
 
-[ ] 5.12 DOKUMENTASJON
+✅ 5.12 DOKUMENTASJON
          - Logg alle funn og rettelser med dato i endringsloggen nedenfor
          - Vurder å legge til automatisk akseptansetest (f.eks. jest-axe) for kritiske komponenter
 

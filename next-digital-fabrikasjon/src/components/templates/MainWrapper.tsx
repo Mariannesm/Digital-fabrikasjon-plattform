@@ -8,7 +8,7 @@ interface WrapperProps extends PropsWithChildren {
 export default function MainWrapper({ children, classNames = ''} : WrapperProps) {
   return (
     <>
-      <main className={`min-h-screen text-black flex flex-col ${classNames}`}>
+      <main id="main-content" className={`min-h-screen text-black flex flex-col ${classNames}`}>
         {children}
       </main>
     </>

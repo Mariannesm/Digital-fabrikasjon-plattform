@@ -24,3 +24,31 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* WCAG 5.4 – Tydelig fokusindikator for alle fokuserbare elementer.
+   Tailwind fjerner outline som standard. Dette gjenoppretter synlig fokus
+   for tastaturbrukere med god kontrast (teal ring = godt over 3:1). */
+*:focus-visible {
+  outline: 3px solid #214C50;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* WCAG 5.9 – Skip link: skjult til det får fokus via Tab */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  background: #214C50;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 0 0 4px 4px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.1s;
+}
+
+.skip-link:focus {
+  top: 0;
+}

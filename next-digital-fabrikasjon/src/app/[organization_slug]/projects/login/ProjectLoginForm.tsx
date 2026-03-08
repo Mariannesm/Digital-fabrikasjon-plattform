@@ -39,24 +39,32 @@ export default function ProjectLoginForm({ organizationSlug }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-[420px] flex flex-col gap-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-[420px] flex flex-col gap-4" noValidate>
       <div>
+        <label htmlFor="login-slug" className="sr-only">Prosjektnavn</label>
         <input
           {...register('slug')}
+          id="login-slug"
           placeholder="Prosjektnavn (slug)"
+          aria-required="true"
+          aria-describedby={errors.slug ? 'login-slug-error' : undefined}
           className="h-12 w-full rounded-md bg-[#EFEFEF] px-4 text-left"
         />
         {errors.slug && (
-          <p className="mt-1 text-sm text-red-600">{errors.slug.message}</p>
+          <p id="login-slug-error" role="alert" className="mt-1 text-sm text-red-600">{errors.slug.message}</p>
         )}
       </div>
 
       <div>
+        <label htmlFor="login-password" className="sr-only">{t('project.fieldPassword')}</label>
         <div className="relative">
           <input
             {...register('password')}
+            id="login-password"
             type={showPassword ? 'text' : 'password'}
-            placeholder="Passord"
+            placeholder={t('project.fieldPassword')}
+            aria-required="true"
+            aria-describedby={errors.password ? 'login-password-error' : undefined}
             className="h-12 w-full rounded-md bg-[#EFEFEF] px-4 pr-10 text-left"
           />
           <button
@@ -74,12 +82,12 @@ export default function ProjectLoginForm({ organizationSlug }: Props) {
           </button>
         </div>
         {errors.password && (
-          <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
+          <p id="login-password-error" role="alert" className="mt-1 text-sm text-red-600">{errors.password.message}</p>
         )}
       </div>
 
       {serverError && (
-        <p className="text-sm text-red-600 text-center">{serverError}</p>
+        <p role="alert" aria-live="polite" className="text-sm text-red-600 text-center">{serverError}</p>
       )}
 
       <div className="flex justify-center mt-2">

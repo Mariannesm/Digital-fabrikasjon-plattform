@@ -4,22 +4,26 @@ import { useState } from 'react'
 import { PortableText } from '@portabletext/react'
 import type { AccordionBlockProps, AccordionItem } from './types'
 
-function AccordionItemComponent({ item, isOpen, onToggle }: {
+function AccordionItemComponent({ item, isOpen, onToggle, id }: {
   item: AccordionItem
   isOpen: boolean
   onToggle: () => void
+  id: string
 }) {
+  const panelId = `${id}-panel`
   return (
     <div className="border-b border-gray-200 last:border-b-0">
       <button
+        id={id}
         onClick={onToggle}
         className="flex w-full items-center justify-between py-4 text-left"
         aria-expanded={isOpen}
+        aria-controls={panelId}
       >
         <span className="text-lg font-semibold text-[#214C50] pr-4">
           {item.question}
         </span>
-        <span className={`flex-shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}>
+        <span className={`flex-shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} aria-hidden="true">
           <svg
             className="w-5 h-5 text-[#488B90]"
             fill="none"
@@ -31,6 +35,9 @@ function AccordionItemComponent({ item, isOpen, onToggle }: {
         </span>
       </button>
       <div
+        id={panelId}
+        role="region"
+        aria-labelledby={id}
         className={`overflow-hidden transition-all duration-200 ${isOpen ? 'max-h-[1000px] pb-4' : 'max-h-0'}`}
       >
         <div className="prose prose-sm max-w-none text-gray-600">
@@ -57,6 +64,7 @@ export function Accordion({ heading, items }: AccordionBlockProps) {
         {items.map((item, index) => (
           <AccordionItemComponent
             key={item._key || index}
+            id={`accordion-${item._key || index}`}
             item={item}
             isOpen={openIndex === index}
             onToggle={() => setOpenIndex(openIndex === index ? null : index)}

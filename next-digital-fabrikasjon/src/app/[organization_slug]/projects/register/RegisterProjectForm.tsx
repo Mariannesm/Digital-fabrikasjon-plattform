@@ -54,11 +54,13 @@ export default function RegisterProjectForm({ organizationId, organizationSlug }
 
         {/* Prosjektnavn */}
         <div>
-          <label className="block text-xl mb-3 text-left">{t('project.fieldTitle')}:</label>
+          <label htmlFor="reg-title" className="block text-xl mb-3 text-left">{t('project.fieldTitle')}:</label>
           <input
+            id="reg-title"
             name="title"
             type="text"
             required
+            aria-required="true"
             className="bg-gray-200 rounded px-3 py-2 w-full"
             placeholder="Birdhouse"
           />
@@ -66,13 +68,15 @@ export default function RegisterProjectForm({ organizationId, organizationSlug }
 
         {/* Prosjektbilde */}
         <div>
-          <label className="block text-xl mb-3 text-left">{t('project.fieldCoverImage')}:</label>
+          <label htmlFor="reg-cover" className="block text-xl mb-3 text-left">{t('project.fieldCoverImage')}:</label>
           <input
             ref={fileInputRef}
+            id="reg-cover"
             name="coverImage"
             type="file"
             accept="image/*"
             onChange={handleImageChange}
+            aria-label={t('project.fieldCoverImage')}
             className="hidden"
           />
           <button
@@ -96,8 +100,9 @@ export default function RegisterProjectForm({ organizationId, organizationSlug }
 
         {/* Beskrivelse */}
         <div>
-          <label className="block text-xl mb-3 text-left">Kort beskrivelse:</label>
+          <label htmlFor="reg-desc" className="block text-xl mb-3 text-left">{t('project.fieldDescription')}:</label>
           <textarea
+            id="reg-desc"
             name="description"
             className="bg-gray-200 rounded px-3 py-2 w-full min-h-[90px]"
             placeholder="Hva er prosjektet ditt?"
@@ -106,13 +111,16 @@ export default function RegisterProjectForm({ organizationId, organizationSlug }
 
         {/* Passord */}
         <div>
-          <label className="block text-xl mb-1 text-left">Lag et passord:</label>
-          <p className="text-left mb-2 text-sm text-gray-600">
+          <label htmlFor="reg-password" className="block text-xl mb-1 text-left">{t('project.fieldPassword')}:</label>
+          <p id="reg-password-hint" className="text-left mb-2 text-sm text-gray-600">
             (Passordet vil være gjeldende for hele gruppen din)
           </p>
           <div className="relative w-full">
             <input
+              id="reg-password"
               name="password"
+              aria-required="true"
+              aria-describedby="reg-password-hint"
               type={showPassword ? 'text' : 'password'}
               required
               minLength={4}
