@@ -412,8 +412,15 @@ export const cardGridBlock = defineType({
               rows: 3,
             }),
             defineField({
+              name: 'pageRef',
+              title: 'Intern sidelenke',
+              type: 'reference',
+              to: [{ type: 'page' }],
+              description: 'Velg en intern side – overstyrer manuell URL',
+            }),
+            defineField({
               name: 'link',
-              title: 'Link',
+              title: 'Ekstern / manuell URL (fallback)',
               type: 'url',
               validation: (Rule) =>
                 Rule.uri({
@@ -532,10 +539,17 @@ export const versionListBlock = defineType({
               options: { hotspot: true },
             }),
             defineField({
+              name: 'pageRef',
+              title: 'Intern sidelenke',
+              type: 'reference',
+              to: [{ type: 'page' }],
+              description: 'Velg en intern side – overstyrer manuell URL',
+            }),
+            defineField({
               name: 'link',
-              title: 'Link (relative path)',
+              title: 'Ekstern / manuell URL (fallback)',
               type: 'string',
-              description: 'Relative path to the guide page, e.g. /org/teknologi/3d-printing/prusa-mk4s',
+              description: 'Brukes kun om ingen intern sidelenke er valgt',
             }),
           ],
           preview: {
@@ -617,7 +631,14 @@ export const guideBlock = defineType({
               type: 'object',
               fields: [
                 defineField({ name: 'label', title: 'Label', type: 'string' }),
-                defineField({ name: 'href', title: 'Path', type: 'string' }),
+                defineField({
+                  name: 'courseRef',
+                  title: 'Kursreferanse (intern)',
+                  type: 'reference',
+                  to: [{ type: 'course' }],
+                  description: 'Velg et kurs – overstyrer manuell URL',
+                }),
+                defineField({ name: 'href', title: 'Manuell URL (fallback)', type: 'string' }),
               ],
             }),
           ],

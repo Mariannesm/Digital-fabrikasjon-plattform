@@ -43,9 +43,9 @@ export function UserProvider({
 
       const { data: profile } = await supabase
         .from('profiles')
-        .select('role, email, assigned_to')
+        .select('role, assigned_to')
         .eq('id', authUser.id)
-        .single()
+        .maybeSingle()
 
       setUser({
         id: authUser.id,

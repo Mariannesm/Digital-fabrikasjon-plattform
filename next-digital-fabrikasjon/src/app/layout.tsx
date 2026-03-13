@@ -3,7 +3,7 @@ import { cookies } from 'next/headers'
 import NextTopLoader from 'nextjs-toploader';
 import { UserProvider } from '@/providers/UserProvider';
 import { LanguageProvider, type Locale } from '@/providers/LanguageProvider';
-import { createClient } from '@/lib/supabase/client'
+import { createClient } from '@/lib/supabase/server'
 import "@/globals.css";
 
 export const metadata: Metadata = {
@@ -27,7 +27,7 @@ export default async function RootLayout({
     localeCookie === 'en' || localeCookie === 'no' ? localeCookie : 'no'
 
   // Opprett Supabase klient for server (med cookies)
-  const supabase = createClient();
+  const supabase = await createClient();
 
   // Hent autentisert bruker
   const { data: { user } } = await supabase.auth.getUser();
@@ -38,9 +38,9 @@ export default async function RootLayout({
   if (user) {
     const { data: profile } = await supabase
       .from('profiles')
-      .select('role, full_name, assigned_to')
+      .select('role, assigned_to')
       .eq('id', user.id)
-      .single();
+      .maybeSingle();
 
     initialUser = {
       id: user.id,

@@ -1,0 +1,397 @@
+================================================================================
+SANITY STUDIO – SIDESTRUKTURER FRA /CLIENT
+================================================================================
+
+Dette er en guide for å gjenskape sidene fra /client i Sanity Studio.
+Alle sider opprettes via: Studio → Content → Page → New Page
+
+GRUNNLEGGENDE OPPSETT FOR ALLE SIDER:
+  - Organization:  velg riktig org
+  - Active:        sett til true (ellers vises ikke siden)
+  - Slug:          genereres automatisk fra navn (kan justeres)
+
+LAYOUT-VALG:
+  - Full width:         innhold fyller hele bredden
+  - Sidebar + content:  venstre nav med søsken-sider + høyre innholdspanel
+                        (brukes for guide, om-oss-seksjonene)
+
+================================================================================
+1. TEKNOLOGI-OVERSIKT  (TechnologyPage.jsx)
+================================================================================
+
+Tittel: Teknologier
+Side-innstillinger:
+  - Slug:     technology
+  - Category: Teknologi
+  - Layout:   Full width
+
+Struktur:
+  <CardGrid>
+    Heading: "Teknologier ved ditt valgte område"
+
+    Kort 1:
+      Title: 3D-PRINTING
+      Icon:  [last opp 3Dprinter-ikon]
+      Link:  /[org]/technology/3d-printing   ← peker til VersionListBlock-siden
+
+    Kort 2:
+      Title: LASERKUTTING
+      Icon:  [last opp Laserkutter-ikon]
+      Link:  /[org]/technology/laserkutting
+
+    Kort 3:
+      Title: CNC-FRESING
+      Icon:  [last opp CNCfreser-ikon]
+      Link:  /[org]/technology/cnc-fresing
+
+    Kort 4:
+      Title: ELEKTRONIKK
+      Icon:  [last opp Elektronikk-ikon]
+      Link:  /[org]/technology/elektronikk
+
+    Kort 5:
+      Title: TRYKK & PROFILERING
+      Icon:  [last opp Vinylkutter-ikon]
+      Link:  /[org]/technology/trykk-profilering
+
+    Kort 6:
+      Title: AIRBRUSHING
+      Icon:  [last opp AirBrushing-ikon]
+      Link:  /[org]/technology/airbrushing
+  </CardGrid>
+
+
+================================================================================
+2. VALGT TEKNOLOGI – VERSJONSLISTE  (SelectedTechnology.jsx)
+================================================================================
+
+Tittel: 3D-Printing
+Side-innstillinger:
+  - Slug:       3d-printing
+  - Category:   Teknologi
+  - Layout:     Full width
+  - OBS:        Opprett én slik side per teknologi (laserkutting, cnc osv.)
+
+Struktur:
+  <VersionListBlock>
+    Heading: "3D-PRINTING"
+
+    Element 1:
+      Title:       Original Prusa MK4S
+      Description: Kompakt og pålitelig printer. Nozzle 0.4mm.
+                   Maks printestørrelse: 250×210×220mm.
+      Image:       [last opp bilde av printeren]
+      Link:        /[org]/technology/3d-printing/prusa-mk4s   ← peker til guide
+
+    Element 2:
+      Title:       Original Prusa MINI+
+      Description: Liten og begynner-vennlig printer.
+                   Maks printestørrelse: 180×180×180mm.
+      Image:       [last opp bilde]
+      Link:        /[org]/technology/3d-printing/prusa-mini
+  </VersionListBlock>
+
+
+================================================================================
+3. BRUKSGUIDE FOR MASKIN  (GuidePage.jsx)
+================================================================================
+
+Tittel: Original Prusa MK4S – Guide
+Side-innstillinger:
+  - Slug:        prusa-mk4s
+  - Layout:      Full width
+  - Parent Page: 3d-printing  ← gjør at den vises i nav under 3D-Printing
+
+  OBS: Sidebar-navigasjonen med steg-knapper er INTERN i GuideBlock-komponenten.
+       Du trenger ikke layout = sidebar for denne siden.
+
+Struktur:
+  <GuideBlock>
+    Icon: [last opp printer-ikon til sidebar]
+
+    Steg 1:
+      Title:   Introduksjon og sikkerhet
+      Content: [rik tekst]
+               Skriv inn: "Sikkerhet er spesielt viktig ved bruk av ulike
+               teknologier. Ved 3D-printing må du tenke på sikkerhetspunktene
+               i boksen under."
+
+      InfoBox (valgfritt):
+        Title: VIKTIGE SIKKERHETSPUNKTER VED 3D-PRINTING:
+        Items:
+          - Printeren kan bli svært varm – ikke berør nozzle under print
+          - Smeltet plastikk er varmt – bruk hansker ved håndtering
+          - Ha god ventilasjon – damper fra filament kan irritere
+
+      CourseLink (valgfritt):
+        Label: Ta kurset om 3D-printing
+        Href:  /[org]/courses/3d-printing   ← peker til kurs
+
+    Steg 2:
+      Title:   1. 3D-modell
+      Content: [rik tekst]
+               "Last ned eller lag en 3D-modell i STL- eller 3MF-format.
+               Du kan finne modeller på Printables, Thingiverse eller
+               lage egne i Fusion 360, TinkerCAD eller Blender."
+
+    Steg 3:
+      Title:   2. Forbered printen (Slicing)
+      Content: [rik tekst]
+               "Åpne PrusaSlicer og importer modellen din. Velg riktig
+               printer og filament. Juster innstillingene og eksporter
+               G-koden til USB."
+
+    Steg 4:
+      Title:   3. Klargjøring av printeren
+      Content: [rik tekst]
+               "Sjekk at platen er ren og jevn. Lim på buildtak om nødvendig.
+               Last inn filament via Filament → Load Filament."
+
+    Steg 5:
+      Title:   4. Kjøre printeren
+      Content: [rik tekst]
+               "Sett inn USB og velg filen via Print → [filnavn]. Følg med
+               de første lagene – abort om noe ser galt ut."
+
+    Steg 6:
+      Title:   5. Oppfølging av printen
+      Content: [rik tekst]
+               "Sjekk at filamentet fester seg. Se etter stringing eller
+               lag-separasjon. Du trenger ikke stå ved siden av hele tiden."
+
+    Steg 7:
+      Title:   6. Ferdig print
+      Content: [rik tekst]
+               "Vent til platen er avkjølt. Bøy platen forsiktig for å løsne
+               printen. Ikke bruk kraft mens platen er varm."
+
+    Steg 8:
+      Title:   7. Etterbehandling
+      Content: [rik tekst]
+               "Fjern støtte-strukturer med tang eller kniv. Slipp overflaten
+               med sandpapir (120 → 240 → 400 grit) om ønskelig."
+  </GuideBlock>
+
+
+================================================================================
+4. MATERIALER / FILAMENT  (FilamentPage.jsx)
+================================================================================
+
+Tittel: Filament
+Side-innstillinger:
+  - Slug:       filament
+  - Layout:     Full width
+  - Parent Page: 3d-printing   ← eller la den stå frittstående under Teknologi
+
+Struktur:
+  <TextSection>
+    Title:   Filament
+    Content: "Filament er råmaterialet som brukes i 3D-printing med FDM-teknologi.
+              Det finnes mange typer med ulike egenskaper. Velg riktig type basert
+              på hva du skal lage og hvilken printer du bruker."
+  </TextSection>
+
+  <MaterialCardBlock>
+    Heading: VELG FILAMENT
+    Intro:   "Når du skal velge filament og printer er det viktig å tenke på
+              hva det skal brukes til."
+
+    Materiale 1:
+      Name:  PLA
+      Image: [last opp bilde / la stå tom for teal bakgrunn]
+      Specs:
+        - Nozzle (°C): 200-220
+        - Bed (°C): 0-60
+      Fordeler:
+        - Billig
+        - Lett å printe
+        - Lite lukt
+        - Bionedbrytbart
+      Ulemper:
+        - Mindre varmebestandig (myk ved ~60°C)
+        - Mindre slitesterk enn PETG/ABS
+      Anbefalt bruk:
+        - Prototyping
+        - Dekorative deler
+        - Skoleprosjekter
+
+    Materiale 2:
+      Name:  PETG
+      Image: [last opp bilde]
+      Specs:
+        - Nozzle (°C): 220-250
+        - Bed (°C): 70-90
+      Fordeler:
+        - Mer slitesterk enn PLA
+        - Tåler fukt
+        - God lagadhesjon
+      Ulemper:
+        - Mer stringing enn PLA
+        - Litt vanskeligere å printe
+      Anbefalt bruk:
+        - Utendørs bruk
+        - Mekaniske deler
+        - Beholdere
+
+    Materiale 3:
+      Name:  ABS
+      Image: [last opp bilde]
+      Specs:
+        - Nozzle (°C): 220-250
+        - Bed (°C): 100-110
+      Fordeler:
+        - Varmebestandig (opp til ~100°C)
+        - Slitesterk
+        - Kan etterbehandles med aceton
+      Ulemper:
+        - Krever innkapslet printer
+        - Sterk lukt
+        - Warp-problemer
+      Anbefalt bruk:
+        - Funksjonelle deler
+        - Høy-temperatur-miljøer
+  </MaterialCardBlock>
+
+
+================================================================================
+5. OM OSS – SEKSJONSSIDER  (AboutUs.jsx + Staff.jsx)
+================================================================================
+
+TIPS: Opprett disse som søsken-sider (samme parentPage = "om-oss").
+      Da viser sidebar-layouten dem automatisk som navigasjon mellom hverandre.
+
+--- OVERORDNET "OM OSS"-SIDE (ikke nødvendig, men anbefalt som parent) ---
+
+Tittel: Om oss
+Side-innstillinger:
+  - Slug:     om-oss
+  - Category: Om oss   ← vises som knapp i org-menyen
+  - Layout:   Full width
+  - Active:   true
+
+Struktur: (tom – fungerer bare som "mappe" for undersidene)
+  <HeroSection>
+    Title:    Om oss
+    Subtitle: Les mer om teamet, lokalet og åpningstidene.
+  </HeroSection>
+
+
+--- SIDE 1: KART OVER OMRÅDET ---
+
+Tittel: Kart over området
+Side-innstillinger:
+  - Slug:        kart
+  - Parent Page: om-oss
+  - Layout:      Sidebar + content   ← gir automatisk søsken-nav i venstre kolonne
+
+Struktur:
+  <TextSection>
+    Title:   Kart over området
+    Content: "Høgskolen i Østfold avdeling Halden har en MakerSpace og en
+              FabLab med tilgang til ulike teknologier og utstyr."
+  </TextSection>
+
+  <ImageBlock>
+    Image:   [last opp kart-bilde]
+    Alt:     Kart over MakerSpace og FabLab
+    Caption: Bygning X, etasje Y
+  </ImageBlock>
+
+
+--- SIDE 2: ANSATTE ---
+
+Tittel: Ansatte
+Side-innstillinger:
+  - Slug:        ansatte
+  - Parent Page: om-oss
+  - Layout:      Sidebar + content
+
+Struktur:
+  <StaffGridBlock>
+    Heading: Ansatte
+    Intro:   MakerSpace og FabLab har flere ansatte som er her for å hjelpe deg.
+
+    Ansatt 1:
+      Name:    Fahad
+      Role:    Ansvarlig
+      Contact: fahad@hiof.no
+      Photo:   [last opp bilde]
+
+    Ansatt 2:
+      Name:    Jennifer
+      Role:    Studentassistent
+      Contact: jennifer@hiof.no
+      Photo:   [last opp bilde]
+
+    Ansatt 3:
+      Name:    Marianne
+      Role:    Studentassistent
+      Contact: marianne@hiof.no
+      Photo:   [last opp bilde]
+  </StaffGridBlock>
+
+
+--- SIDE 3: ÅPNINGSTIDER ---
+
+Tittel: Åpningstider
+Side-innstillinger:
+  - Slug:        apningstider
+  - Parent Page: om-oss
+  - Layout:      Sidebar + content
+
+Struktur:
+  <TextSection>
+    Title:   Åpningstider
+    Content: [rik tekst – legg inn tabell eller liste med åpningstider]
+             F.eks:
+             Mandag–fredag: 08:00–16:00
+             Lørdag–søndag: Stengt
+
+             I eksamensperioden kan det forekomme endringer.
+  </TextSection>
+
+
+================================================================================
+BLOKKTYPER – HURTIGREFERANSE
+================================================================================
+
+Hero Section         → Stor toppbanner med tittel, undertekst og bilde
+Text Section         → Overskrift + rik tekst (avsnitt, lister, lenker)
+Image Block          → Enkeltbilde med alt-tekst og valgfri bildetekst
+Image Gallery        → Rutenett med flere bilder
+Call To Action       → Knapp med tekst og lenke
+Video Embed          → YouTube, Vimeo eller direkte videofil
+Accordion            → Trekkspill med spørsmål og svar
+Card Grid            → Teal kort-rutenett med ikon og tittel (→ TechnologyPage)
+Divider              → Horisontale skillelinje
+
+Version List Block   → Kort med bilde, tittel, beskrivelse og "Velg"-knapp
+                       (→ SelectedTechnology)
+Guide Block          → Steg-for-steg guide med sidebar-nav, infoboks og
+                       kurslenke (→ GuidePage)
+Material Card Block  → Produktkort med specs, fordeler, ulemper
+                       (→ FilamentPage)
+Staff Grid Block     → Liste over ansatte med foto, rolle og kontakt
+                       (→ Staff)
+
+================================================================================
+SIDEHIERARKI – EKSEMPEL
+================================================================================
+
+[Org-meny]
+├── Teknologi  (kategori-knapp)
+│   └── technology/  (CardGrid-side)
+│       ├── 3d-printing/  (VersionListBlock-side)
+│       │   ├── prusa-mk4s/  (GuideBlock-side)
+│       │   ├── prusa-mini/  (GuideBlock-side)
+│       │   └── filament/   (MaterialCardBlock-side)
+│       ├── laserkutting/
+│       └── ...
+│
+├── Om oss  (kategori-knapp)
+│   ├── kart/          (TextSection + ImageBlock, sidebar-layout)
+│   ├── ansatte/       (StaffGridBlock, sidebar-layout)
+│   └── apningstider/  (TextSection, sidebar-layout)
+│
+├── Prosjekter  (fast rute → /projects/)
+└── Kurs        (fast rute → /courses/)

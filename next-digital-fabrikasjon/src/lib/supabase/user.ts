@@ -37,7 +37,7 @@ export async function signIn(
     return { error: error.message }
   }
 
-  redirect('/')
+  redirect('/admin')
 
   // Denne linjen blir aldri nådd pga redirect, men TypeScript krever den
   return { success: true }

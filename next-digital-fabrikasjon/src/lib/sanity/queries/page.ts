@@ -39,7 +39,31 @@ export async function getPageBySlug(
       slug,
       description,
       layout,
-      blocks[],
+      "blocks": blocks[]{
+        ...,
+        _type == "cardGridBlock" => {
+          "cards": cards[]{
+            ...,
+            "pageRef": pageRef->{ _id, slug, "orgSlug": organization->slug.current }
+          }
+        },
+        _type == "versionListBlock" => {
+          "items": items[]{
+            ...,
+            "pageRef": pageRef->{ _id, slug, "orgSlug": organization->slug.current }
+          }
+        },
+        _type == "guideBlock" => {
+          "steps": steps[]{
+            ...,
+            "courseLink": courseLink{
+              label,
+              href,
+              "courseRef": courseRef->{ _id, slug, "orgSlug": organization->slug.current }
+            }
+          }
+        }
+      },
       "parent": parentPage-> { _id, name, slug },
       "grandparent": parentPage->parentPage-> { _id, name, slug },
       "siblings": *[

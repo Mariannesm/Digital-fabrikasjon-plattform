@@ -87,9 +87,13 @@ export function GuideBlock({ icon, steps }: GuideBlockProps) {
               )}
 
               {/* Kurs-lenke */}
-              {step.courseLink?.href && (
+              {(step.courseLink?.courseRef || step.courseLink?.href) && (
                 <Link
-                  href={step.courseLink.href}
+                  href={
+                    step.courseLink.courseRef
+                      ? `/${step.courseLink.courseRef.orgSlug}/courses/${step.courseLink.courseRef.slug.current}`
+                      : step.courseLink.href!
+                  }
                   className="flex items-center justify-between rounded-2xl bg-[#C2D8DA] px-4 py-3 max-w-xl mb-6 hover:bg-[#488B90]/30 transition-colors"
                 >
                   <h3 className="text-lg font-semibold tracking-wide text-[#214C50]">

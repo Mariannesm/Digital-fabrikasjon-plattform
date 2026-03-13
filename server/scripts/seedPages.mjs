@@ -39,8 +39,9 @@ if (!ORG_SLUG) {
 
 const PROJECT_ID  = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'rnl5hcxh'
 const DATASET     = process.env.NEXT_PUBLIC_SANITY_DATASET    || 'production'
-const API_VERSION = '2024-01-01'
-const TOKEN       = process.env.SANITY_API_TOKEN
+const API_VERSION = '2026-01-01'
+const TOKEN      = process.env.NEXT_SANITY_API_TOKEN || 'skDHdXY4UVQDTrQcZCA9b1cL9892QwmE3b0gMlBXRFMWw0iW4vVUR51If4UnEnpa9iiDE77ukeW0sflrwNSlxGkCs72rrTYcuaQxJ21khg7SkW4TCDfr73FzuFxuwh5S9TvkqiiJLRrteENXCPUKPaJ91kd5fHgPDIsxDteRNFH23HT8uRY0'
+
 
 if (!TOKEN) {
   console.error('Mangler SANITY_API_TOKEN i .env.local')
@@ -112,6 +113,26 @@ if (!org) {
 console.log(`  ✓ Fant: ${org.name} (${org._id})`)
 const ORG_REF = ref(org._id)
 
+// ─── Look up categories ───────────────────────────────────────────────────────
+
+console.log('\nSlår opp kategorier...')
+const categories = await query(
+  `*[_type == "category"]{ _id, slug }`,
+)
+
+const catRef = (slug) => {
+  const cat = categories.find(c => c.slug?.current === slug)
+  if (!cat) {
+    console.warn(`  ⚠ Fant ikke kategori med slug "${slug}" – hopper over referansen`)
+    return undefined
+  }
+  return ref(cat._id)
+}
+
+for (const cat of categories) {
+  console.log(`  ✓ Kategori: ${cat.slug?.current} (${cat._id})`)
+}
+
 // ─── Page definitions ─────────────────────────────────────────────────────────
 
 const pages = [
@@ -125,7 +146,7 @@ const pages = [
     name: 'Teknologier',
     slug: { _type: 'slug', current: 'technology' },
     organization: ORG_REF,
-    category: ref('category-technology'),
+    category: catRef('technology'),
     layout: 'full',
     active: true,
     order: 1,
@@ -136,7 +157,7 @@ const pages = [
         heading: 'Teknologier ved ditt valgte område',
         columns: 3,
         cards: [
-          { _key: key('c'), title: '3D-PRINTING',        link: `/${ORG_SLUG}/3d-printing` },
+          { _key: key('c'), title: '3D-PRINTING',        pageRef: ref(pageId('3d-printing')) },
           { _key: key('c'), title: 'LASERKUTTING',        link: `/${ORG_SLUG}/laserkutting` },
           { _key: key('c'), title: 'CNC-FRESING',         link: `/${ORG_SLUG}/cnc-fresing` },
           { _key: key('c'), title: 'ELEKTRONIKK',         link: `/${ORG_SLUG}/elektronikk` },
@@ -156,7 +177,7 @@ const pages = [
     name: '3D-Printing',
     slug: { _type: 'slug', current: '3d-printing' },
     organization: ORG_REF,
-    category: ref('category-technology'),
+    category: catRef('technology'),
     parentPage: ref(pageId('technology')),
     layout: 'full',
     active: true,
@@ -171,13 +192,13 @@ const pages = [
             _key: key('vi'),
             title: 'Original Prusa MK4S',
             description: 'Kompakt og pålitelig printer. Nozzle 0.4 mm. Maks printestørrelse: 250×210×220 mm.',
-            link: `/${ORG_SLUG}/prusa-mk4s`,
+            pageRef: ref(pageId('prusa-mk4s')),
           },
           {
             _key: key('vi'),
             title: 'Original Prusa MINI+',
             description: 'Liten og begynner-vennlig printer. Maks printestørrelse: 180×180×180 mm.',
-            link: `/${ORG_SLUG}/prusa-mini`,
+            // Ingen side opprettet for MINI+ ennå – link settes manuelt i Studio
           },
         ],
       },
@@ -352,7 +373,7 @@ const pages = [
     name: 'Om oss',
     slug: { _type: 'slug', current: 'om-oss' },
     organization: ORG_REF,
-    category: ref('category-about'),
+    category: catRef('about'),
     layout: 'full',
     active: true,
     order: 1,

@@ -54,8 +54,12 @@ export function VersionListBlock({ heading, items }: VersionListBlockProps) {
             </div>
           )
 
-          return item.link ? (
-            <Link key={item._key || String(index)} href={item.link} className="block hover:-translate-y-1 transition-transform">
+          const href = item.pageRef
+            ? `/${item.pageRef.orgSlug}/${item.pageRef.slug.current}`
+            : item.link
+
+          return href ? (
+            <Link key={item._key || String(index)} href={href} className="block hover:-translate-y-1 transition-transform">
               {card}
             </Link>
           ) : (

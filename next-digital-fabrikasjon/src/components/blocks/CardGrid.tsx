@@ -35,9 +35,13 @@ function Card({ card }: { card: CardItem }) {
     </div>
   )
 
-  if (card.link) {
+  const href = card.pageRef
+    ? `/${card.pageRef.orgSlug}/${card.pageRef.slug.current}`
+    : card.link
+
+  if (href) {
     return (
-      <Link href={card.link} className="block">
+      <Link href={href} className="block">
         {inner}
       </Link>
     )

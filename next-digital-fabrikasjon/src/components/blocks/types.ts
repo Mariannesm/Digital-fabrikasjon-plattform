@@ -1,5 +1,12 @@
 import type { PortableTextBlock } from '@portabletext/types'
-import type { SanityImageSource } from '@sanity/image-url'
+import type { SanityImageSource } from '@sanity/image-url/dist/types/types'
+
+// Resolved internal reference (page or course) returned by GROQ dereference
+export interface ResolvedPageRef {
+  _id: string
+  slug: { current: string }
+  orgSlug: string
+}
 
 // Base block type with _key and _type
 export interface BaseBlock {
@@ -103,6 +110,7 @@ export interface CardItem {
   icon?: SanityImage
   title: string
   description?: string
+  pageRef?: ResolvedPageRef
   link?: string
 }
 
@@ -125,6 +133,7 @@ export interface VersionListItem {
   title: string
   description?: string
   image?: SanityImage
+  pageRef?: ResolvedPageRef
   link?: string
 }
 
@@ -142,7 +151,8 @@ export interface GuideInfoBox {
 
 export interface GuideCourseLink {
   label?: string
-  href: string
+  courseRef?: ResolvedPageRef
+  href?: string
 }
 
 export interface GuideStep {

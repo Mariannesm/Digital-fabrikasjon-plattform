@@ -1,1 +1,0 @@
-"Vi jobber med Digital Fabrikasjon-plattformen. Se docs/claude_plan.txt for hva som er gjort og hva som gjenstår, og fortsett der vi slapp."
