@@ -1,16 +1,9 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { createClient } from '@sanity/client'
-import { dataset, projectId, apiVersion } from '@/lib/sanity/env'
+import { getWriteClient } from '@/lib/sanity/client'
 import { getCurrentUserWithRole } from '@/lib/supabase/server'
 import { isSuperAdmin } from '@/lib/auth/roles'
-
-function getWriteClient() {
-  const token = process.env.SANITY_API_TOKEN
-  if (!token) throw new Error('SANITY_API_TOKEN mangler i .env.local')
-  return createClient({ projectId, dataset, apiVersion, useCdn: false, token })
-}
 
 async function requireSuperAdmin() {
   const user = await getCurrentUserWithRole()
@@ -35,12 +28,24 @@ export async function createOrganization(formData: FormData): Promise<void> {
     .replace(/^-|-$/g, '')
 
   const writeClient = getWriteClient()
-  await writeClient.create({
+  const org = await writeClient.create({
     _type: 'organization',
     name: name.trim(),
     slug: { _type: 'slug', current: slug },
     url: url.trim(),
     active: true,
+  })
+
+  // Auto-create default "Om oss" page for the new organization
+  await writeClient.create({
+    _type: 'page',
+    name: 'Om oss',
+    slug: { _type: 'slug', current: 'om-oss' },
+    organization: { _type: 'reference', _ref: org._id },
+    layout: 'full',
+    active: true,
+    order: 0,
+    blocks: [],
   })
 
   revalidatePath('/admin/organizations')

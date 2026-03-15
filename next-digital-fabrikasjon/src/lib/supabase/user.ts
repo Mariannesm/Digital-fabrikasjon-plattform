@@ -42,3 +42,9 @@ export async function signIn(
   // Denne linjen blir aldri nådd pga redirect, men TypeScript krever den
   return { success: true }
 }
+
+export async function signOut(): Promise<void> {
+  const supabase = await createClient()
+  await supabase.auth.signOut()
+  redirect('/')
+}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { cookies } from 'next/headers'
+import { cookies, draftMode } from 'next/headers'
 import NextTopLoader from 'nextjs-toploader';
+import { VisualEditing } from 'next-sanity/visual-editing'
 import { UserProvider } from '@/providers/UserProvider';
 import { LanguageProvider, type Locale } from '@/providers/LanguageProvider';
 import { createClient } from '@/lib/supabase/server'
@@ -50,6 +51,8 @@ export default async function RootLayout({
     };
   }
 
+  const { isEnabled: isDraftMode } = await draftMode()
+
   return (
     <html lang={initialLocale}>
       <body className="antialiased">
@@ -65,6 +68,7 @@ export default async function RootLayout({
             {children}
           </UserProvider>
         </LanguageProvider>
+        {isDraftMode && <VisualEditing />}
 
         <footer className="mt-auto p-4 text-center text-sm text-gray-600">
           <p className="font-mono">© 2025 Høgskolen i Østfold</p>

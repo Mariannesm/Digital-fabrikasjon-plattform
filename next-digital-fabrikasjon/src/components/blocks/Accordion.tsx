@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { PortableText } from '@portabletext/react'
 import type { AccordionBlockProps, AccordionItem } from './types'
+import { BlockRenderer } from './BlockRenderer'
 
 function AccordionItemComponent({ item, isOpen, onToggle, id }: {
   item: AccordionItem
@@ -38,11 +38,9 @@ function AccordionItemComponent({ item, isOpen, onToggle, id }: {
         id={panelId}
         role="region"
         aria-labelledby={id}
-        className={`overflow-hidden transition-all duration-200 ${isOpen ? 'max-h-[1000px] pb-4' : 'max-h-0'}`}
+        className={`overflow-hidden transition-all duration-200 ${isOpen ? 'max-h-[2000px] pb-4' : 'max-h-0'}`}
       >
-        <div className="prose prose-sm max-w-none text-gray-600">
-          <PortableText value={item.answer} />
-        </div>
+        <BlockRenderer blocks={item.content ?? []} />
       </div>
     </div>
   )

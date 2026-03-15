@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { createAdminUser } from './actions'
+import { useTranslation } from '@/providers/LanguageProvider'
 
 interface Organization {
   _id: string
@@ -14,6 +15,7 @@ interface Props {
 }
 
 export function RegisterAdminForm({ organizations }: Props) {
+  const { t } = useTranslation()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [role, setRole] = useState<'ADMIN' | 'SUPER_ADMIN'>('ADMIN')
@@ -28,7 +30,7 @@ export function RegisterAdminForm({ organizations }: Props) {
     setSuccess('')
 
     if (role === 'ADMIN' && !orgId) {
-      setError('ADMIN må knyttes til en organisasjon.')
+      setError(t('admin.register.adminOrgRequired'))
       return
     }
 
@@ -40,13 +42,17 @@ export function RegisterAdminForm({ organizations }: Props) {
         role,
         organizationId: role === 'ADMIN' ? orgId : null,
       })
-      setSuccess(`Bruker ${email} er opprettet med rolle ${role}.`)
+      setSuccess(
+        t('admin.register.successMessage')
+          .replace('{email}', email)
+          .replace('{role}', role)
+      )
       setEmail('')
       setPassword('')
       setOrgId('')
       setRole('ADMIN')
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Ukjent feil')
+      setError(err instanceof Error ? err.message : t('common.error'))
     } finally {
       setLoading(false)
     }
@@ -56,7 +62,7 @@ export function RegisterAdminForm({ organizations }: Props) {
     <form onSubmit={handleSubmit} className="flex flex-col gap-5 max-w-md">
       <div className="flex flex-col gap-1">
         <label htmlFor="email" className="text-sm font-semibold text-[#214C50]">
-          E-postadresse
+          {t('admin.fieldEmail')}
         </label>
         <input
           id="email"
@@ -70,7 +76,7 @@ export function RegisterAdminForm({ organizations }: Props) {
 
       <div className="flex flex-col gap-1">
         <label htmlFor="password" className="text-sm font-semibold text-[#214C50]">
-          Midlertidig passord
+          {t('admin.fieldPassword')}
         </label>
         <input
           id="password"
@@ -81,12 +87,12 @@ export function RegisterAdminForm({ organizations }: Props) {
           minLength={8}
           className="rounded-lg border border-gray-300 px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-[#214C50]"
         />
-        <p className="text-xs text-gray-500">Minimum 8 tegn. Brukeren bør bytte dette selv.</p>
+        <p className="text-xs text-gray-500">{t('admin.fieldPasswordNote')}</p>
       </div>
 
       <div className="flex flex-col gap-1">
         <label htmlFor="role" className="text-sm font-semibold text-[#214C50]">
-          Rolle
+          {t('admin.fieldRole')}
         </label>
         <select
           id="role"
@@ -94,15 +100,15 @@ export function RegisterAdminForm({ organizations }: Props) {
           onChange={(e) => setRole(e.target.value as 'ADMIN' | 'SUPER_ADMIN')}
           className="rounded-lg border border-gray-300 px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-[#214C50]"
         >
-          <option value="ADMIN">ADMIN (begrenset til én organisasjon)</option>
-          <option value="SUPER_ADMIN">SUPER_ADMIN (full tilgang)</option>
+          <option value="ADMIN">{t('admin.register.roleAdmin')}</option>
+          <option value="SUPER_ADMIN">{t('admin.register.roleSuperAdmin')}</option>
         </select>
       </div>
 
       {role === 'ADMIN' && (
         <div className="flex flex-col gap-1">
           <label htmlFor="org" className="text-sm font-semibold text-[#214C50]">
-            Organisasjon <span className="text-red-500">*</span>
+            {t('admin.fieldOrg')} <span className="text-red-500">*</span>
           </label>
           <select
             id="org"
@@ -111,7 +117,7 @@ export function RegisterAdminForm({ organizations }: Props) {
             required={role === 'ADMIN'}
             className="rounded-lg border border-gray-300 px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-[#214C50]"
           >
-            <option value="">Velg organisasjon…</option>
+            <option value="">{t('admin.selectOrg')}</option>
             {organizations.map((org) => (
               <option key={org._id} value={org._id}>
                 {org.name}
@@ -137,7 +143,7 @@ export function RegisterAdminForm({ organizations }: Props) {
         disabled={loading}
         className="rounded-2xl bg-[#214C50] px-8 py-3 text-base font-bold text-white shadow hover:bg-[#488B90] transition disabled:opacity-50"
       >
-        {loading ? 'Oppretter…' : 'Opprett admin'}
+        {loading ? t('admin.creating') : t('admin.createAdmin.btn')}
       </button>
     </form>
   )

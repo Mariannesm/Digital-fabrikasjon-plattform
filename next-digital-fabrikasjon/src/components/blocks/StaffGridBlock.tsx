@@ -7,11 +7,12 @@ export function StaffGridBlock({ heading, intro, staff }: StaffGridBlockProps) {
 
   return (
     <section className="w-full">
-      {/* Tittel */}
-      <div className="flex flex-col gap-2 mb-6">
-        <h2 className="text-2xl font-bold">{heading || 'Ansatte'}</h2>
-        <span className="h-1 w-full bg-[#488B90]" />
-      </div>
+      {heading && (
+        <div className="flex flex-col gap-2 mb-6">
+          <h2 className="text-2xl font-bold">{heading}</h2>
+          <span className="h-1 w-full bg-[#488B90]" />
+        </div>
+      )}
 
       {intro && (
         <p className="mb-8 text-base font-normal text-black">{intro}</p>

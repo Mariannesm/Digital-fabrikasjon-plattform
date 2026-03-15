@@ -8,6 +8,9 @@ interface CourseCompletionEmailParams {
   orgSlug: string
 }
 
+
+// TODO: Add email provider etc.
+
 export async function sendCourseCompletionEmail(
   params: CourseCompletionEmailParams
 ): Promise<void> {

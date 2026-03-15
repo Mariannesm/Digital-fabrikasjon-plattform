@@ -106,5 +106,33 @@
   "admin.fieldOrg": "Organization",
   "admin.selectOrg": "Select organization…",
   "admin.createAdmin.btn": "Create admin",
-  "admin.creating": "Creating…"
+  "admin.creating": "Creating…",
+
+  "admin.completions.title": "Course completions",
+  "admin.completions.orgFilter": "Organization:",
+  "admin.completions.allOrgs": "All",
+  "admin.completions.filter": "Filter",
+  "admin.completions.rowCount": "{n} row",
+  "admin.completions.rowCountPlural": "{n} rows",
+
+  "menu.technologies": "Learn to use the technologies",
+  "menu.about": "About the area",
+  "menu.courses": "Digital and physical courses",
+  "menu.projects": "Projects",
+
+  "admin.dashboard.loggedInAs": "Logged in as",
+  "admin.dashboard.projectsLabel": "Projects",
+  "admin.dashboard.coursesLabel": "Courses",
+  "admin.nav.ariaLabel": "Admin navigation",
+  "admin.register.note": "Only available for SUPER_ADMIN. ADMIN users must be linked to one organization. The user logs in at /login with email and password.",
+  "admin.register.roleAdmin": "ADMIN (limited to one organization)",
+  "admin.register.roleSuperAdmin": "SUPER_ADMIN (full access)",
+  "admin.register.adminOrgRequired": "ADMIN must be linked to an organization.",
+  "admin.register.successMessage": "User {email} created with role {role}.",
+  "admin.organizations.noOrgs": "No organizations created yet.",
+  "admin.organizations.colName": "Name",
+  "admin.organizations.colSlug": "Slug",
+  "admin.organizations.colUrl": "URL",
+  "admin.projects.colCreated": "Created",
+  "admin.projects.colOrg": "Org"
 }

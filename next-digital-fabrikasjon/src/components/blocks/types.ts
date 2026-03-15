@@ -95,7 +95,8 @@ export interface VideoBlockProps extends BaseBlock {
 export interface AccordionItem {
   _key: string
   question: string
-  answer: PortableTextBlock[]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  content: any[]
 }
 
 export interface AccordionBlockProps extends BaseBlock {

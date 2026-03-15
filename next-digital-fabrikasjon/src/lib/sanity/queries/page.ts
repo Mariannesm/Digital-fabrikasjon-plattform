@@ -1,15 +1,11 @@
 import { client } from '@/lib/sanity/client'
 
-export interface PageParent {
-  _id: string
-  name: string
-  slug: { current: string }
-}
-
-export interface SiblingPage {
-  _id: string
-  name: string
-  slug: { current: string }
+export interface PageSection {
+  _key: string
+  title?: string
+  align?: 'left' | 'center' | 'right'
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  content: any[]
 }
 
 export interface SanityPage {
@@ -17,12 +13,11 @@ export interface SanityPage {
   name: string
   slug: { current: string }
   description?: string
-  layout: 'full' | 'sidebar'
+  layout: 'full' | 'sections'
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   blocks: any[]
-  parent: PageParent | null
-  grandparent: PageParent | null
-  siblings: SiblingPage[]
+  sections: PageSection[]
+  category: { name: string; slug: { current: string } } | null
 }
 
 export async function getPageBySlug(
@@ -39,6 +34,21 @@ export async function getPageBySlug(
       slug,
       description,
       layout,
+      "category": category->{ name, slug },
+      sections[]{
+        _key,
+        title,
+        align,
+        content[]{
+          ...,
+          _type == "cardGridBlock" => {
+            "cards": cards[]{
+              ...,
+              "pageRef": pageRef->{ _id, slug, "orgSlug": organization->slug.current }
+            }
+          }
+        }
+      },
       "blocks": blocks[]{
         ...,
         _type == "cardGridBlock" => {
@@ -63,30 +73,34 @@ export async function getPageBySlug(
             }
           }
         }
-      },
-      "parent": parentPage-> { _id, name, slug },
-      "grandparent": parentPage->parentPage-> { _id, name, slug },
-      "siblings": *[
-        _type == "page"
-        && active == true
-        && organization->slug.current == $orgSlug
-        && (
-          (defined(^.parentPage) && parentPage._ref == ^.parentPage._ref)
-          || (!defined(^.parentPage) && !defined(parentPage))
-        )
-      ] | order(order asc) { _id, name, slug }
+      }
     }`,
     { orgSlug, slug }
   )
 }
 
-export async function getTopLevelPages(orgSlug: string): Promise<SiblingPage[]> {
+export interface TechnologyPage {
+  _id: string
+  name: string
+  slug: { current: string }
+  icon?: { asset: { _ref: string } }
+}
+
+export async function getPagesByCategory(
+  orgSlug: string,
+  categorySlug: string
+): Promise<TechnologyPage[]> {
   return client.fetch(
     `*[_type == "page"
       && organization->slug.current == $orgSlug
-      && !defined(parentPage)
+      && category->slug.current == $categorySlug
       && active == true
-    ] | order(order asc) { _id, name, slug }`,
-    { orgSlug }
+    ] | order(order asc) {
+      _id,
+      name,
+      slug,
+      icon { asset }
+    }`,
+    { orgSlug, categorySlug }
   )
 }

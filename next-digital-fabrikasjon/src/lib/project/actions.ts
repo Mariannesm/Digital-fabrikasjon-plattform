@@ -1,14 +1,6 @@
 'use server'
 
-import { createClient } from '@sanity/client'
-import { dataset, projectId, apiVersion } from '@/lib/sanity/env'
-
-/** Sanity-klient med write-tilgang (server-only) */
-function getWriteClient() {
-  const token = process.env.SANITY_API_TOKEN
-  if (!token) throw new Error('SANITY_API_TOKEN mangler i .env.local')
-  return createClient({ projectId, dataset, apiVersion, useCdn: false, token })
-}
+import { getWriteClient } from '@/lib/sanity/client'
 
 export interface CreateProjectInput {
   title: string

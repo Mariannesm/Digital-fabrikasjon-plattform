@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { createOrganization, updateOrganization } from './actions'
+import { useTranslation } from '@/providers/LanguageProvider'
 
 interface OrgFormProps {
   /** If provided, form is in edit mode */
@@ -12,6 +13,7 @@ interface OrgFormProps {
 }
 
 export function OrgForm({ orgId, initialName = '', initialUrl = '', onDone }: OrgFormProps) {
+  const { t } = useTranslation()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const isEdit = !!orgId
@@ -30,7 +32,7 @@ export function OrgForm({ orgId, initialName = '', initialUrl = '', onDone }: Or
       }
       onDone?.()
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Ukjent feil')
+      setError(err instanceof Error ? err.message : t('common.error'))
     } finally {
       setLoading(false)
     }
@@ -43,7 +45,7 @@ export function OrgForm({ orgId, initialName = '', initialUrl = '', onDone }: Or
           name="name"
           type="text"
           defaultValue={initialName}
-          placeholder="Organisasjonsnavn"
+          placeholder={t('admin.orgName')}
           required
           className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#214C50]"
         />
@@ -51,7 +53,7 @@ export function OrgForm({ orgId, initialName = '', initialUrl = '', onDone }: Or
           name="url"
           type="url"
           defaultValue={initialUrl}
-          placeholder="https://eksempel.no"
+          placeholder={t('admin.orgUrl')}
           required
           className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#214C50]"
         />
@@ -60,7 +62,7 @@ export function OrgForm({ orgId, initialName = '', initialUrl = '', onDone }: Or
           disabled={loading}
           className="rounded-lg bg-[#214C50] px-4 py-2 text-sm font-bold text-white hover:bg-[#488B90] transition disabled:opacity-50"
         >
-          {loading ? '…' : isEdit ? 'Lagre' : 'Opprett'}
+          {loading ? '…' : isEdit ? t('admin.orgSave.btn') : t('admin.orgCreate.btn')}
         </button>
         {onDone && (
           <button
@@ -68,7 +70,7 @@ export function OrgForm({ orgId, initialName = '', initialUrl = '', onDone }: Or
             onClick={onDone}
             className="rounded-lg bg-gray-200 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-300 transition"
           >
-            Avbryt
+            {t('common.cancel')}
           </button>
         )}
       </div>

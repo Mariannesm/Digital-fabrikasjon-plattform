@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { toggleOrganizationActive } from './actions'
 import { OrgForm } from './OrgForm'
+import { useTranslation } from '@/providers/LanguageProvider'
 
 interface OrgRowProps {
   _id: string
@@ -13,6 +14,7 @@ interface OrgRowProps {
 }
 
 export function OrgRow({ _id, name, slug, url, active }: OrgRowProps) {
+  const { t } = useTranslation()
   const [editing, setEditing] = useState(false)
   const [toggling, setToggling] = useState(false)
   const [currentActive, setCurrentActive] = useState(active)
@@ -53,7 +55,7 @@ export function OrgRow({ _id, name, slug, url, active }: OrgRowProps) {
       </td>
       <td className="px-4 py-3">
         <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${currentActive ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-600'}`}>
-          {currentActive ? 'Aktiv' : 'Inaktiv'}
+          {currentActive ? t('admin.orgStatus.active') : t('admin.orgStatus.inactive')}
         </span>
       </td>
       <td className="px-4 py-3 flex gap-2">
@@ -61,7 +63,7 @@ export function OrgRow({ _id, name, slug, url, active }: OrgRowProps) {
           onClick={() => setEditing(true)}
           className="rounded-lg bg-[#C2D8DA] px-3 py-1 text-xs font-bold text-[#214C50] hover:bg-[#488B90] hover:text-white transition"
         >
-          Rediger
+          {t('admin.orgEdit.btn')}
         </button>
         <button
           onClick={handleToggle}
@@ -72,7 +74,7 @@ export function OrgRow({ _id, name, slug, url, active }: OrgRowProps) {
               : 'bg-green-100 text-green-700 hover:bg-green-200'
           }`}
         >
-          {toggling ? '…' : currentActive ? 'Deaktiver' : 'Aktiver'}
+          {toggling ? '…' : currentActive ? t('admin.orgDeactivate.btn') : t('admin.orgActivate.btn')}
         </button>
       </td>
     </tr>

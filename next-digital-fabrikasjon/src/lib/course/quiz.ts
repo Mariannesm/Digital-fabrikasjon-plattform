@@ -1,15 +1,8 @@
 'use server'
 
-import { createClient as createSanityWriteClient } from '@sanity/client'
-import { dataset, projectId, apiVersion } from '@/lib/sanity/env'
+import { getWriteClient } from '@/lib/sanity/client'
 import { getCourseBySlug } from '@/lib/sanity/queries/course'
 import { sendCourseCompletionEmail } from '@/lib/email/sendCourseCompletion'
-
-function getWriteClient() {
-  const token = process.env.SANITY_API_TOKEN
-  if (!token) throw new Error('SANITY_API_TOKEN mangler i .env.local')
-  return createSanityWriteClient({ projectId, dataset, apiVersion, useCdn: false, token })
-}
 
 export interface QuizResult {
   passed: boolean

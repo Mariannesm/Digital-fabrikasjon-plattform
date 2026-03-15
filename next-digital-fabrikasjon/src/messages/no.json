@@ -106,5 +106,33 @@
   "admin.fieldOrg": "Organisasjon",
   "admin.selectOrg": "Velg organisasjon…",
   "admin.createAdmin.btn": "Opprett admin",
-  "admin.creating": "Oppretter…"
+  "admin.creating": "Oppretter…",
+
+  "admin.completions.title": "Kursgjennomføringer",
+  "admin.completions.orgFilter": "Organisasjon:",
+  "admin.completions.allOrgs": "Alle",
+  "admin.completions.filter": "Filtrer",
+  "admin.completions.rowCount": "{n} rad",
+  "admin.completions.rowCountPlural": "{n} rader",
+
+  "menu.technologies": "Lær å bruk teknologiene",
+  "menu.about": "Om området",
+  "menu.courses": "Digitale og fysiske kurs",
+  "menu.projects": "Prosjekter",
+
+  "admin.dashboard.loggedInAs": "Innlogget som",
+  "admin.dashboard.projectsLabel": "Prosjekter",
+  "admin.dashboard.coursesLabel": "Kurs",
+  "admin.nav.ariaLabel": "Admin-navigasjon",
+  "admin.register.note": "Kun tilgjengelig for SUPER_ADMIN. ADMIN-brukere må knyttes til én organisasjon. Brukeren logger inn på /login med e-post og passord.",
+  "admin.register.roleAdmin": "ADMIN (begrenset til én organisasjon)",
+  "admin.register.roleSuperAdmin": "SUPER_ADMIN (full tilgang)",
+  "admin.register.adminOrgRequired": "ADMIN må knyttes til en organisasjon.",
+  "admin.register.successMessage": "Bruker {email} er opprettet med rolle {role}.",
+  "admin.organizations.noOrgs": "Ingen organisasjoner opprettet ennå.",
+  "admin.organizations.colName": "Navn",
+  "admin.organizations.colSlug": "Slug",
+  "admin.organizations.colUrl": "URL",
+  "admin.projects.colCreated": "Opprettet",
+  "admin.projects.colOrg": "Org"
 }

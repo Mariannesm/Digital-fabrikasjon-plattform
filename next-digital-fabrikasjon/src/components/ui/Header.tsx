@@ -1,9 +1,11 @@
 'use client';
 
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { useContext } from 'react';
 import BackButton from './BackButton';
 import OrganizationSelect from './OrganizationSelect';
+import HeaderMenu from './HeaderMenu';
 import { ROOT_PAGES, isInstitutionSelectable } from '@/lib/constants/routes';
 import { OrganizationContext } from '@/providers/OrganizationProvider';
 import { useLanguage } from '@/providers/LanguageProvider';
@@ -25,9 +27,16 @@ export default function Header({ title = '' }: HeaderProps) {
             <div className="col-span-1 row-span-4">
                 <h1
                     onClick={() => router.push('/')}
-                    className="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#E69138] mt-8 cursor-pointer select-none"
+                    className="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#E69138] mt-8 cursor-pointer select-none flex items-center gap-2"
                 >
                     SmartMaking
+                    <Image
+                        src="/SmartMakingIkon.png"
+                        alt="SmartMaking ikon"
+                        width={40}
+                        height={40}
+                        className="object-contain mt-1"
+                    />
                 </h1>
 
                 {isInstitutionSelectable(pathname) ? (
@@ -52,34 +61,19 @@ export default function Header({ title = '' }: HeaderProps) {
                 </h2>
             </div>
 
-            {/* Høyre kolonne: Språkbytte */}
-            <div className="col-start-3 row-start-1 flex justify-end pr-6 sm:pr-10 pt-4">
-                <div className="flex items-center gap-1 rounded-full bg-white/60 px-1 py-1 shadow-sm">
-                    <button
-                        onClick={() => setLocale('no')}
-                        aria-label="Bytt til norsk"
-                        aria-pressed={locale === 'no'}
-                        className={`rounded-full px-3 py-1 text-xs font-bold transition ${
-                            locale === 'no'
-                                ? 'bg-[#214C50] text-white'
-                                : 'text-[#214C50] hover:bg-[#C2D8DA]'
-                        }`}
-                    >
-                        NO
-                    </button>
-                    <button
-                        onClick={() => setLocale('en')}
-                        aria-label="Switch to English"
-                        aria-pressed={locale === 'en'}
-                        className={`rounded-full px-3 py-1 text-xs font-bold transition ${
-                            locale === 'en'
-                                ? 'bg-[#214C50] text-white'
-                                : 'text-[#214C50] hover:bg-[#C2D8DA]'
-                        }`}
-                    >
-                        EN
-                    </button>
-                </div>
+            {/* Høyre kolonne: Språkvalg + burgermeny */}
+            <div className="col-start-3 row-start-1 flex justify-end items-start gap-3 pr-6 sm:pr-10 pt-6">
+                <select
+                    value={locale}
+                    onChange={(e) => setLocale(e.target.value as 'no' | 'en')}
+                    className="bg-gray-100 text-sm px-3 py-2 rounded-md border border-black/10
+                        hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-orange-400
+                        font-semibold text-black"
+                >
+                    <option value="no">Norsk</option>
+                    <option value="en">English</option>
+                </select>
+                <HeaderMenu />
             </div>
         </header>
     );

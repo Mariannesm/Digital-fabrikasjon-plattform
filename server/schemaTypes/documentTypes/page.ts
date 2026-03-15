@@ -83,11 +83,28 @@ export const page = defineType({
       group: 'settings',
     }),
     defineField({
+      name: 'layout',
+      title: 'Layout',
+      type: 'string',
+      description: 'Full: standard content page. Sections: left sidebar nav + content panel (like "Om oss")',
+      options: {
+        list: [
+          { title: 'Full width', value: 'full' },
+          { title: 'Sections (sidebar nav)', value: 'sections' },
+        ],
+        layout: 'radio',
+        direction: 'horizontal',
+      },
+      initialValue: 'full',
+      group: 'settings',
+    }),
+    defineField({
       name: 'blocks',
       title: 'Page Content',
       type: 'array',
       description: 'Build your page by adding and arranging content blocks',
       group: 'content',
+      hidden: ({ document }) => document?.layout === 'sections',
       of: [
         defineArrayMember({ type: 'heroBlock' }),
         defineArrayMember({ type: 'textBlock' }),
@@ -102,6 +119,58 @@ export const page = defineType({
         defineArrayMember({ type: 'guideBlock' }),
         defineArrayMember({ type: 'materialCardBlock' }),
         defineArrayMember({ type: 'staffGridBlock' }),
+      ],
+    }),
+    defineField({
+      name: 'sections',
+      title: 'Sections',
+      type: 'array',
+      description: 'Each section = one nav button on the left + content on the right',
+      group: 'content',
+      hidden: ({ document }) => document?.layout !== 'sections',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'title',
+              title: 'Section title',
+              type: 'string',
+            }),
+            defineField({
+              name: 'align',
+              title: 'Content alignment',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Left', value: 'left' },
+                  { title: 'Center', value: 'center' },
+                  { title: 'Right', value: 'right' },
+                ],
+                layout: 'radio',
+                direction: 'horizontal',
+              },
+              initialValue: 'left',
+            }),
+            defineField({
+              name: 'content',
+              title: 'Content',
+              type: 'array',
+              of: [
+                defineArrayMember({ type: 'textBlock' }),
+                defineArrayMember({ type: 'imageBlock' }),
+                defineArrayMember({ type: 'imageGalleryBlock' }),
+                defineArrayMember({ type: 'videoBlock' }),
+                defineArrayMember({ type: 'staffGridBlock' }),
+                defineArrayMember({ type: 'materialCardBlock' }),
+                defineArrayMember({ type: 'ctaBlock' }),
+              ],
+            }),
+          ],
+          preview: {
+            select: { title: 'title' },
+          },
+        }),
       ],
     }),
   ],
