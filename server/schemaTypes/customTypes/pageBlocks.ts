@@ -343,10 +343,17 @@ export const accordionBlock = defineType({
               validation: (Rule) => Rule.required(),
             }),
             defineField({
-              name: 'answer',
-              title: 'Answer / Content',
-              type: 'blockContent',
-              validation: (Rule) => Rule.required(),
+              name: 'content',
+              title: 'Content',
+              type: 'array',
+              of: [
+                defineArrayMember({ type: 'textBlock' }),
+                defineArrayMember({ type: 'imageBlock' }),
+                defineArrayMember({ type: 'imageGalleryBlock' }),
+                defineArrayMember({ type: 'videoBlock' }),
+                defineArrayMember({ type: 'staffGridBlock' }),
+                defineArrayMember({ type: 'materialCardBlock' }),
+              ],
             }),
           ],
           preview: {

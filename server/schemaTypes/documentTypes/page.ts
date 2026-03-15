@@ -59,35 +59,19 @@ export const page = defineType({
       group: 'settings',
     }),
     defineField({
-      name: 'parentPage',
-      title: 'Parent Page',
-      type: 'reference',
-      to: [{ type: 'page' }],
-      description: 'Optional: makes this a sub-page under another page (enables unlimited nesting)',
-      group: 'settings',
-    }),
-    defineField({
-      name: 'layout',
-      title: 'Layout',
-      type: 'string',
-      description: 'Full: content fills the width. Sidebar: left nav + right content panel (like guide/staff pages)',
-      options: {
-        list: [
-          { title: 'Full width', value: 'full' },
-          { title: 'Sidebar + content', value: 'sidebar' },
-        ],
-        layout: 'radio',
-        direction: 'horizontal',
-      },
-      initialValue: 'full',
-      group: 'settings',
-    }),
-    defineField({
       name: 'active',
       title: 'Active',
       type: 'boolean',
       description: 'Whether this page is visible on the site',
       initialValue: false,
+      group: 'settings',
+    }),
+    defineField({
+      name: 'icon',
+      title: 'Icon',
+      type: 'image',
+      description: 'Icon shown on technology overview cards',
+      options: { hotspot: false },
       group: 'settings',
     }),
     defineField({

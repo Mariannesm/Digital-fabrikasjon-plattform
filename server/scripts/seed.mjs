@@ -29,7 +29,7 @@ const API_VERSION = '2024-01-01'
 const TOKEN      = process.env.NEXT_SANITY_API_TOKEN || 'skpH4dl0Q6qxDz2y6Rr7HpcoPeDQpmN6Cc05BvOOuSeXjd2hAyciFaTWsBhXV2E4sOu4LlHICILRBHvvVYhZzSMUyHDKWA4Eptahwq39E6STqPeMty7ZHPdN5nWvhsZTcdDfCEyexAwZ41UpTyyVVyQcD9Z7dn40TesWFwxFwIN1BvMZmPHu'
 
 if (!TOKEN) {
-  console.error('Mangler SANITY_API_TOKEN i .env.local')
+  console.error('Mangler NEXT_SANITY_API_TOKEN i .env.local')
   process.exit(1)
 }
 
